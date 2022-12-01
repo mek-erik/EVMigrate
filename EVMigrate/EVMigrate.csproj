@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B64F2425-7545-4D52-8657-5FFC3F7A4001}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>EVMigrate</RootNamespace>
+    <AssemblyName>EVMigrate</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942" />
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.19.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604" />
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d" />
+    <Reference Include="MySql.Data, Version=8.0.31.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="alerts.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="attr_types.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="attr_values.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="changes.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="change_stubs.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="comments.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="email_inboxes.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventumModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventumModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventumModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventumModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventumModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_columns_to_display.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_customer_account_manager.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_customer_note.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_custom_field.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_custom_field_option.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_custom_filter.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_email_account.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_email_draft.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_email_draft_recipient.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_email_response.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_faq.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_faq_support_level.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_group.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_history_type.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_irc_notice.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_association.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_attachment.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_attachment_file.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_checkin.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_custom_field.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_history.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_quarantine.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_requirement.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_user.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_issue_user_replier.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_link_filter.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_mail_queue.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_mail_queue_log.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_news.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_note.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_phone_support.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_category.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_custom_field.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_email_response.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_field_display.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_group.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_link_filter.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_news.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_phone_category.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_priority.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_release.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_round_robin.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_status.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_status_date.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_project_user.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_action.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_action_list.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_action_type.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_field.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_history.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_level.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_level_condition.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_operator.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_priority.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_requirement.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_reminder_triggered_action.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_resolution.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_round_robin_user.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_search_profile.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_status.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_subscription.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_subscription_type.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_support_email.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_support_email_body.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_time_tracking.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_time_tracking_category.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_user.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_user_alias.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventum_version.cs">
+      <DependentUpon>EventumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="files.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="folders.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="issues.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="issue_descriptions.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="issue_states.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="issue_stubs.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="issue_types.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="log_events.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="preferences.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="projects.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="project_descriptions.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="register_requests.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rights.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="server.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sessions.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="settings.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="stamps.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="subscriptions.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="users.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="views.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_preferences.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_settings.cs">
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebIssuesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebIssuesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebIssuesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebIssuesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebIssuesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebIssuesModel.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="EventumModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EventumModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EventumModel.edmx.diagram">
+      <DependentUpon>EventumModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="WebIssuesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebIssuesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="WebIssuesModel.edmx.diagram">
+      <DependentUpon>WebIssuesModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EventumModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventumModel.edmx</DependentUpon>
+      <LastGenOutput>EventumModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EventumModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EventumModel.edmx</DependentUpon>
+      <LastGenOutput>EventumModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="WebIssuesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebIssuesModel.edmx</DependentUpon>
+      <LastGenOutput>WebIssuesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="WebIssuesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebIssuesModel.edmx</DependentUpon>
+      <LastGenOutput>WebIssuesModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

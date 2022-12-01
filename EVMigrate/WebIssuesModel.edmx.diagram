@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="96a25c6a2aed4b8596f79fdfaf9412db" Name="Diagram1">
+        <EntityTypeShape EntityType="webissuesModel.alerts" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.attr_types" Width="1.5" PointX="6" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.attr_values" Width="1.5" PointX="7.5" PointY="50" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.change_stubs" Width="1.5" PointX="5.25" PointY="46" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.changes" Width="1.5" PointX="8.25" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.comments" Width="1.5" PointX="10.5" PointY="44.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.email_inboxes" Width="1.5" PointX="6" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.files" Width="1.5" PointX="10.5" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.folders" Width="1.5" PointX="3" PointY="49.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.issue_descriptions" Width="1.5" PointX="7.5" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.issue_states" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.issue_stubs" Width="1.5" PointX="5.25" PointY="42.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.issue_types" Width="1.5" PointX="3.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.issues" Width="1.5" PointX="5.25" PointY="48.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.log_events" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.preferences" Width="1.5" PointX="3" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.project_descriptions" Width="1.5" PointX="3" PointY="54" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.projects" Width="1.5" PointX="0.75" PointY="49.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.register_requests" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.rights" Width="1.5" PointX="3" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.sessions" Width="1.5" PointX="3" PointY="42.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.settings" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.stamps" Width="1.5" PointX="3" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.subscriptions" Width="1.5" PointX="8.25" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.users" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.view_preferences" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.view_settings" Width="1.5" PointX="6" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.views" Width="1.5" PointX="6" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="webissuesModel.server" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="webissuesModel.alerts_folder_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.alerts_project_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.alerts_type_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.alerts_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.alerts_view_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.attr_types_type_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.attr_values_attr_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.changes_attr_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.attr_values_issue_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.change_stubs_issue_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.change_stubs_stub_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.changes_change_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.changes_from_folder_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.changes_issue_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.changes_to_folder_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.comments_comment_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.files_file_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.email_inboxes_inbox_default_folder_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.email_inboxes_inbox_robot_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.subscriptions_inbox_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.folders_project_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.folders_type_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issue_stubs_folder_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issues_folder_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issue_descriptions_issue_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issue_states_issue_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issue_states_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issue_stubs_stub_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.view_preferences_type_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.view_settings_type_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.views_type_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issues_issue_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.issues_stamp_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.subscriptions_issue_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.log_events_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.preferences_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.project_descriptions_project_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.rights_project_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.rights_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.sessions_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.stamps_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.subscriptions_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.view_preferences_user_id_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="webissuesModel.views_user_id_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

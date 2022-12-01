@@ -1,0 +1,2646 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="webissuesModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alerts">
+          <Key>
+            <PropertyRef Name="alert_id" />
+          </Key>
+          <Property Name="alert_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="project_id" Type="int" />
+          <Property Name="folder_id" Type="int" />
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="view_id" Type="int" />
+          <Property Name="alert_type" Type="tinyint" Nullable="false" />
+          <Property Name="alert_frequency" Type="tinyint" />
+          <Property Name="stamp_id" Type="int" />
+        </EntityType>
+        <EntityType Name="attr_types">
+          <Key>
+            <PropertyRef Name="attr_id" />
+          </Key>
+          <Property Name="attr_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="attr_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="attr_def" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="attr_values">
+          <Key>
+            <PropertyRef Name="issue_id" />
+            <PropertyRef Name="attr_id" />
+          </Key>
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="attr_id" Type="int" Nullable="false" />
+          <Property Name="attr_value" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="change_stubs">
+          <Key>
+            <PropertyRef Name="stub_id" />
+          </Key>
+          <Property Name="stub_id" Type="int" Nullable="false" />
+          <Property Name="change_id" Type="int" Nullable="false" />
+          <Property Name="issue_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="changes">
+          <Key>
+            <PropertyRef Name="change_id" />
+          </Key>
+          <Property Name="change_id" Type="int" Nullable="false" />
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="change_type" Type="tinyint" Nullable="false" />
+          <Property Name="stamp_id" Type="int" Nullable="false" />
+          <Property Name="attr_id" Type="int" />
+          <Property Name="value_old" Type="varchar" MaxLength="255" />
+          <Property Name="value_new" Type="varchar" MaxLength="255" />
+          <Property Name="from_folder_id" Type="int" />
+          <Property Name="to_folder_id" Type="int" />
+          <Property Name="subscription_id" Type="int" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="int" Nullable="false" />
+          <Property Name="comment_text" Type="longtext" Nullable="false" />
+          <Property Name="comment_format" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="email_inboxes">
+          <Key>
+            <PropertyRef Name="inbox_id" />
+          </Key>
+          <Property Name="inbox_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inbox_engine" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="inbox_email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="inbox_server" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="inbox_port" Type="int" Nullable="false" />
+          <Property Name="inbox_encryption" Type="varchar" MaxLength="40" />
+          <Property Name="inbox_user" Type="varchar" MaxLength="255" />
+          <Property Name="inbox_password" Type="varchar" MaxLength="255" />
+          <Property Name="inbox_mailbox" Type="varchar" MaxLength="255" />
+          <Property Name="inbox_no_validate" Type="tinyint" Nullable="false" />
+          <Property Name="inbox_leave_messages" Type="tinyint" Nullable="false" />
+          <Property Name="inbox_allow_external" Type="tinyint" Nullable="false" />
+          <Property Name="inbox_robot" Type="int" />
+          <Property Name="inbox_map_folder" Type="tinyint" Nullable="false" />
+          <Property Name="inbox_default_folder" Type="int" />
+          <Property Name="inbox_respond" Type="tinyint" Nullable="false" />
+          <Property Name="inbox_subscribe" Type="tinyint" Nullable="false" />
+          <Property Name="inbox_format" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="files">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="int" Nullable="false" />
+          <Property Name="file_name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="file_size" Type="int" Nullable="false" />
+          <Property Name="file_data" Type="longblob" />
+          <Property Name="file_descr" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="file_storage" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="folders">
+          <Key>
+            <PropertyRef Name="folder_id" />
+          </Key>
+          <Property Name="folder_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="folder_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="stamp_id" Type="int" />
+        </EntityType>
+        <EntityType Name="issue_descriptions">
+          <Key>
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="descr_text" Type="longtext" Nullable="false" />
+          <Property Name="descr_format" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="issue_states">
+          <Key>
+            <PropertyRef Name="state_id" />
+          </Key>
+          <Property Name="state_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="read_id" Type="int" />
+          <Property Name="subscription_id" Type="int" />
+        </EntityType>
+        <EntityType Name="issue_stubs">
+          <Key>
+            <PropertyRef Name="stub_id" />
+          </Key>
+          <Property Name="stub_id" Type="int" Nullable="false" />
+          <Property Name="prev_id" Type="int" Nullable="false" />
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="folder_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="issue_types">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_name" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="issues">
+          <Key>
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="folder_id" Type="int" Nullable="false" />
+          <Property Name="issue_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="stamp_id" Type="int" Nullable="false" />
+          <Property Name="stub_id" Type="int" />
+          <Property Name="descr_id" Type="int" />
+          <Property Name="descr_stub_id" Type="int" />
+        </EntityType>
+        <EntityType Name="log_events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="event_type" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="event_severity" Type="tinyint" Nullable="false" />
+          <Property Name="event_message" Type="longtext" Nullable="false" />
+          <Property Name="event_time" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="host_name" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="preferences">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="pref_key" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="pref_key" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="pref_value" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="project_descriptions">
+          <Key>
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="descr_text" Type="longtext" Nullable="false" />
+          <Property Name="descr_format" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="project_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="project_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="stamp_id" Type="int" />
+          <Property Name="descr_id" Type="int" />
+          <Property Name="descr_stub_id" Type="int" />
+          <Property Name="is_public" Type="tinyint" Nullable="false" />
+          <Property Name="is_archived" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="register_requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_login" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="user_email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="user_passwd" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="request_key" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="created_time" Type="int" Nullable="false" />
+          <Property Name="is_active" Type="tinyint" Nullable="false" />
+          <Property Name="is_sent" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rights">
+          <Key>
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="project_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="project_access" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.webissues.server' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="server">
+          <Key>
+            <PropertyRef Name="server_name" />
+            <PropertyRef Name="server_uuid" />
+            <PropertyRef Name="db_version" />
+          </Key>
+          <Property Name="server_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="server_uuid" Type="guid" Nullable="false" />
+          <Property Name="db_version" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sessions">
+          <Key>
+            <PropertyRef Name="session_id" />
+          </Key>
+          <Property Name="session_id" Type="char" MaxLength="32" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="session_data" Type="longtext" Nullable="false" />
+          <Property Name="last_access" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="settings">
+          <Key>
+            <PropertyRef Name="set_key" />
+          </Key>
+          <Property Name="set_key" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="set_value" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stamps">
+          <Key>
+            <PropertyRef Name="stamp_id" />
+          </Key>
+          <Property Name="stamp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="stamp_time" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subscriptions">
+          <Key>
+            <PropertyRef Name="subscription_id" />
+          </Key>
+          <Property Name="subscription_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="user_email" Type="varchar" MaxLength="255" />
+          <Property Name="stamp_id" Type="int" Nullable="false" />
+          <Property Name="inbox_id" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_login" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="user_passwd" Type="varchar" MaxLength="255" />
+          <Property Name="user_access" Type="tinyint" Nullable="false" />
+          <Property Name="passwd_temp" Type="tinyint" Nullable="false" />
+          <Property Name="reset_key" Type="char" MaxLength="12" />
+          <Property Name="reset_time" Type="int" />
+          <Property Name="user_email" Type="varchar" MaxLength="255" />
+          <Property Name="user_language" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="view_preferences">
+          <Key>
+            <PropertyRef Name="type_id" />
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="pref_key" />
+          </Key>
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="pref_key" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="pref_value" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="view_settings">
+          <Key>
+            <PropertyRef Name="type_id" />
+            <PropertyRef Name="set_key" />
+          </Key>
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="set_key" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="set_value" Type="longtext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="views">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="view_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="view_def" Type="longtext" Nullable="false" />
+        </EntityType>
+        <Association Name="alerts_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_view_id_fk">
+          <End Role="views" Type="Self.views" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="views">
+              <PropertyRef Name="view_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="view_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attr_types_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="attr_types" Type="Self.attr_types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="attr_types">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attr_values_attr_id_fk">
+          <End Role="attr_types" Type="Self.attr_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="attr_values" Type="Self.attr_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attr_types">
+              <PropertyRef Name="attr_id" />
+            </Principal>
+            <Dependent Role="attr_values">
+              <PropertyRef Name="attr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attr_values_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="attr_values" Type="Self.attr_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="attr_values">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="change_stubs_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="change_stubs" Type="Self.change_stubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="change_stubs">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="change_stubs_stub_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="change_stubs" Type="Self.change_stubs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="change_stubs">
+              <PropertyRef Name="stub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_attr_id_fk">
+          <End Role="attr_types" Type="Self.attr_types" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attr_types">
+              <PropertyRef Name="attr_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="attr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_change_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="changes" Type="Self.changes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="change_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_from_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1" />
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="from_folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_to_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1" />
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="to_folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comments_comment_id_fk">
+          <End Role="changes" Type="Self.changes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="Self.comments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="changes">
+              <PropertyRef Name="change_id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="email_inboxes_inbox_default_folder_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1" />
+          <End Role="email_inboxes" Type="Self.email_inboxes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="email_inboxes">
+              <PropertyRef Name="inbox_default_folder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="email_inboxes_inbox_robot_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="email_inboxes" Type="Self.email_inboxes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="email_inboxes">
+              <PropertyRef Name="inbox_robot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="files_file_id_fk">
+          <End Role="changes" Type="Self.changes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="files" Type="Self.files" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="changes">
+              <PropertyRef Name="change_id" />
+            </Principal>
+            <Dependent Role="files">
+              <PropertyRef Name="file_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="folders_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="folders" Type="Self.folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="folders">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="folders_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="folders" Type="Self.folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="folders">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_descriptions_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issue_descriptions" Type="Self.issue_descriptions" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue_descriptions">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_states_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issue_states" Type="Self.issue_states" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue_states">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_states_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="issue_states" Type="Self.issue_states" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="issue_states">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_stubs_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issue_stubs" Type="Self.issue_stubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="issue_stubs">
+              <PropertyRef Name="folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_stubs_stub_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="issue_stubs" Type="Self.issue_stubs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="issue_stubs">
+              <PropertyRef Name="stub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issues_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issues" Type="Self.issues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="issues">
+              <PropertyRef Name="folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issues_issue_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="issues" Type="Self.issues" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issues_stamp_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="issues" Type="Self.issues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="issues">
+              <PropertyRef Name="stamp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="log_events_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="log_events" Type="Self.log_events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="log_events">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="preferences_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="preferences" Type="Self.preferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="preferences">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_descriptions_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="project_descriptions" Type="Self.project_descriptions" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="project_descriptions">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rights_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="rights" Type="Self.rights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="rights">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rights_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="rights" Type="Self.rights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="rights">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sessions_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="sessions">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="stamps_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="stamps" Type="Self.stamps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="stamps">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subscriptions_inbox_id_fk">
+          <End Role="email_inboxes" Type="Self.email_inboxes" Multiplicity="0..1" />
+          <End Role="subscriptions" Type="Self.subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="email_inboxes">
+              <PropertyRef Name="inbox_id" />
+            </Principal>
+            <Dependent Role="subscriptions">
+              <PropertyRef Name="inbox_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subscriptions_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subscriptions" Type="Self.subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="subscriptions">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subscriptions_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="subscriptions" Type="Self.subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="subscriptions">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="view_preferences_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="view_preferences" Type="Self.view_preferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="view_preferences">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="view_preferences_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="view_preferences" Type="Self.view_preferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="view_preferences">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="view_settings_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="view_settings" Type="Self.view_settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="view_settings">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="views_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="views" Type="Self.views" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="views">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="views_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="views" Type="Self.views" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="views">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="webissuesModelStoreContainer">
+          <EntitySet Name="alerts" EntityType="Self.alerts" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="attr_types" EntityType="Self.attr_types" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="attr_values" EntityType="Self.attr_values" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="change_stubs" EntityType="Self.change_stubs" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="changes" EntityType="Self.changes" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="comments" EntityType="Self.comments" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="email_inboxes" EntityType="Self.email_inboxes" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="files" EntityType="Self.files" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="folders" EntityType="Self.folders" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="issue_descriptions" EntityType="Self.issue_descriptions" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="issue_states" EntityType="Self.issue_states" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="issue_stubs" EntityType="Self.issue_stubs" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="issue_types" EntityType="Self.issue_types" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="issues" EntityType="Self.issues" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="log_events" EntityType="Self.log_events" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="preferences" EntityType="Self.preferences" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="project_descriptions" EntityType="Self.project_descriptions" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="projects" EntityType="Self.projects" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="register_requests" EntityType="Self.register_requests" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="rights" EntityType="Self.rights" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="sessions" EntityType="Self.sessions" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="settings" EntityType="Self.settings" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="stamps" EntityType="Self.stamps" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="subscriptions" EntityType="Self.subscriptions" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="view_preferences" EntityType="Self.view_preferences" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="view_settings" EntityType="Self.view_settings" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="views" EntityType="Self.views" Schema="webissues" store:Type="Tables" />
+          <EntitySet Name="server" EntityType="Self.server" store:Type="Tables" store:Schema="webissues">
+            <DefiningQuery>SELECT
+`server`.`server_name`, 
+`server`.`server_uuid`, 
+`server`.`db_version`
+FROM `server` AS `server`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="alerts_folder_id_fk" Association="Self.alerts_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_project_id_fk" Association="Self.alerts_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_type_id_fk" Association="Self.alerts_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_user_id_fk" Association="Self.alerts_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_view_id_fk" Association="Self.alerts_view_id_fk">
+            <End Role="views" EntitySet="views" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="attr_types_type_id_fk" Association="Self.attr_types_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="attr_types" EntitySet="attr_types" />
+          </AssociationSet>
+          <AssociationSet Name="attr_values_attr_id_fk" Association="Self.attr_values_attr_id_fk">
+            <End Role="attr_types" EntitySet="attr_types" />
+            <End Role="attr_values" EntitySet="attr_values" />
+          </AssociationSet>
+          <AssociationSet Name="attr_values_issue_id_fk" Association="Self.attr_values_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="attr_values" EntitySet="attr_values" />
+          </AssociationSet>
+          <AssociationSet Name="change_stubs_issue_id_fk" Association="Self.change_stubs_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="change_stubs" EntitySet="change_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="change_stubs_stub_id_fk" Association="Self.change_stubs_stub_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="change_stubs" EntitySet="change_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="changes_attr_id_fk" Association="Self.changes_attr_id_fk">
+            <End Role="attr_types" EntitySet="attr_types" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="changes_change_id_fk" Association="Self.changes_change_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="changes_from_folder_id_fk" Association="Self.changes_from_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="changes_issue_id_fk" Association="Self.changes_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="changes_to_folder_id_fk" Association="Self.changes_to_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="comments_comment_id_fk" Association="Self.comments_comment_id_fk">
+            <End Role="changes" EntitySet="changes" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="email_inboxes_inbox_default_folder_fk" Association="Self.email_inboxes_inbox_default_folder_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="email_inboxes" EntitySet="email_inboxes" />
+          </AssociationSet>
+          <AssociationSet Name="email_inboxes_inbox_robot_fk" Association="Self.email_inboxes_inbox_robot_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="email_inboxes" EntitySet="email_inboxes" />
+          </AssociationSet>
+          <AssociationSet Name="files_file_id_fk" Association="Self.files_file_id_fk">
+            <End Role="changes" EntitySet="changes" />
+            <End Role="files" EntitySet="files" />
+          </AssociationSet>
+          <AssociationSet Name="folders_project_id_fk" Association="Self.folders_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="folders" EntitySet="folders" />
+          </AssociationSet>
+          <AssociationSet Name="folders_type_id_fk" Association="Self.folders_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="folders" EntitySet="folders" />
+          </AssociationSet>
+          <AssociationSet Name="issue_descriptions_issue_id_fk" Association="Self.issue_descriptions_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="issue_descriptions" EntitySet="issue_descriptions" />
+          </AssociationSet>
+          <AssociationSet Name="issue_states_issue_id_fk" Association="Self.issue_states_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="issue_states" EntitySet="issue_states" />
+          </AssociationSet>
+          <AssociationSet Name="issue_states_user_id_fk" Association="Self.issue_states_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="issue_states" EntitySet="issue_states" />
+          </AssociationSet>
+          <AssociationSet Name="issue_stubs_folder_id_fk" Association="Self.issue_stubs_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="issue_stubs" EntitySet="issue_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="issue_stubs_stub_id_fk" Association="Self.issue_stubs_stub_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="issue_stubs" EntitySet="issue_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="issues_folder_id_fk" Association="Self.issues_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="issues" EntitySet="issues" />
+          </AssociationSet>
+          <AssociationSet Name="issues_issue_id_fk" Association="Self.issues_issue_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="issues" EntitySet="issues" />
+          </AssociationSet>
+          <AssociationSet Name="issues_stamp_id_fk" Association="Self.issues_stamp_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="issues" EntitySet="issues" />
+          </AssociationSet>
+          <AssociationSet Name="log_events_user_id_fk" Association="Self.log_events_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="log_events" EntitySet="log_events" />
+          </AssociationSet>
+          <AssociationSet Name="preferences_user_id_fk" Association="Self.preferences_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="preferences" EntitySet="preferences" />
+          </AssociationSet>
+          <AssociationSet Name="project_descriptions_project_id_fk" Association="Self.project_descriptions_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="project_descriptions" EntitySet="project_descriptions" />
+          </AssociationSet>
+          <AssociationSet Name="rights_project_id_fk" Association="Self.rights_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="rights" EntitySet="rights" />
+          </AssociationSet>
+          <AssociationSet Name="rights_user_id_fk" Association="Self.rights_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="rights" EntitySet="rights" />
+          </AssociationSet>
+          <AssociationSet Name="sessions_user_id_fk" Association="Self.sessions_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="sessions" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="stamps_user_id_fk" Association="Self.stamps_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="stamps" EntitySet="stamps" />
+          </AssociationSet>
+          <AssociationSet Name="subscriptions_inbox_id_fk" Association="Self.subscriptions_inbox_id_fk">
+            <End Role="email_inboxes" EntitySet="email_inboxes" />
+            <End Role="subscriptions" EntitySet="subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="subscriptions_issue_id_fk" Association="Self.subscriptions_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="subscriptions" EntitySet="subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="subscriptions_user_id_fk" Association="Self.subscriptions_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="subscriptions" EntitySet="subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="view_preferences_type_id_fk" Association="Self.view_preferences_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="view_preferences" EntitySet="view_preferences" />
+          </AssociationSet>
+          <AssociationSet Name="view_preferences_user_id_fk" Association="Self.view_preferences_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="view_preferences" EntitySet="view_preferences" />
+          </AssociationSet>
+          <AssociationSet Name="view_settings_type_id_fk" Association="Self.view_settings_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="view_settings" EntitySet="view_settings" />
+          </AssociationSet>
+          <AssociationSet Name="views_type_id_fk" Association="Self.views_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="views" EntitySet="views" />
+          </AssociationSet>
+          <AssociationSet Name="views_user_id_fk" Association="Self.views_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="views" EntitySet="views" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="webissuesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alerts">
+          <Key>
+            <PropertyRef Name="alert_id" />
+          </Key>
+          <Property Name="alert_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="project_id" Type="Int32" />
+          <Property Name="folder_id" Type="Int32" />
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="view_id" Type="Int32" />
+          <Property Name="alert_type" Type="SByte" Nullable="false" />
+          <Property Name="alert_frequency" Type="SByte" />
+          <Property Name="stamp_id" Type="Int32" />
+          <NavigationProperty Name="folders" Relationship="Self.alerts_folder_id_fk" FromRole="alerts" ToRole="folders" />
+          <NavigationProperty Name="projects" Relationship="Self.alerts_project_id_fk" FromRole="alerts" ToRole="projects" />
+          <NavigationProperty Name="issue_types" Relationship="Self.alerts_type_id_fk" FromRole="alerts" ToRole="issue_types" />
+          <NavigationProperty Name="users" Relationship="Self.alerts_user_id_fk" FromRole="alerts" ToRole="users" />
+          <NavigationProperty Name="views" Relationship="Self.alerts_view_id_fk" FromRole="alerts" ToRole="views" />
+        </EntityType>
+        <EntityType Name="attr_types">
+          <Key>
+            <PropertyRef Name="attr_id" />
+          </Key>
+          <Property Name="attr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="attr_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="attr_def" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="issue_types" Relationship="Self.attr_types_type_id_fk" FromRole="attr_types" ToRole="issue_types" />
+          <NavigationProperty Name="attr_values" Relationship="Self.attr_values_attr_id_fk" FromRole="attr_types" ToRole="attr_values" />
+          <NavigationProperty Name="changes" Relationship="Self.changes_attr_id_fk" FromRole="attr_types" ToRole="changes" />
+        </EntityType>
+        <EntityType Name="attr_values">
+          <Key>
+            <PropertyRef Name="issue_id" />
+            <PropertyRef Name="attr_id" />
+          </Key>
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="attr_id" Type="Int32" Nullable="false" />
+          <Property Name="attr_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="attr_types" Relationship="Self.attr_values_attr_id_fk" FromRole="attr_values" ToRole="attr_types" />
+          <NavigationProperty Name="issues" Relationship="Self.attr_values_issue_id_fk" FromRole="attr_values" ToRole="issues" />
+        </EntityType>
+        <EntityType Name="change_stubs">
+          <Key>
+            <PropertyRef Name="stub_id" />
+          </Key>
+          <Property Name="stub_id" Type="Int32" Nullable="false" />
+          <Property Name="change_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="issues" Relationship="Self.change_stubs_issue_id_fk" FromRole="change_stubs" ToRole="issues" />
+          <NavigationProperty Name="stamps" Relationship="Self.change_stubs_stub_id_fk" FromRole="change_stubs" ToRole="stamps" />
+        </EntityType>
+        <EntityType Name="changes">
+          <Key>
+            <PropertyRef Name="change_id" />
+          </Key>
+          <Property Name="change_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="change_type" Type="SByte" Nullable="false" />
+          <Property Name="stamp_id" Type="Int32" Nullable="false" />
+          <Property Name="attr_id" Type="Int32" />
+          <Property Name="value_old" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="value_new" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="from_folder_id" Type="Int32" />
+          <Property Name="to_folder_id" Type="Int32" />
+          <Property Name="subscription_id" Type="Int32" />
+          <NavigationProperty Name="attr_types" Relationship="Self.changes_attr_id_fk" FromRole="changes" ToRole="attr_types" />
+          <NavigationProperty Name="stamps" Relationship="Self.changes_change_id_fk" FromRole="changes" ToRole="stamps" />
+          <NavigationProperty Name="folders" Relationship="Self.changes_from_folder_id_fk" FromRole="changes" ToRole="folders" />
+          <NavigationProperty Name="issues" Relationship="Self.changes_issue_id_fk" FromRole="changes" ToRole="issues" />
+          <NavigationProperty Name="folders1" Relationship="Self.changes_to_folder_id_fk" FromRole="changes" ToRole="folders" />
+          <NavigationProperty Name="comments" Relationship="Self.comments_comment_id_fk" FromRole="changes" ToRole="comments" />
+          <NavigationProperty Name="files" Relationship="Self.files_file_id_fk" FromRole="changes" ToRole="files" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="Int32" Nullable="false" />
+          <Property Name="comment_text" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment_format" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="changes" Relationship="Self.comments_comment_id_fk" FromRole="comments" ToRole="changes" />
+        </EntityType>
+        <EntityType Name="email_inboxes">
+          <Key>
+            <PropertyRef Name="inbox_id" />
+          </Key>
+          <Property Name="inbox_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inbox_engine" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="inbox_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="inbox_server" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="inbox_port" Type="Int32" Nullable="false" />
+          <Property Name="inbox_encryption" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="inbox_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="inbox_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="inbox_mailbox" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="inbox_no_validate" Type="SByte" Nullable="false" />
+          <Property Name="inbox_leave_messages" Type="SByte" Nullable="false" />
+          <Property Name="inbox_allow_external" Type="SByte" Nullable="false" />
+          <Property Name="inbox_robot" Type="Int32" />
+          <Property Name="inbox_map_folder" Type="SByte" Nullable="false" />
+          <Property Name="inbox_default_folder" Type="Int32" />
+          <Property Name="inbox_respond" Type="SByte" Nullable="false" />
+          <Property Name="inbox_subscribe" Type="SByte" Nullable="false" />
+          <Property Name="inbox_format" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="folders" Relationship="Self.email_inboxes_inbox_default_folder_fk" FromRole="email_inboxes" ToRole="folders" />
+          <NavigationProperty Name="users" Relationship="Self.email_inboxes_inbox_robot_fk" FromRole="email_inboxes" ToRole="users" />
+          <NavigationProperty Name="subscriptions" Relationship="Self.subscriptions_inbox_id_fk" FromRole="email_inboxes" ToRole="subscriptions" />
+        </EntityType>
+        <EntityType Name="files">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" />
+          <Property Name="file_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="file_size" Type="Int32" Nullable="false" />
+          <Property Name="file_data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="file_descr" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="file_storage" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="changes" Relationship="Self.files_file_id_fk" FromRole="files" ToRole="changes" />
+        </EntityType>
+        <EntityType Name="folders">
+          <Key>
+            <PropertyRef Name="folder_id" />
+          </Key>
+          <Property Name="folder_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="folder_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stamp_id" Type="Int32" />
+          <NavigationProperty Name="alerts" Relationship="Self.alerts_folder_id_fk" FromRole="folders" ToRole="alerts" />
+          <NavigationProperty Name="changes" Relationship="Self.changes_from_folder_id_fk" FromRole="folders" ToRole="changes" />
+          <NavigationProperty Name="changes1" Relationship="Self.changes_to_folder_id_fk" FromRole="folders" ToRole="changes" />
+          <NavigationProperty Name="email_inboxes" Relationship="Self.email_inboxes_inbox_default_folder_fk" FromRole="folders" ToRole="email_inboxes" />
+          <NavigationProperty Name="projects" Relationship="Self.folders_project_id_fk" FromRole="folders" ToRole="projects" />
+          <NavigationProperty Name="issue_types" Relationship="Self.folders_type_id_fk" FromRole="folders" ToRole="issue_types" />
+          <NavigationProperty Name="issue_stubs" Relationship="Self.issue_stubs_folder_id_fk" FromRole="folders" ToRole="issue_stubs" />
+          <NavigationProperty Name="issues" Relationship="Self.issues_folder_id_fk" FromRole="folders" ToRole="issues" />
+        </EntityType>
+        <EntityType Name="issue_descriptions">
+          <Key>
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="descr_text" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descr_format" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="issues" Relationship="Self.issue_descriptions_issue_id_fk" FromRole="issue_descriptions" ToRole="issues" />
+        </EntityType>
+        <EntityType Name="issue_states">
+          <Key>
+            <PropertyRef Name="state_id" />
+          </Key>
+          <Property Name="state_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="read_id" Type="Int32" />
+          <Property Name="subscription_id" Type="Int32" />
+          <NavigationProperty Name="issues" Relationship="Self.issue_states_issue_id_fk" FromRole="issue_states" ToRole="issues" />
+          <NavigationProperty Name="users" Relationship="Self.issue_states_user_id_fk" FromRole="issue_states" ToRole="users" />
+        </EntityType>
+        <EntityType Name="issue_stubs">
+          <Key>
+            <PropertyRef Name="stub_id" />
+          </Key>
+          <Property Name="stub_id" Type="Int32" Nullable="false" />
+          <Property Name="prev_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="folder_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="folders" Relationship="Self.issue_stubs_folder_id_fk" FromRole="issue_stubs" ToRole="folders" />
+          <NavigationProperty Name="stamps" Relationship="Self.issue_stubs_stub_id_fk" FromRole="issue_stubs" ToRole="stamps" />
+        </EntityType>
+        <EntityType Name="issue_types">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alerts" Relationship="Self.alerts_type_id_fk" FromRole="issue_types" ToRole="alerts" />
+          <NavigationProperty Name="attr_types" Relationship="Self.attr_types_type_id_fk" FromRole="issue_types" ToRole="attr_types" />
+          <NavigationProperty Name="folders" Relationship="Self.folders_type_id_fk" FromRole="issue_types" ToRole="folders" />
+          <NavigationProperty Name="view_preferences" Relationship="Self.view_preferences_type_id_fk" FromRole="issue_types" ToRole="view_preferences" />
+          <NavigationProperty Name="view_settings" Relationship="Self.view_settings_type_id_fk" FromRole="issue_types" ToRole="view_settings" />
+          <NavigationProperty Name="views" Relationship="Self.views_type_id_fk" FromRole="issue_types" ToRole="views" />
+        </EntityType>
+        <EntityType Name="issues">
+          <Key>
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="folder_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stamp_id" Type="Int32" Nullable="false" />
+          <Property Name="stub_id" Type="Int32" />
+          <Property Name="descr_id" Type="Int32" />
+          <Property Name="descr_stub_id" Type="Int32" />
+          <NavigationProperty Name="attr_values" Relationship="Self.attr_values_issue_id_fk" FromRole="issues" ToRole="attr_values" />
+          <NavigationProperty Name="change_stubs" Relationship="Self.change_stubs_issue_id_fk" FromRole="issues" ToRole="change_stubs" />
+          <NavigationProperty Name="changes" Relationship="Self.changes_issue_id_fk" FromRole="issues" ToRole="changes" />
+          <NavigationProperty Name="folders" Relationship="Self.issues_folder_id_fk" FromRole="issues" ToRole="folders" />
+          <NavigationProperty Name="issue_descriptions" Relationship="Self.issue_descriptions_issue_id_fk" FromRole="issues" ToRole="issue_descriptions" />
+          <NavigationProperty Name="issue_states" Relationship="Self.issue_states_issue_id_fk" FromRole="issues" ToRole="issue_states" />
+          <NavigationProperty Name="stamps" Relationship="Self.issues_issue_id_fk" FromRole="issues" ToRole="stamps" />
+          <NavigationProperty Name="stamps1" Relationship="Self.issues_stamp_id_fk" FromRole="issues" ToRole="stamps" />
+          <NavigationProperty Name="subscriptions" Relationship="Self.subscriptions_issue_id_fk" FromRole="issues" ToRole="subscriptions" />
+        </EntityType>
+        <EntityType Name="log_events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event_type" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="event_severity" Type="SByte" Nullable="false" />
+          <Property Name="event_message" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="event_time" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="host_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.log_events_user_id_fk" FromRole="log_events" ToRole="users" />
+        </EntityType>
+        <EntityType Name="preferences">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="pref_key" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="pref_key" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pref_value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.preferences_user_id_fk" FromRole="preferences" ToRole="users" />
+        </EntityType>
+        <EntityType Name="project_descriptions">
+          <Key>
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="descr_text" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descr_format" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="projects" Relationship="Self.project_descriptions_project_id_fk" FromRole="project_descriptions" ToRole="projects" />
+        </EntityType>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="project_id" />
+          </Key>
+          <Property Name="project_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="project_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stamp_id" Type="Int32" />
+          <Property Name="descr_id" Type="Int32" />
+          <Property Name="descr_stub_id" Type="Int32" />
+          <Property Name="is_public" Type="SByte" Nullable="false" />
+          <Property Name="is_archived" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="alerts" Relationship="Self.alerts_project_id_fk" FromRole="projects" ToRole="alerts" />
+          <NavigationProperty Name="folders" Relationship="Self.folders_project_id_fk" FromRole="projects" ToRole="folders" />
+          <NavigationProperty Name="project_descriptions" Relationship="Self.project_descriptions_project_id_fk" FromRole="projects" ToRole="project_descriptions" />
+          <NavigationProperty Name="rights" Relationship="Self.rights_project_id_fk" FromRole="projects" ToRole="rights" />
+        </EntityType>
+        <EntityType Name="register_requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_login" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_passwd" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="request_key" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_time" Type="Int32" Nullable="false" />
+          <Property Name="is_active" Type="SByte" Nullable="false" />
+          <Property Name="is_sent" Type="SByte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rights">
+          <Key>
+            <PropertyRef Name="project_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="project_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="project_access" Type="SByte" Nullable="false" />
+          <NavigationProperty Name="projects" Relationship="Self.rights_project_id_fk" FromRole="rights" ToRole="projects" />
+          <NavigationProperty Name="users" Relationship="Self.rights_user_id_fk" FromRole="rights" ToRole="users" />
+        </EntityType>
+        <EntityType Name="sessions">
+          <Key>
+            <PropertyRef Name="session_id" />
+          </Key>
+          <Property Name="session_id" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="session_data" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_access" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.sessions_user_id_fk" FromRole="sessions" ToRole="users" />
+        </EntityType>
+        <EntityType Name="settings">
+          <Key>
+            <PropertyRef Name="set_key" />
+          </Key>
+          <Property Name="set_key" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="set_value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stamps">
+          <Key>
+            <PropertyRef Name="stamp_id" />
+          </Key>
+          <Property Name="stamp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="stamp_time" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="change_stubs" Relationship="Self.change_stubs_stub_id_fk" FromRole="stamps" ToRole="change_stubs" />
+          <NavigationProperty Name="changes" Relationship="Self.changes_change_id_fk" FromRole="stamps" ToRole="changes" />
+          <NavigationProperty Name="issue_stubs" Relationship="Self.issue_stubs_stub_id_fk" FromRole="stamps" ToRole="issue_stubs" />
+          <NavigationProperty Name="issues" Relationship="Self.issues_issue_id_fk" FromRole="stamps" ToRole="issues" />
+          <NavigationProperty Name="issues1" Relationship="Self.issues_stamp_id_fk" FromRole="stamps" ToRole="issues" />
+          <NavigationProperty Name="users" Relationship="Self.stamps_user_id_fk" FromRole="stamps" ToRole="users" />
+        </EntityType>
+        <EntityType Name="subscriptions">
+          <Key>
+            <PropertyRef Name="subscription_id" />
+          </Key>
+          <Property Name="subscription_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="stamp_id" Type="Int32" Nullable="false" />
+          <Property Name="inbox_id" Type="Int32" />
+          <NavigationProperty Name="email_inboxes" Relationship="Self.subscriptions_inbox_id_fk" FromRole="subscriptions" ToRole="email_inboxes" />
+          <NavigationProperty Name="issues" Relationship="Self.subscriptions_issue_id_fk" FromRole="subscriptions" ToRole="issues" />
+          <NavigationProperty Name="users" Relationship="Self.subscriptions_user_id_fk" FromRole="subscriptions" ToRole="users" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_login" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_passwd" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user_access" Type="SByte" Nullable="false" />
+          <Property Name="passwd_temp" Type="SByte" Nullable="false" />
+          <Property Name="reset_key" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="reset_time" Type="Int32" />
+          <Property Name="user_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user_language" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="alerts" Relationship="Self.alerts_user_id_fk" FromRole="users" ToRole="alerts" />
+          <NavigationProperty Name="email_inboxes" Relationship="Self.email_inboxes_inbox_robot_fk" FromRole="users" ToRole="email_inboxes" />
+          <NavigationProperty Name="issue_states" Relationship="Self.issue_states_user_id_fk" FromRole="users" ToRole="issue_states" />
+          <NavigationProperty Name="log_events" Relationship="Self.log_events_user_id_fk" FromRole="users" ToRole="log_events" />
+          <NavigationProperty Name="preferences" Relationship="Self.preferences_user_id_fk" FromRole="users" ToRole="preferences" />
+          <NavigationProperty Name="rights" Relationship="Self.rights_user_id_fk" FromRole="users" ToRole="rights" />
+          <NavigationProperty Name="sessions" Relationship="Self.sessions_user_id_fk" FromRole="users" ToRole="sessions" />
+          <NavigationProperty Name="stamps" Relationship="Self.stamps_user_id_fk" FromRole="users" ToRole="stamps" />
+          <NavigationProperty Name="subscriptions" Relationship="Self.subscriptions_user_id_fk" FromRole="users" ToRole="subscriptions" />
+          <NavigationProperty Name="view_preferences" Relationship="Self.view_preferences_user_id_fk" FromRole="users" ToRole="view_preferences" />
+          <NavigationProperty Name="views" Relationship="Self.views_user_id_fk" FromRole="users" ToRole="views" />
+        </EntityType>
+        <EntityType Name="view_preferences">
+          <Key>
+            <PropertyRef Name="type_id" />
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="pref_key" />
+          </Key>
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="pref_key" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pref_value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="issue_types" Relationship="Self.view_preferences_type_id_fk" FromRole="view_preferences" ToRole="issue_types" />
+          <NavigationProperty Name="users" Relationship="Self.view_preferences_user_id_fk" FromRole="view_preferences" ToRole="users" />
+        </EntityType>
+        <EntityType Name="view_settings">
+          <Key>
+            <PropertyRef Name="type_id" />
+            <PropertyRef Name="set_key" />
+          </Key>
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="set_key" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="set_value" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="issue_types" Relationship="Self.view_settings_type_id_fk" FromRole="view_settings" ToRole="issue_types" />
+        </EntityType>
+        <EntityType Name="views">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="view_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="view_def" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="alerts" Relationship="Self.alerts_view_id_fk" FromRole="views" ToRole="alerts" />
+          <NavigationProperty Name="issue_types" Relationship="Self.views_type_id_fk" FromRole="views" ToRole="issue_types" />
+          <NavigationProperty Name="users" Relationship="Self.views_user_id_fk" FromRole="views" ToRole="users" />
+        </EntityType>
+        <EntityType Name="server">
+          <Key>
+            <PropertyRef Name="server_name" />
+            <PropertyRef Name="server_uuid" />
+            <PropertyRef Name="db_version" />
+          </Key>
+          <Property Name="server_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="server_uuid" Type="Guid" Nullable="false" />
+          <Property Name="db_version" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="alerts_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="alerts_view_id_fk">
+          <End Role="views" Type="Self.views" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="alerts" Type="Self.alerts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="views">
+              <PropertyRef Name="view_id" />
+            </Principal>
+            <Dependent Role="alerts">
+              <PropertyRef Name="view_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attr_types_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="attr_types" Type="Self.attr_types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="attr_types">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attr_values_attr_id_fk">
+          <End Role="attr_types" Type="Self.attr_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="attr_values" Type="Self.attr_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attr_types">
+              <PropertyRef Name="attr_id" />
+            </Principal>
+            <Dependent Role="attr_values">
+              <PropertyRef Name="attr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_attr_id_fk">
+          <End Role="attr_types" Type="Self.attr_types" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attr_types">
+              <PropertyRef Name="attr_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="attr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="attr_values_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="attr_values" Type="Self.attr_values" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="attr_values">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="change_stubs_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="change_stubs" Type="Self.change_stubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="change_stubs">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="change_stubs_stub_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="change_stubs" Type="Self.change_stubs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="change_stubs">
+              <PropertyRef Name="stub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_change_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="changes" Type="Self.changes" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="change_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_from_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1" />
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="from_folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="changes_to_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1" />
+          <End Role="changes" Type="Self.changes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="changes">
+              <PropertyRef Name="to_folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comments_comment_id_fk">
+          <End Role="changes" Type="Self.changes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comments" Type="Self.comments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="changes">
+              <PropertyRef Name="change_id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="files_file_id_fk">
+          <End Role="changes" Type="Self.changes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="files" Type="Self.files" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="changes">
+              <PropertyRef Name="change_id" />
+            </Principal>
+            <Dependent Role="files">
+              <PropertyRef Name="file_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="email_inboxes_inbox_default_folder_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="0..1" />
+          <End Role="email_inboxes" Type="Self.email_inboxes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="email_inboxes">
+              <PropertyRef Name="inbox_default_folder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="email_inboxes_inbox_robot_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="email_inboxes" Type="Self.email_inboxes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="email_inboxes">
+              <PropertyRef Name="inbox_robot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subscriptions_inbox_id_fk">
+          <End Role="email_inboxes" Type="Self.email_inboxes" Multiplicity="0..1" />
+          <End Role="subscriptions" Type="Self.subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="email_inboxes">
+              <PropertyRef Name="inbox_id" />
+            </Principal>
+            <Dependent Role="subscriptions">
+              <PropertyRef Name="inbox_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="folders_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="folders" Type="Self.folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="folders">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="folders_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="folders" Type="Self.folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="folders">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_stubs_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issue_stubs" Type="Self.issue_stubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="issue_stubs">
+              <PropertyRef Name="folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issues_folder_id_fk">
+          <End Role="folders" Type="Self.folders" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issues" Type="Self.issues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="folders">
+              <PropertyRef Name="folder_id" />
+            </Principal>
+            <Dependent Role="issues">
+              <PropertyRef Name="folder_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_descriptions_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issue_descriptions" Type="Self.issue_descriptions" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue_descriptions">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_states_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="issue_states" Type="Self.issue_states" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue_states">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_states_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="issue_states" Type="Self.issue_states" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="issue_states">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issue_stubs_stub_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="issue_stubs" Type="Self.issue_stubs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="issue_stubs">
+              <PropertyRef Name="stub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="view_preferences_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="view_preferences" Type="Self.view_preferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="view_preferences">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="view_settings_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="view_settings" Type="Self.view_settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="view_settings">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="views_type_id_fk">
+          <End Role="issue_types" Type="Self.issue_types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="views" Type="Self.views" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_types">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="views">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issues_issue_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="issues" Type="Self.issues" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="issues_stamp_id_fk">
+          <End Role="stamps" Type="Self.stamps" Multiplicity="1" />
+          <End Role="issues" Type="Self.issues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stamps">
+              <PropertyRef Name="stamp_id" />
+            </Principal>
+            <Dependent Role="issues">
+              <PropertyRef Name="stamp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subscriptions_issue_id_fk">
+          <End Role="issues" Type="Self.issues" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="subscriptions" Type="Self.subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issues">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="subscriptions">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="log_events_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="log_events" Type="Self.log_events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="log_events">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="preferences_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="preferences" Type="Self.preferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="preferences">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_descriptions_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="project_descriptions" Type="Self.project_descriptions" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="project_descriptions">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rights_project_id_fk">
+          <End Role="projects" Type="Self.projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="rights" Type="Self.rights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="project_id" />
+            </Principal>
+            <Dependent Role="rights">
+              <PropertyRef Name="project_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rights_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="rights" Type="Self.rights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="rights">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sessions_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="sessions" Type="Self.sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="sessions">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="stamps_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="stamps" Type="Self.stamps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="stamps">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="subscriptions_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="subscriptions" Type="Self.subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="subscriptions">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="view_preferences_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="view_preferences" Type="Self.view_preferences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="view_preferences">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="views_user_id_fk">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="views" Type="Self.views" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="views">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="webissuesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alerts" EntityType="Self.alerts" />
+          <EntitySet Name="attr_types" EntityType="Self.attr_types" />
+          <EntitySet Name="attr_values" EntityType="Self.attr_values" />
+          <EntitySet Name="change_stubs" EntityType="Self.change_stubs" />
+          <EntitySet Name="changes" EntityType="Self.changes" />
+          <EntitySet Name="comments" EntityType="Self.comments" />
+          <EntitySet Name="email_inboxes" EntityType="Self.email_inboxes" />
+          <EntitySet Name="files" EntityType="Self.files" />
+          <EntitySet Name="folders" EntityType="Self.folders" />
+          <EntitySet Name="issue_descriptions" EntityType="Self.issue_descriptions" />
+          <EntitySet Name="issue_states" EntityType="Self.issue_states" />
+          <EntitySet Name="issue_stubs" EntityType="Self.issue_stubs" />
+          <EntitySet Name="issue_types" EntityType="Self.issue_types" />
+          <EntitySet Name="issues" EntityType="Self.issues" />
+          <EntitySet Name="log_events" EntityType="Self.log_events" />
+          <EntitySet Name="preferences" EntityType="Self.preferences" />
+          <EntitySet Name="project_descriptions" EntityType="Self.project_descriptions" />
+          <EntitySet Name="projects" EntityType="Self.projects" />
+          <EntitySet Name="register_requests" EntityType="Self.register_requests" />
+          <EntitySet Name="rights" EntityType="Self.rights" />
+          <EntitySet Name="sessions" EntityType="Self.sessions" />
+          <EntitySet Name="settings" EntityType="Self.settings" />
+          <EntitySet Name="stamps" EntityType="Self.stamps" />
+          <EntitySet Name="subscriptions" EntityType="Self.subscriptions" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="view_preferences" EntityType="Self.view_preferences" />
+          <EntitySet Name="view_settings" EntityType="Self.view_settings" />
+          <EntitySet Name="views" EntityType="Self.views" />
+          <EntitySet Name="server" EntityType="Self.server" />
+          <AssociationSet Name="alerts_folder_id_fk" Association="Self.alerts_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_project_id_fk" Association="Self.alerts_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_type_id_fk" Association="Self.alerts_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_user_id_fk" Association="Self.alerts_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="alerts_view_id_fk" Association="Self.alerts_view_id_fk">
+            <End Role="views" EntitySet="views" />
+            <End Role="alerts" EntitySet="alerts" />
+          </AssociationSet>
+          <AssociationSet Name="attr_types_type_id_fk" Association="Self.attr_types_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="attr_types" EntitySet="attr_types" />
+          </AssociationSet>
+          <AssociationSet Name="attr_values_attr_id_fk" Association="Self.attr_values_attr_id_fk">
+            <End Role="attr_types" EntitySet="attr_types" />
+            <End Role="attr_values" EntitySet="attr_values" />
+          </AssociationSet>
+          <AssociationSet Name="changes_attr_id_fk" Association="Self.changes_attr_id_fk">
+            <End Role="attr_types" EntitySet="attr_types" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="attr_values_issue_id_fk" Association="Self.attr_values_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="attr_values" EntitySet="attr_values" />
+          </AssociationSet>
+          <AssociationSet Name="change_stubs_issue_id_fk" Association="Self.change_stubs_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="change_stubs" EntitySet="change_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="change_stubs_stub_id_fk" Association="Self.change_stubs_stub_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="change_stubs" EntitySet="change_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="changes_change_id_fk" Association="Self.changes_change_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="changes_from_folder_id_fk" Association="Self.changes_from_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="changes_issue_id_fk" Association="Self.changes_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="changes_to_folder_id_fk" Association="Self.changes_to_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="changes" EntitySet="changes" />
+          </AssociationSet>
+          <AssociationSet Name="comments_comment_id_fk" Association="Self.comments_comment_id_fk">
+            <End Role="changes" EntitySet="changes" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="files_file_id_fk" Association="Self.files_file_id_fk">
+            <End Role="changes" EntitySet="changes" />
+            <End Role="files" EntitySet="files" />
+          </AssociationSet>
+          <AssociationSet Name="email_inboxes_inbox_default_folder_fk" Association="Self.email_inboxes_inbox_default_folder_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="email_inboxes" EntitySet="email_inboxes" />
+          </AssociationSet>
+          <AssociationSet Name="email_inboxes_inbox_robot_fk" Association="Self.email_inboxes_inbox_robot_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="email_inboxes" EntitySet="email_inboxes" />
+          </AssociationSet>
+          <AssociationSet Name="subscriptions_inbox_id_fk" Association="Self.subscriptions_inbox_id_fk">
+            <End Role="email_inboxes" EntitySet="email_inboxes" />
+            <End Role="subscriptions" EntitySet="subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="folders_project_id_fk" Association="Self.folders_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="folders" EntitySet="folders" />
+          </AssociationSet>
+          <AssociationSet Name="folders_type_id_fk" Association="Self.folders_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="folders" EntitySet="folders" />
+          </AssociationSet>
+          <AssociationSet Name="issue_stubs_folder_id_fk" Association="Self.issue_stubs_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="issue_stubs" EntitySet="issue_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="issues_folder_id_fk" Association="Self.issues_folder_id_fk">
+            <End Role="folders" EntitySet="folders" />
+            <End Role="issues" EntitySet="issues" />
+          </AssociationSet>
+          <AssociationSet Name="issue_descriptions_issue_id_fk" Association="Self.issue_descriptions_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="issue_descriptions" EntitySet="issue_descriptions" />
+          </AssociationSet>
+          <AssociationSet Name="issue_states_issue_id_fk" Association="Self.issue_states_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="issue_states" EntitySet="issue_states" />
+          </AssociationSet>
+          <AssociationSet Name="issue_states_user_id_fk" Association="Self.issue_states_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="issue_states" EntitySet="issue_states" />
+          </AssociationSet>
+          <AssociationSet Name="issue_stubs_stub_id_fk" Association="Self.issue_stubs_stub_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="issue_stubs" EntitySet="issue_stubs" />
+          </AssociationSet>
+          <AssociationSet Name="view_preferences_type_id_fk" Association="Self.view_preferences_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="view_preferences" EntitySet="view_preferences" />
+          </AssociationSet>
+          <AssociationSet Name="view_settings_type_id_fk" Association="Self.view_settings_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="view_settings" EntitySet="view_settings" />
+          </AssociationSet>
+          <AssociationSet Name="views_type_id_fk" Association="Self.views_type_id_fk">
+            <End Role="issue_types" EntitySet="issue_types" />
+            <End Role="views" EntitySet="views" />
+          </AssociationSet>
+          <AssociationSet Name="issues_issue_id_fk" Association="Self.issues_issue_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="issues" EntitySet="issues" />
+          </AssociationSet>
+          <AssociationSet Name="issues_stamp_id_fk" Association="Self.issues_stamp_id_fk">
+            <End Role="stamps" EntitySet="stamps" />
+            <End Role="issues" EntitySet="issues" />
+          </AssociationSet>
+          <AssociationSet Name="subscriptions_issue_id_fk" Association="Self.subscriptions_issue_id_fk">
+            <End Role="issues" EntitySet="issues" />
+            <End Role="subscriptions" EntitySet="subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="log_events_user_id_fk" Association="Self.log_events_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="log_events" EntitySet="log_events" />
+          </AssociationSet>
+          <AssociationSet Name="preferences_user_id_fk" Association="Self.preferences_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="preferences" EntitySet="preferences" />
+          </AssociationSet>
+          <AssociationSet Name="project_descriptions_project_id_fk" Association="Self.project_descriptions_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="project_descriptions" EntitySet="project_descriptions" />
+          </AssociationSet>
+          <AssociationSet Name="rights_project_id_fk" Association="Self.rights_project_id_fk">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="rights" EntitySet="rights" />
+          </AssociationSet>
+          <AssociationSet Name="rights_user_id_fk" Association="Self.rights_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="rights" EntitySet="rights" />
+          </AssociationSet>
+          <AssociationSet Name="sessions_user_id_fk" Association="Self.sessions_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="sessions" EntitySet="sessions" />
+          </AssociationSet>
+          <AssociationSet Name="stamps_user_id_fk" Association="Self.stamps_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="stamps" EntitySet="stamps" />
+          </AssociationSet>
+          <AssociationSet Name="subscriptions_user_id_fk" Association="Self.subscriptions_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="subscriptions" EntitySet="subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="view_preferences_user_id_fk" Association="Self.view_preferences_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="view_preferences" EntitySet="view_preferences" />
+          </AssociationSet>
+          <AssociationSet Name="views_user_id_fk" Association="Self.views_user_id_fk">
+            <End Role="users" EntitySet="users" />
+            <End Role="views" EntitySet="views" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="webissuesModelStoreContainer" CdmEntityContainer="webissuesEntities">
+          <EntitySetMapping Name="alerts">
+            <EntityTypeMapping TypeName="webissuesModel.alerts">
+              <MappingFragment StoreEntitySet="alerts">
+                <ScalarProperty Name="alert_id" ColumnName="alert_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="folder_id" ColumnName="folder_id" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="view_id" ColumnName="view_id" />
+                <ScalarProperty Name="alert_type" ColumnName="alert_type" />
+                <ScalarProperty Name="alert_frequency" ColumnName="alert_frequency" />
+                <ScalarProperty Name="stamp_id" ColumnName="stamp_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attr_types">
+            <EntityTypeMapping TypeName="webissuesModel.attr_types">
+              <MappingFragment StoreEntitySet="attr_types">
+                <ScalarProperty Name="attr_id" ColumnName="attr_id" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="attr_name" ColumnName="attr_name" />
+                <ScalarProperty Name="attr_def" ColumnName="attr_def" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attr_values">
+            <EntityTypeMapping TypeName="webissuesModel.attr_values">
+              <MappingFragment StoreEntitySet="attr_values">
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="attr_id" ColumnName="attr_id" />
+                <ScalarProperty Name="attr_value" ColumnName="attr_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="change_stubs">
+            <EntityTypeMapping TypeName="webissuesModel.change_stubs">
+              <MappingFragment StoreEntitySet="change_stubs">
+                <ScalarProperty Name="stub_id" ColumnName="stub_id" />
+                <ScalarProperty Name="change_id" ColumnName="change_id" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="changes">
+            <EntityTypeMapping TypeName="webissuesModel.changes">
+              <MappingFragment StoreEntitySet="changes">
+                <ScalarProperty Name="change_id" ColumnName="change_id" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="change_type" ColumnName="change_type" />
+                <ScalarProperty Name="stamp_id" ColumnName="stamp_id" />
+                <ScalarProperty Name="attr_id" ColumnName="attr_id" />
+                <ScalarProperty Name="value_old" ColumnName="value_old" />
+                <ScalarProperty Name="value_new" ColumnName="value_new" />
+                <ScalarProperty Name="from_folder_id" ColumnName="from_folder_id" />
+                <ScalarProperty Name="to_folder_id" ColumnName="to_folder_id" />
+                <ScalarProperty Name="subscription_id" ColumnName="subscription_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="webissuesModel.comments">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="comment_text" ColumnName="comment_text" />
+                <ScalarProperty Name="comment_format" ColumnName="comment_format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="email_inboxes">
+            <EntityTypeMapping TypeName="webissuesModel.email_inboxes">
+              <MappingFragment StoreEntitySet="email_inboxes">
+                <ScalarProperty Name="inbox_id" ColumnName="inbox_id" />
+                <ScalarProperty Name="inbox_engine" ColumnName="inbox_engine" />
+                <ScalarProperty Name="inbox_email" ColumnName="inbox_email" />
+                <ScalarProperty Name="inbox_server" ColumnName="inbox_server" />
+                <ScalarProperty Name="inbox_port" ColumnName="inbox_port" />
+                <ScalarProperty Name="inbox_encryption" ColumnName="inbox_encryption" />
+                <ScalarProperty Name="inbox_user" ColumnName="inbox_user" />
+                <ScalarProperty Name="inbox_password" ColumnName="inbox_password" />
+                <ScalarProperty Name="inbox_mailbox" ColumnName="inbox_mailbox" />
+                <ScalarProperty Name="inbox_no_validate" ColumnName="inbox_no_validate" />
+                <ScalarProperty Name="inbox_leave_messages" ColumnName="inbox_leave_messages" />
+                <ScalarProperty Name="inbox_allow_external" ColumnName="inbox_allow_external" />
+                <ScalarProperty Name="inbox_robot" ColumnName="inbox_robot" />
+                <ScalarProperty Name="inbox_map_folder" ColumnName="inbox_map_folder" />
+                <ScalarProperty Name="inbox_default_folder" ColumnName="inbox_default_folder" />
+                <ScalarProperty Name="inbox_respond" ColumnName="inbox_respond" />
+                <ScalarProperty Name="inbox_subscribe" ColumnName="inbox_subscribe" />
+                <ScalarProperty Name="inbox_format" ColumnName="inbox_format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="files">
+            <EntityTypeMapping TypeName="webissuesModel.files">
+              <MappingFragment StoreEntitySet="files">
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="file_size" ColumnName="file_size" />
+                <ScalarProperty Name="file_data" ColumnName="file_data" />
+                <ScalarProperty Name="file_descr" ColumnName="file_descr" />
+                <ScalarProperty Name="file_storage" ColumnName="file_storage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="folders">
+            <EntityTypeMapping TypeName="webissuesModel.folders">
+              <MappingFragment StoreEntitySet="folders">
+                <ScalarProperty Name="folder_id" ColumnName="folder_id" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="folder_name" ColumnName="folder_name" />
+                <ScalarProperty Name="stamp_id" ColumnName="stamp_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issue_descriptions">
+            <EntityTypeMapping TypeName="webissuesModel.issue_descriptions">
+              <MappingFragment StoreEntitySet="issue_descriptions">
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="descr_text" ColumnName="descr_text" />
+                <ScalarProperty Name="descr_format" ColumnName="descr_format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issue_states">
+            <EntityTypeMapping TypeName="webissuesModel.issue_states">
+              <MappingFragment StoreEntitySet="issue_states">
+                <ScalarProperty Name="state_id" ColumnName="state_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="read_id" ColumnName="read_id" />
+                <ScalarProperty Name="subscription_id" ColumnName="subscription_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issue_stubs">
+            <EntityTypeMapping TypeName="webissuesModel.issue_stubs">
+              <MappingFragment StoreEntitySet="issue_stubs">
+                <ScalarProperty Name="stub_id" ColumnName="stub_id" />
+                <ScalarProperty Name="prev_id" ColumnName="prev_id" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="folder_id" ColumnName="folder_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issue_types">
+            <EntityTypeMapping TypeName="webissuesModel.issue_types">
+              <MappingFragment StoreEntitySet="issue_types">
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="type_name" ColumnName="type_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issues">
+            <EntityTypeMapping TypeName="webissuesModel.issues">
+              <MappingFragment StoreEntitySet="issues">
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="folder_id" ColumnName="folder_id" />
+                <ScalarProperty Name="issue_name" ColumnName="issue_name" />
+                <ScalarProperty Name="stamp_id" ColumnName="stamp_id" />
+                <ScalarProperty Name="stub_id" ColumnName="stub_id" />
+                <ScalarProperty Name="descr_id" ColumnName="descr_id" />
+                <ScalarProperty Name="descr_stub_id" ColumnName="descr_stub_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="log_events">
+            <EntityTypeMapping TypeName="webissuesModel.log_events">
+              <MappingFragment StoreEntitySet="log_events">
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="event_type" ColumnName="event_type" />
+                <ScalarProperty Name="event_severity" ColumnName="event_severity" />
+                <ScalarProperty Name="event_message" ColumnName="event_message" />
+                <ScalarProperty Name="event_time" ColumnName="event_time" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="host_name" ColumnName="host_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="preferences">
+            <EntityTypeMapping TypeName="webissuesModel.preferences">
+              <MappingFragment StoreEntitySet="preferences">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="pref_key" ColumnName="pref_key" />
+                <ScalarProperty Name="pref_value" ColumnName="pref_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="project_descriptions">
+            <EntityTypeMapping TypeName="webissuesModel.project_descriptions">
+              <MappingFragment StoreEntitySet="project_descriptions">
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="descr_text" ColumnName="descr_text" />
+                <ScalarProperty Name="descr_format" ColumnName="descr_format" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="webissuesModel.projects">
+              <MappingFragment StoreEntitySet="projects">
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="stamp_id" ColumnName="stamp_id" />
+                <ScalarProperty Name="descr_id" ColumnName="descr_id" />
+                <ScalarProperty Name="descr_stub_id" ColumnName="descr_stub_id" />
+                <ScalarProperty Name="is_public" ColumnName="is_public" />
+                <ScalarProperty Name="is_archived" ColumnName="is_archived" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="register_requests">
+            <EntityTypeMapping TypeName="webissuesModel.register_requests">
+              <MappingFragment StoreEntitySet="register_requests">
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="user_login" ColumnName="user_login" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="user_passwd" ColumnName="user_passwd" />
+                <ScalarProperty Name="request_key" ColumnName="request_key" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="is_sent" ColumnName="is_sent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rights">
+            <EntityTypeMapping TypeName="webissuesModel.rights">
+              <MappingFragment StoreEntitySet="rights">
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="project_access" ColumnName="project_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessions">
+            <EntityTypeMapping TypeName="webissuesModel.sessions">
+              <MappingFragment StoreEntitySet="sessions">
+                <ScalarProperty Name="session_id" ColumnName="session_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="session_data" ColumnName="session_data" />
+                <ScalarProperty Name="last_access" ColumnName="last_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="settings">
+            <EntityTypeMapping TypeName="webissuesModel.settings">
+              <MappingFragment StoreEntitySet="settings">
+                <ScalarProperty Name="set_key" ColumnName="set_key" />
+                <ScalarProperty Name="set_value" ColumnName="set_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stamps">
+            <EntityTypeMapping TypeName="webissuesModel.stamps">
+              <MappingFragment StoreEntitySet="stamps">
+                <ScalarProperty Name="stamp_id" ColumnName="stamp_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="stamp_time" ColumnName="stamp_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subscriptions">
+            <EntityTypeMapping TypeName="webissuesModel.subscriptions">
+              <MappingFragment StoreEntitySet="subscriptions">
+                <ScalarProperty Name="subscription_id" ColumnName="subscription_id" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="stamp_id" ColumnName="stamp_id" />
+                <ScalarProperty Name="inbox_id" ColumnName="inbox_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="webissuesModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_login" ColumnName="user_login" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_passwd" ColumnName="user_passwd" />
+                <ScalarProperty Name="user_access" ColumnName="user_access" />
+                <ScalarProperty Name="passwd_temp" ColumnName="passwd_temp" />
+                <ScalarProperty Name="reset_key" ColumnName="reset_key" />
+                <ScalarProperty Name="reset_time" ColumnName="reset_time" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="user_language" ColumnName="user_language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_preferences">
+            <EntityTypeMapping TypeName="webissuesModel.view_preferences">
+              <MappingFragment StoreEntitySet="view_preferences">
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="pref_key" ColumnName="pref_key" />
+                <ScalarProperty Name="pref_value" ColumnName="pref_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_settings">
+            <EntityTypeMapping TypeName="webissuesModel.view_settings">
+              <MappingFragment StoreEntitySet="view_settings">
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="set_key" ColumnName="set_key" />
+                <ScalarProperty Name="set_value" ColumnName="set_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="views">
+            <EntityTypeMapping TypeName="webissuesModel.views">
+              <MappingFragment StoreEntitySet="views">
+                <ScalarProperty Name="view_id" ColumnName="view_id" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="view_name" ColumnName="view_name" />
+                <ScalarProperty Name="view_def" ColumnName="view_def" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="server">
+            <EntityTypeMapping TypeName="webissuesModel.server">
+              <MappingFragment StoreEntitySet="server">
+                <ScalarProperty Name="server_name" ColumnName="server_name" />
+                <ScalarProperty Name="server_uuid" ColumnName="server_uuid" />
+                <ScalarProperty Name="db_version" ColumnName="db_version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

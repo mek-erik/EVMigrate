@@ -1,0 +1,2763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="u49299178_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="eventum_columns_to_display">
+          <Key>
+            <PropertyRef Name="ctd_prj_id" />
+            <PropertyRef Name="ctd_page" />
+            <PropertyRef Name="ctd_field" />
+          </Key>
+          <Property Name="ctd_prj_id" Type="uint" Nullable="false" />
+          <Property Name="ctd_page" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ctd_field" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ctd_min_role" Type="bool" Nullable="false" />
+          <Property Name="ctd_rank" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_custom_field">
+          <Key>
+            <PropertyRef Name="fld_id" />
+          </Key>
+          <Property Name="fld_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fld_title" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="fld_description" Type="varchar" MaxLength="64" />
+          <Property Name="fld_type" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="fld_report_form" Type="int" Nullable="false" />
+          <Property Name="fld_report_form_required" Type="int" Nullable="false" />
+          <Property Name="fld_anonymous_form" Type="int" Nullable="false" />
+          <Property Name="fld_anonymous_form_required" Type="int" Nullable="false" />
+          <Property Name="fld_close_form" Type="bool" Nullable="false" />
+          <Property Name="fld_close_form_required" Type="bool" Nullable="false" />
+          <Property Name="fld_list_display" Type="bool" Nullable="false" />
+          <Property Name="fld_min_role" Type="bool" Nullable="false" />
+          <Property Name="fld_rank" Type="smallint" Nullable="false" />
+          <Property Name="fld_backend" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="eventum_custom_field_option">
+          <Key>
+            <PropertyRef Name="cfo_id" />
+          </Key>
+          <Property Name="cfo_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cfo_fld_id" Type="uint" Nullable="false" />
+          <Property Name="cfo_value" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_custom_filter">
+          <Key>
+            <PropertyRef Name="cst_id" />
+          </Key>
+          <Property Name="cst_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cst_usr_id" Type="uint" Nullable="false" />
+          <Property Name="cst_prj_id" Type="uint" Nullable="false" />
+          <Property Name="cst_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="cst_iss_pri_id" Type="uint" />
+          <Property Name="cst_keywords" Type="varchar" MaxLength="64" />
+          <Property Name="cst_users" Type="varchar" MaxLength="64" />
+          <Property Name="cst_reporter" Type="uint" />
+          <Property Name="cst_iss_prc_id" Type="uint" />
+          <Property Name="cst_iss_sta_id" Type="uint" />
+          <Property Name="cst_iss_pre_id" Type="uint" />
+          <Property Name="cst_show_authorized" Type="char" MaxLength="3" />
+          <Property Name="cst_show_notification_list" Type="char" MaxLength="3" />
+          <Property Name="cst_created_date" Type="date" />
+          <Property Name="cst_created_date_filter_type" Type="varchar" MaxLength="7" />
+          <Property Name="cst_created_date_time_period" Type="smallint" />
+          <Property Name="cst_created_date_end" Type="date" />
+          <Property Name="cst_updated_date" Type="date" />
+          <Property Name="cst_updated_date_filter_type" Type="varchar" MaxLength="7" />
+          <Property Name="cst_updated_date_time_period" Type="smallint" />
+          <Property Name="cst_updated_date_end" Type="date" />
+          <Property Name="cst_last_response_date" Type="date" />
+          <Property Name="cst_last_response_date_filter_type" Type="varchar" MaxLength="7" />
+          <Property Name="cst_last_response_date_time_period" Type="smallint" />
+          <Property Name="cst_last_response_date_end" Type="date" />
+          <Property Name="cst_first_response_date" Type="date" />
+          <Property Name="cst_first_response_date_filter_type" Type="varchar" MaxLength="7" />
+          <Property Name="cst_first_response_date_time_period" Type="smallint" />
+          <Property Name="cst_first_response_date_end" Type="date" />
+          <Property Name="cst_closed_date" Type="date" />
+          <Property Name="cst_closed_date_filter_type" Type="varchar" MaxLength="7" />
+          <Property Name="cst_closed_date_time_period" Type="smallint" />
+          <Property Name="cst_closed_date_end" Type="date" />
+          <Property Name="cst_rows" Type="char" MaxLength="3" />
+          <Property Name="cst_sort_by" Type="varchar" MaxLength="32" />
+          <Property Name="cst_sort_order" Type="varchar" MaxLength="4" />
+          <Property Name="cst_hide_closed" Type="int" />
+          <Property Name="cst_is_global" Type="int" />
+          <Property Name="cst_search_type" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cst_custom_field" Type="text" />
+        </EntityType>
+        <EntityType Name="eventum_customer_account_manager">
+          <Key>
+            <PropertyRef Name="cam_id" />
+          </Key>
+          <Property Name="cam_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cam_prj_id" Type="uint" Nullable="false" />
+          <Property Name="cam_customer_id" Type="uint" Nullable="false" />
+          <Property Name="cam_usr_id" Type="uint" Nullable="false" />
+          <Property Name="cam_type" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_customer_note">
+          <Key>
+            <PropertyRef Name="cno_id" />
+          </Key>
+          <Property Name="cno_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cno_prj_id" Type="uint" Nullable="false" />
+          <Property Name="cno_customer_id" Type="uint" Nullable="false" />
+          <Property Name="cno_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="cno_updated_date" Type="datetime" Precision="0" />
+          <Property Name="cno_note" Type="text" />
+        </EntityType>
+        <EntityType Name="eventum_email_account">
+          <Key>
+            <PropertyRef Name="ema_id" />
+          </Key>
+          <Property Name="ema_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ema_prj_id" Type="uint" Nullable="false" />
+          <Property Name="ema_type" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ema_folder" Type="varchar" MaxLength="255" />
+          <Property Name="ema_hostname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ema_port" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ema_username" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ema_password" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ema_get_only_new" Type="int" Nullable="false" />
+          <Property Name="ema_leave_copy" Type="int" Nullable="false" />
+          <Property Name="ema_issue_auto_creation" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="ema_issue_auto_creation_options" Type="text" />
+          <Property Name="ema_use_routing" Type="bool" />
+        </EntityType>
+        <EntityType Name="eventum_email_draft">
+          <Key>
+            <PropertyRef Name="emd_id" />
+          </Key>
+          <Property Name="emd_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emd_usr_id" Type="uint" Nullable="false" />
+          <Property Name="emd_iss_id" Type="uint" Nullable="false" />
+          <Property Name="emd_sup_id" Type="uint" />
+          <Property Name="emd_status" Type="enum" Nullable="false" />
+          <Property Name="emd_updated_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="emd_subject" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="emd_body" Type="longtext" Nullable="false" />
+          <Property Name="emd_unknown_user" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="eventum_email_draft_recipient">
+          <Key>
+            <PropertyRef Name="edr_id" />
+          </Key>
+          <Property Name="edr_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="edr_emd_id" Type="uint" Nullable="false" />
+          <Property Name="edr_is_cc" Type="bool" Nullable="false" />
+          <Property Name="edr_email" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_email_response">
+          <Key>
+            <PropertyRef Name="ere_id" />
+          </Key>
+          <Property Name="ere_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ere_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ere_response_body" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_faq">
+          <Key>
+            <PropertyRef Name="faq_id" />
+          </Key>
+          <Property Name="faq_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="faq_prj_id" Type="uint" Nullable="false" />
+          <Property Name="faq_usr_id" Type="uint" Nullable="false" />
+          <Property Name="faq_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="faq_updated_date" Type="datetime" Precision="0" />
+          <Property Name="faq_title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="faq_message" Type="longtext" Nullable="false" />
+          <Property Name="faq_rank" Type="utinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_faq_support_level">
+          <Key>
+            <PropertyRef Name="fsl_faq_id" />
+            <PropertyRef Name="fsl_support_level_id" />
+          </Key>
+          <Property Name="fsl_faq_id" Type="uint" Nullable="false" />
+          <Property Name="fsl_support_level_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_group">
+          <Key>
+            <PropertyRef Name="grp_id" />
+          </Key>
+          <Property Name="grp_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grp_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="grp_description" Type="varchar" MaxLength="255" />
+          <Property Name="grp_manager_usr_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_history_type">
+          <Key>
+            <PropertyRef Name="htt_id" />
+          </Key>
+          <Property Name="htt_id" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="htt_name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="htt_role" Type="bool" />
+        </EntityType>
+        <EntityType Name="eventum_irc_notice">
+          <Key>
+            <PropertyRef Name="ino_id" />
+          </Key>
+          <Property Name="ino_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ino_prj_id" Type="int" Nullable="false" />
+          <Property Name="ino_iss_id" Type="uint" Nullable="false" />
+          <Property Name="ino_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ino_message" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ino_status" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue">
+          <Key>
+            <PropertyRef Name="iss_id" />
+          </Key>
+          <Property Name="iss_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iss_customer_id" Type="uint" />
+          <Property Name="iss_customer_contact_id" Type="uint" />
+          <Property Name="iss_customer_contract_id" Type="varchar" MaxLength="50" />
+          <Property Name="iss_usr_id" Type="uint" Nullable="false" />
+          <Property Name="iss_grp_id" Type="uint" />
+          <Property Name="iss_prj_id" Type="uint" Nullable="false" />
+          <Property Name="iss_prc_id" Type="uint" Nullable="false" />
+          <Property Name="iss_pre_id" Type="uint" Nullable="false" />
+          <Property Name="iss_pri_id" Type="smallint" Nullable="false" />
+          <Property Name="iss_sta_id" Type="bool" Nullable="false" />
+          <Property Name="iss_res_id" Type="uint" />
+          <Property Name="iss_duplicated_iss_id" Type="uint" />
+          <Property Name="iss_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="iss_updated_date" Type="datetime" Precision="0" />
+          <Property Name="iss_last_response_date" Type="datetime" Precision="0" />
+          <Property Name="iss_first_response_date" Type="datetime" Precision="0" />
+          <Property Name="iss_closed_date" Type="datetime" Precision="0" />
+          <Property Name="iss_last_customer_action_date" Type="datetime" Precision="0" />
+          <Property Name="iss_expected_resolution_date" Type="date" />
+          <Property Name="iss_summary" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="iss_description" Type="text" Nullable="false" />
+          <Property Name="iss_dev_time" Type="float" />
+          <Property Name="iss_developer_est_time" Type="float" />
+          <Property Name="iss_impact_analysis" Type="text" />
+          <Property Name="iss_contact_person_lname" Type="varchar" MaxLength="64" />
+          <Property Name="iss_contact_person_fname" Type="varchar" MaxLength="64" />
+          <Property Name="iss_contact_email" Type="varchar" MaxLength="255" />
+          <Property Name="iss_contact_phone" Type="varchar" MaxLength="32" />
+          <Property Name="iss_contact_timezone" Type="varchar" MaxLength="64" />
+          <Property Name="iss_trigger_reminders" Type="bool" />
+          <Property Name="iss_last_public_action_date" Type="datetime" Precision="0" />
+          <Property Name="iss_last_public_action_type" Type="varchar" MaxLength="20" />
+          <Property Name="iss_last_internal_action_date" Type="datetime" Precision="0" />
+          <Property Name="iss_last_internal_action_type" Type="varchar" MaxLength="20" />
+          <Property Name="iss_private" Type="bool" Nullable="false" />
+          <Property Name="iss_percent_complete" Type="utinyint" />
+          <Property Name="iss_root_message_id" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.u49299178_.eventum_issue_association' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="eventum_issue_association">
+          <Key>
+            <PropertyRef Name="isa_issue_id" />
+            <PropertyRef Name="isa_associated_id" />
+          </Key>
+          <Property Name="isa_issue_id" Type="uint" Nullable="false" />
+          <Property Name="isa_associated_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_attachment">
+          <Key>
+            <PropertyRef Name="iat_id" />
+          </Key>
+          <Property Name="iat_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iat_iss_id" Type="uint" Nullable="false" />
+          <Property Name="iat_usr_id" Type="uint" Nullable="false" />
+          <Property Name="iat_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="iat_description" Type="text" />
+          <Property Name="iat_unknown_user" Type="varchar" MaxLength="255" />
+          <Property Name="iat_status" Type="enum" Nullable="false" />
+          <Property Name="iat_not_id" Type="uint" />
+        </EntityType>
+        <EntityType Name="eventum_issue_attachment_file">
+          <Key>
+            <PropertyRef Name="iaf_id" />
+          </Key>
+          <Property Name="iaf_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iaf_iat_id" Type="uint" Nullable="false" />
+          <Property Name="iaf_file" Type="longblob" />
+          <Property Name="iaf_filename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="iaf_filetype" Type="varchar" MaxLength="255" />
+          <Property Name="iaf_filesize" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_checkin">
+          <Key>
+            <PropertyRef Name="isc_id" />
+          </Key>
+          <Property Name="isc_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isc_iss_id" Type="uint" Nullable="false" />
+          <Property Name="isc_module" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="isc_filename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="isc_old_version" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="isc_new_version" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="isc_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="isc_username" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="isc_commit_msg" Type="text" />
+        </EntityType>
+        <EntityType Name="eventum_issue_custom_field">
+          <Key>
+            <PropertyRef Name="icf_id" />
+          </Key>
+          <Property Name="icf_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="icf_iss_id" Type="uint" Nullable="false" />
+          <Property Name="icf_fld_id" Type="uint" Nullable="false" />
+          <Property Name="icf_value" Type="text" />
+          <Property Name="icf_value_integer" Type="int" />
+          <Property Name="icf_value_date" Type="date" />
+        </EntityType>
+        <EntityType Name="eventum_issue_history">
+          <Key>
+            <PropertyRef Name="his_id" />
+          </Key>
+          <Property Name="his_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="his_iss_id" Type="uint" Nullable="false" />
+          <Property Name="his_usr_id" Type="uint" Nullable="false" />
+          <Property Name="his_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="his_summary" Type="text" Nullable="false" />
+          <Property Name="his_htt_id" Type="tinyint" Nullable="false" />
+          <Property Name="his_is_hidden" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_quarantine">
+          <Key>
+            <PropertyRef Name="iqu_iss_id" />
+          </Key>
+          <Property Name="iqu_iss_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iqu_expiration" Type="datetime" Precision="0" />
+          <Property Name="iqu_status" Type="bool" />
+        </EntityType>
+        <EntityType Name="eventum_issue_requirement">
+          <Key>
+            <PropertyRef Name="isr_id" />
+          </Key>
+          <Property Name="isr_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isr_iss_id" Type="uint" Nullable="false" />
+          <Property Name="isr_usr_id" Type="uint" Nullable="false" />
+          <Property Name="isr_updated_usr_id" Type="uint" />
+          <Property Name="isr_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="isr_updated_date" Type="datetime" Precision="0" />
+          <Property Name="isr_requirement" Type="text" Nullable="false" />
+          <Property Name="isr_dev_time" Type="float" />
+          <Property Name="isr_impact_analysis" Type="text" />
+        </EntityType>
+        <EntityType Name="eventum_issue_user">
+          <Key>
+            <PropertyRef Name="isu_iss_id" />
+            <PropertyRef Name="isu_usr_id" />
+          </Key>
+          <Property Name="isu_iss_id" Type="uint" Nullable="false" />
+          <Property Name="isu_usr_id" Type="uint" Nullable="false" />
+          <Property Name="isu_assigned_date" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="eventum_issue_user_replier">
+          <Key>
+            <PropertyRef Name="iur_id" />
+          </Key>
+          <Property Name="iur_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iur_iss_id" Type="uint" Nullable="false" />
+          <Property Name="iur_usr_id" Type="uint" Nullable="false" />
+          <Property Name="iur_email" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="eventum_link_filter">
+          <Key>
+            <PropertyRef Name="lfi_id" />
+          </Key>
+          <Property Name="lfi_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lfi_pattern" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="lfi_replacement" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="lfi_usr_role" Type="tinyint" Nullable="false" />
+          <Property Name="lfi_description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="eventum_mail_queue">
+          <Key>
+            <PropertyRef Name="maq_id" />
+          </Key>
+          <Property Name="maq_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maq_iss_id" Type="uint" />
+          <Property Name="maq_queued_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="maq_status" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="maq_save_copy" Type="bool" Nullable="false" />
+          <Property Name="maq_sender_ip_address" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="maq_recipient" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="maq_subject" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="maq_headers" Type="text" Nullable="false" />
+          <Property Name="maq_body" Type="longblob" Nullable="false" />
+          <Property Name="maq_type" Type="varchar" MaxLength="30" />
+          <Property Name="maq_usr_id" Type="uint" />
+          <Property Name="maq_type_id" Type="uint" />
+        </EntityType>
+        <EntityType Name="eventum_mail_queue_log">
+          <Key>
+            <PropertyRef Name="mql_id" />
+          </Key>
+          <Property Name="mql_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mql_maq_id" Type="uint" Nullable="false" />
+          <Property Name="mql_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="mql_status" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="mql_server_message" Type="text" />
+        </EntityType>
+        <EntityType Name="eventum_news">
+          <Key>
+            <PropertyRef Name="nws_id" />
+          </Key>
+          <Property Name="nws_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nws_usr_id" Type="uint" Nullable="false" />
+          <Property Name="nws_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="nws_title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="nws_message" Type="text" Nullable="false" />
+          <Property Name="nws_status" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_note">
+          <Key>
+            <PropertyRef Name="not_id" />
+          </Key>
+          <Property Name="not_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="not_iss_id" Type="uint" Nullable="false" />
+          <Property Name="not_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="not_usr_id" Type="uint" Nullable="false" />
+          <Property Name="not_title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="not_note" Type="longtext" Nullable="false" />
+          <Property Name="not_full_message" Type="longtext" />
+          <Property Name="not_parent_id" Type="uint" />
+          <Property Name="not_unknown_user" Type="varchar" MaxLength="255" />
+          <Property Name="not_has_attachment" Type="bool" Nullable="false" />
+          <Property Name="not_message_id" Type="varchar" MaxLength="255" />
+          <Property Name="not_removed" Type="bool" Nullable="false" />
+          <Property Name="not_is_blocked" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_phone_support">
+          <Key>
+            <PropertyRef Name="phs_id" />
+          </Key>
+          <Property Name="phs_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phs_usr_id" Type="uint" Nullable="false" />
+          <Property Name="phs_iss_id" Type="uint" Nullable="false" />
+          <Property Name="phs_ttr_id" Type="uint" />
+          <Property Name="phs_call_from_lname" Type="varchar" MaxLength="64" />
+          <Property Name="phs_call_from_fname" Type="varchar" MaxLength="64" />
+          <Property Name="phs_call_to_lname" Type="varchar" MaxLength="64" />
+          <Property Name="phs_call_to_fname" Type="varchar" MaxLength="64" />
+          <Property Name="phs_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="phs_type" Type="enum" Nullable="false" />
+          <Property Name="phs_phone_number" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="phs_phone_type" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="phs_phc_id" Type="uint" Nullable="false" />
+          <Property Name="phs_description" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project">
+          <Key>
+            <PropertyRef Name="prj_id" />
+          </Key>
+          <Property Name="prj_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prj_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="prj_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="prj_status" Type="set" Nullable="false" />
+          <Property Name="prj_lead_usr_id" Type="uint" Nullable="false" />
+          <Property Name="prj_initial_sta_id" Type="uint" Nullable="false" />
+          <Property Name="prj_remote_invocation" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="prj_anonymous_post" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="prj_anonymous_post_options" Type="text" />
+          <Property Name="prj_outgoing_sender_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="prj_outgoing_sender_email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="prj_mail_aliases" Type="varchar" MaxLength="255" />
+          <Property Name="prj_customer_backend" Type="varchar" MaxLength="64" />
+          <Property Name="prj_workflow_backend" Type="varchar" MaxLength="64" />
+          <Property Name="prj_segregate_reporter" Type="bool" />
+        </EntityType>
+        <EntityType Name="eventum_project_category">
+          <Key>
+            <PropertyRef Name="prc_id" />
+          </Key>
+          <Property Name="prc_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prc_prj_id" Type="uint" Nullable="false" />
+          <Property Name="prc_title" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_custom_field">
+          <Key>
+            <PropertyRef Name="pcf_id" />
+          </Key>
+          <Property Name="pcf_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pcf_prj_id" Type="uint" Nullable="false" />
+          <Property Name="pcf_fld_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_email_response">
+          <Key>
+            <PropertyRef Name="per_prj_id" />
+            <PropertyRef Name="per_ere_id" />
+          </Key>
+          <Property Name="per_prj_id" Type="uint" Nullable="false" />
+          <Property Name="per_ere_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_field_display">
+          <Key>
+            <PropertyRef Name="pfd_prj_id" />
+            <PropertyRef Name="pfd_field" />
+          </Key>
+          <Property Name="pfd_prj_id" Type="uint" Nullable="false" />
+          <Property Name="pfd_field" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pfd_min_role" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_group">
+          <Key>
+            <PropertyRef Name="pgr_prj_id" />
+            <PropertyRef Name="pgr_grp_id" />
+          </Key>
+          <Property Name="pgr_prj_id" Type="uint" Nullable="false" />
+          <Property Name="pgr_grp_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_link_filter">
+          <Key>
+            <PropertyRef Name="plf_prj_id" />
+            <PropertyRef Name="plf_lfi_id" />
+          </Key>
+          <Property Name="plf_prj_id" Type="int" Nullable="false" />
+          <Property Name="plf_lfi_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_news">
+          <Key>
+            <PropertyRef Name="prn_nws_id" />
+            <PropertyRef Name="prn_prj_id" />
+          </Key>
+          <Property Name="prn_nws_id" Type="uint" Nullable="false" />
+          <Property Name="prn_prj_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_phone_category">
+          <Key>
+            <PropertyRef Name="phc_id" />
+          </Key>
+          <Property Name="phc_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phc_prj_id" Type="uint" Nullable="false" />
+          <Property Name="phc_title" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_priority">
+          <Key>
+            <PropertyRef Name="pri_id" />
+          </Key>
+          <Property Name="pri_id" Type="usmallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pri_prj_id" Type="uint" Nullable="false" />
+          <Property Name="pri_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="pri_rank" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_release">
+          <Key>
+            <PropertyRef Name="pre_id" />
+          </Key>
+          <Property Name="pre_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pre_prj_id" Type="uint" Nullable="false" />
+          <Property Name="pre_title" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="pre_scheduled_date" Type="date" Nullable="false" />
+          <Property Name="pre_status" Type="enum" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_round_robin">
+          <Key>
+            <PropertyRef Name="prr_id" />
+          </Key>
+          <Property Name="prr_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prr_prj_id" Type="uint" Nullable="false" />
+          <Property Name="prr_blackout_start" Type="time" Precision="0" Nullable="false" />
+          <Property Name="prr_blackout_end" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_status">
+          <Key>
+            <PropertyRef Name="prs_id" />
+          </Key>
+          <Property Name="prs_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prs_prj_id" Type="uint" Nullable="false" />
+          <Property Name="prs_sta_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_status_date">
+          <Key>
+            <PropertyRef Name="psd_id" />
+          </Key>
+          <Property Name="psd_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="psd_prj_id" Type="uint" Nullable="false" />
+          <Property Name="psd_sta_id" Type="uint" Nullable="false" />
+          <Property Name="psd_date_field" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="psd_label" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_user">
+          <Key>
+            <PropertyRef Name="pru_id" />
+          </Key>
+          <Property Name="pru_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pru_prj_id" Type="uint" Nullable="false" />
+          <Property Name="pru_usr_id" Type="uint" Nullable="false" />
+          <Property Name="pru_role" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_action">
+          <Key>
+            <PropertyRef Name="rma_id" />
+          </Key>
+          <Property Name="rma_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rma_rem_id" Type="uint" Nullable="false" />
+          <Property Name="rma_rmt_id" Type="utinyint" Nullable="false" />
+          <Property Name="rma_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="rma_last_updated_date" Type="datetime" Precision="0" />
+          <Property Name="rma_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="rma_rank" Type="utinyint" Nullable="false" />
+          <Property Name="rma_alert_irc" Type="bool" Nullable="false" />
+          <Property Name="rma_alert_group_leader" Type="bool" Nullable="false" />
+          <Property Name="rma_boilerplate" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.u49299178_.eventum_reminder_action_list' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="eventum_reminder_action_list">
+          <Key>
+            <PropertyRef Name="ral_rma_id" />
+            <PropertyRef Name="ral_email" />
+            <PropertyRef Name="ral_usr_id" />
+          </Key>
+          <Property Name="ral_rma_id" Type="uint" Nullable="false" />
+          <Property Name="ral_email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ral_usr_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_action_type">
+          <Key>
+            <PropertyRef Name="rmt_id" />
+          </Key>
+          <Property Name="rmt_id" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rmt_type" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="rmt_title" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_field">
+          <Key>
+            <PropertyRef Name="rmf_id" />
+          </Key>
+          <Property Name="rmf_id" Type="utinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rmf_title" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="rmf_sql_field" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="rmf_sql_representation" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="rmf_allow_column_compare" Type="bool" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_history">
+          <Key>
+            <PropertyRef Name="rmh_id" />
+          </Key>
+          <Property Name="rmh_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rmh_iss_id" Type="int" Nullable="false" />
+          <Property Name="rmh_rma_id" Type="int" Nullable="false" />
+          <Property Name="rmh_created_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_level">
+          <Key>
+            <PropertyRef Name="rem_id" />
+          </Key>
+          <Property Name="rem_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rem_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="rem_rank" Type="bool" Nullable="false" />
+          <Property Name="rem_last_updated_date" Type="datetime" Precision="0" />
+          <Property Name="rem_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="rem_prj_id" Type="uint" Nullable="false" />
+          <Property Name="rem_skip_weekend" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_level_condition">
+          <Key>
+            <PropertyRef Name="rlc_id" />
+          </Key>
+          <Property Name="rlc_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rlc_rma_id" Type="uint" Nullable="false" />
+          <Property Name="rlc_rmf_id" Type="utinyint" Nullable="false" />
+          <Property Name="rlc_rmo_id" Type="bool" Nullable="false" />
+          <Property Name="rlc_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="rlc_last_updated_date" Type="datetime" Precision="0" />
+          <Property Name="rlc_value" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="rlc_comparison_rmf_id" Type="utinyint" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_operator">
+          <Key>
+            <PropertyRef Name="rmo_id" />
+          </Key>
+          <Property Name="rmo_id" Type="bool" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rmo_title" Type="varchar" MaxLength="32" />
+          <Property Name="rmo_sql_representation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_priority">
+          <Key>
+            <PropertyRef Name="rep_id" />
+          </Key>
+          <Property Name="rep_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rep_rem_id" Type="uint" Nullable="false" />
+          <Property Name="rep_pri_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_requirement">
+          <Key>
+            <PropertyRef Name="rer_id" />
+          </Key>
+          <Property Name="rer_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rer_rem_id" Type="uint" Nullable="false" />
+          <Property Name="rer_iss_id" Type="uint" />
+          <Property Name="rer_support_level_id" Type="uint" />
+          <Property Name="rer_customer_id" Type="uint" />
+          <Property Name="rer_trigger_all_issues" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_triggered_action">
+          <Key>
+            <PropertyRef Name="rta_iss_id" />
+          </Key>
+          <Property Name="rta_iss_id" Type="uint" Nullable="false" />
+          <Property Name="rta_rma_id" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_resolution">
+          <Key>
+            <PropertyRef Name="res_id" />
+          </Key>
+          <Property Name="res_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="res_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="res_created_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.u49299178_.eventum_round_robin_user' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="eventum_round_robin_user">
+          <Key>
+            <PropertyRef Name="rru_prr_id" />
+            <PropertyRef Name="rru_usr_id" />
+          </Key>
+          <Property Name="rru_prr_id" Type="uint" Nullable="false" />
+          <Property Name="rru_usr_id" Type="uint" Nullable="false" />
+          <Property Name="rru_next" Type="bool" />
+        </EntityType>
+        <EntityType Name="eventum_search_profile">
+          <Key>
+            <PropertyRef Name="sep_id" />
+          </Key>
+          <Property Name="sep_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sep_usr_id" Type="uint" Nullable="false" />
+          <Property Name="sep_prj_id" Type="uint" Nullable="false" />
+          <Property Name="sep_type" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="sep_user_profile" Type="blob" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_status">
+          <Key>
+            <PropertyRef Name="sta_id" />
+          </Key>
+          <Property Name="sta_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sta_title" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="sta_abbreviation" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="sta_rank" Type="int" Nullable="false" />
+          <Property Name="sta_color" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="sta_is_closed" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_subscription">
+          <Key>
+            <PropertyRef Name="sub_id" />
+          </Key>
+          <Property Name="sub_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sub_iss_id" Type="uint" Nullable="false" />
+          <Property Name="sub_usr_id" Type="uint" />
+          <Property Name="sub_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="sub_level" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sub_email" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="eventum_subscription_type">
+          <Key>
+            <PropertyRef Name="sbt_id" />
+          </Key>
+          <Property Name="sbt_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sbt_sub_id" Type="uint" Nullable="false" />
+          <Property Name="sbt_type" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_support_email">
+          <Key>
+            <PropertyRef Name="sup_id" />
+          </Key>
+          <Property Name="sup_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sup_ema_id" Type="uint" Nullable="false" />
+          <Property Name="sup_parent_id" Type="uint" Nullable="false" />
+          <Property Name="sup_iss_id" Type="uint" />
+          <Property Name="sup_usr_id" Type="uint" />
+          <Property Name="sup_customer_id" Type="uint" />
+          <Property Name="sup_message_id" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sup_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="sup_from" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sup_to" Type="text" Nullable="false" />
+          <Property Name="sup_cc" Type="text" />
+          <Property Name="sup_subject" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sup_has_attachment" Type="bool" Nullable="false" />
+          <Property Name="sup_removed" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_support_email_body">
+          <Key>
+            <PropertyRef Name="seb_sup_id" />
+          </Key>
+          <Property Name="seb_sup_id" Type="uint" Nullable="false" />
+          <Property Name="seb_body" Type="longtext" Nullable="false" />
+          <Property Name="seb_full_email" Type="longblob" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_time_tracking">
+          <Key>
+            <PropertyRef Name="ttr_id" />
+          </Key>
+          <Property Name="ttr_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ttr_ttc_id" Type="uint" Nullable="false" />
+          <Property Name="ttr_iss_id" Type="uint" Nullable="false" />
+          <Property Name="ttr_usr_id" Type="uint" Nullable="false" />
+          <Property Name="ttr_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ttr_time_spent" Type="uint" Nullable="false" />
+          <Property Name="ttr_summary" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_time_tracking_category">
+          <Key>
+            <PropertyRef Name="ttc_id" />
+          </Key>
+          <Property Name="ttc_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ttc_title" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="ttc_created_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_user">
+          <Key>
+            <PropertyRef Name="usr_id" />
+          </Key>
+          <Property Name="usr_id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usr_grp_id" Type="uint" />
+          <Property Name="usr_customer_id" Type="uint" />
+          <Property Name="usr_customer_contact_id" Type="uint" />
+          <Property Name="usr_created_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="usr_status" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="usr_password" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="usr_full_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="usr_email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="usr_preferences" Type="longtext" />
+          <Property Name="usr_sms_email" Type="varchar" MaxLength="255" />
+          <Property Name="usr_clocked_in" Type="bool" />
+          <Property Name="usr_lang" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.u49299178_.eventum_user_alias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="eventum_user_alias">
+          <Key>
+            <PropertyRef Name="ual_usr_id" />
+          </Key>
+          <Property Name="ual_usr_id" Type="uint" Nullable="false" />
+          <Property Name="ual_email" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.u49299178_.eventum_version' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="eventum_version">
+          <Key>
+            <PropertyRef Name="ver_version" />
+          </Key>
+          <Property Name="ver_version" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="u49299178_ModelStoreContainer">
+          <EntitySet Name="eventum_columns_to_display" EntityType="Self.eventum_columns_to_display" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_custom_field" EntityType="Self.eventum_custom_field" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_custom_field_option" EntityType="Self.eventum_custom_field_option" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_custom_filter" EntityType="Self.eventum_custom_filter" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_customer_account_manager" EntityType="Self.eventum_customer_account_manager" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_customer_note" EntityType="Self.eventum_customer_note" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_email_account" EntityType="Self.eventum_email_account" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_email_draft" EntityType="Self.eventum_email_draft" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_email_draft_recipient" EntityType="Self.eventum_email_draft_recipient" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_email_response" EntityType="Self.eventum_email_response" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_faq" EntityType="Self.eventum_faq" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_faq_support_level" EntityType="Self.eventum_faq_support_level" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_group" EntityType="Self.eventum_group" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_history_type" EntityType="Self.eventum_history_type" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_irc_notice" EntityType="Self.eventum_irc_notice" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue" EntityType="Self.eventum_issue" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_attachment" EntityType="Self.eventum_issue_attachment" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_attachment_file" EntityType="Self.eventum_issue_attachment_file" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_checkin" EntityType="Self.eventum_issue_checkin" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_custom_field" EntityType="Self.eventum_issue_custom_field" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_history" EntityType="Self.eventum_issue_history" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_quarantine" EntityType="Self.eventum_issue_quarantine" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_requirement" EntityType="Self.eventum_issue_requirement" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_user" EntityType="Self.eventum_issue_user" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_user_replier" EntityType="Self.eventum_issue_user_replier" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_link_filter" EntityType="Self.eventum_link_filter" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_mail_queue" EntityType="Self.eventum_mail_queue" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_mail_queue_log" EntityType="Self.eventum_mail_queue_log" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_news" EntityType="Self.eventum_news" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_note" EntityType="Self.eventum_note" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_phone_support" EntityType="Self.eventum_phone_support" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project" EntityType="Self.eventum_project" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_category" EntityType="Self.eventum_project_category" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_custom_field" EntityType="Self.eventum_project_custom_field" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_email_response" EntityType="Self.eventum_project_email_response" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_field_display" EntityType="Self.eventum_project_field_display" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_group" EntityType="Self.eventum_project_group" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_link_filter" EntityType="Self.eventum_project_link_filter" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_news" EntityType="Self.eventum_project_news" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_phone_category" EntityType="Self.eventum_project_phone_category" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_priority" EntityType="Self.eventum_project_priority" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_release" EntityType="Self.eventum_project_release" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_round_robin" EntityType="Self.eventum_project_round_robin" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_status" EntityType="Self.eventum_project_status" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_status_date" EntityType="Self.eventum_project_status_date" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_project_user" EntityType="Self.eventum_project_user" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_action" EntityType="Self.eventum_reminder_action" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_action_type" EntityType="Self.eventum_reminder_action_type" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_field" EntityType="Self.eventum_reminder_field" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_history" EntityType="Self.eventum_reminder_history" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_level" EntityType="Self.eventum_reminder_level" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_level_condition" EntityType="Self.eventum_reminder_level_condition" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_operator" EntityType="Self.eventum_reminder_operator" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_priority" EntityType="Self.eventum_reminder_priority" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_requirement" EntityType="Self.eventum_reminder_requirement" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_reminder_triggered_action" EntityType="Self.eventum_reminder_triggered_action" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_resolution" EntityType="Self.eventum_resolution" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_search_profile" EntityType="Self.eventum_search_profile" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_status" EntityType="Self.eventum_status" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_subscription" EntityType="Self.eventum_subscription" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_subscription_type" EntityType="Self.eventum_subscription_type" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_support_email" EntityType="Self.eventum_support_email" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_support_email_body" EntityType="Self.eventum_support_email_body" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_time_tracking" EntityType="Self.eventum_time_tracking" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_time_tracking_category" EntityType="Self.eventum_time_tracking_category" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_user" EntityType="Self.eventum_user" Schema="u49299178_" store:Type="Tables" />
+          <EntitySet Name="eventum_issue_association" EntityType="Self.eventum_issue_association" store:Type="Tables" store:Schema="u49299178_">
+            <DefiningQuery>SELECT
+`eventum_issue_association`.`isa_issue_id`, 
+`eventum_issue_association`.`isa_associated_id`
+FROM `eventum_issue_association` AS `eventum_issue_association`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="eventum_reminder_action_list" EntityType="Self.eventum_reminder_action_list" store:Type="Tables" store:Schema="u49299178_">
+            <DefiningQuery>SELECT
+`eventum_reminder_action_list`.`ral_rma_id`, 
+`eventum_reminder_action_list`.`ral_email`, 
+`eventum_reminder_action_list`.`ral_usr_id`
+FROM `eventum_reminder_action_list` AS `eventum_reminder_action_list`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="eventum_round_robin_user" EntityType="Self.eventum_round_robin_user" store:Type="Tables" store:Schema="u49299178_">
+            <DefiningQuery>SELECT
+`eventum_round_robin_user`.`rru_prr_id`, 
+`eventum_round_robin_user`.`rru_usr_id`, 
+`eventum_round_robin_user`.`rru_next`
+FROM `eventum_round_robin_user` AS `eventum_round_robin_user`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="eventum_user_alias" EntityType="Self.eventum_user_alias" store:Type="Tables" store:Schema="u49299178_">
+            <DefiningQuery>SELECT
+`eventum_user_alias`.`ual_usr_id`, 
+`eventum_user_alias`.`ual_email`
+FROM `eventum_user_alias` AS `eventum_user_alias`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="eventum_version" EntityType="Self.eventum_version" store:Type="Tables" store:Schema="u49299178_">
+            <DefiningQuery>SELECT
+`eventum_version`.`ver_version`
+FROM `eventum_version` AS `eventum_version`</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="u49299178_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="eventum_columns_to_display">
+          <Key>
+            <PropertyRef Name="ctd_prj_id" />
+            <PropertyRef Name="ctd_page" />
+            <PropertyRef Name="ctd_field" />
+          </Key>
+          <Property Name="ctd_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="ctd_page" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ctd_field" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ctd_min_role" Type="Boolean" Nullable="false" />
+          <Property Name="ctd_rank" Type="SByte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_custom_field">
+          <Key>
+            <PropertyRef Name="fld_id" />
+          </Key>
+          <Property Name="fld_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fld_title" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fld_description" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="fld_type" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fld_report_form" Type="Int32" Nullable="false" />
+          <Property Name="fld_report_form_required" Type="Int32" Nullable="false" />
+          <Property Name="fld_anonymous_form" Type="Int32" Nullable="false" />
+          <Property Name="fld_anonymous_form_required" Type="Int32" Nullable="false" />
+          <Property Name="fld_close_form" Type="Boolean" Nullable="false" />
+          <Property Name="fld_close_form_required" Type="Boolean" Nullable="false" />
+          <Property Name="fld_list_display" Type="Boolean" Nullable="false" />
+          <Property Name="fld_min_role" Type="Boolean" Nullable="false" />
+          <Property Name="fld_rank" Type="Int16" Nullable="false" />
+          <Property Name="fld_backend" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_custom_field_option">
+          <Key>
+            <PropertyRef Name="cfo_id" />
+          </Key>
+          <Property Name="cfo_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cfo_fld_id" Type="Int64" Nullable="false" />
+          <Property Name="cfo_value" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_custom_filter">
+          <Key>
+            <PropertyRef Name="cst_id" />
+          </Key>
+          <Property Name="cst_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cst_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="cst_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="cst_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cst_iss_pri_id" Type="Int64" />
+          <Property Name="cst_keywords" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="cst_users" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="cst_reporter" Type="Int64" />
+          <Property Name="cst_iss_prc_id" Type="Int64" />
+          <Property Name="cst_iss_sta_id" Type="Int64" />
+          <Property Name="cst_iss_pre_id" Type="Int64" />
+          <Property Name="cst_show_authorized" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="cst_show_notification_list" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="cst_created_date" Type="DateTime" />
+          <Property Name="cst_created_date_filter_type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="cst_created_date_time_period" Type="Int16" />
+          <Property Name="cst_created_date_end" Type="DateTime" />
+          <Property Name="cst_updated_date" Type="DateTime" />
+          <Property Name="cst_updated_date_filter_type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="cst_updated_date_time_period" Type="Int16" />
+          <Property Name="cst_updated_date_end" Type="DateTime" />
+          <Property Name="cst_last_response_date" Type="DateTime" />
+          <Property Name="cst_last_response_date_filter_type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="cst_last_response_date_time_period" Type="Int16" />
+          <Property Name="cst_last_response_date_end" Type="DateTime" />
+          <Property Name="cst_first_response_date" Type="DateTime" />
+          <Property Name="cst_first_response_date_filter_type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="cst_first_response_date_time_period" Type="Int16" />
+          <Property Name="cst_first_response_date_end" Type="DateTime" />
+          <Property Name="cst_closed_date" Type="DateTime" />
+          <Property Name="cst_closed_date_filter_type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="cst_closed_date_time_period" Type="Int16" />
+          <Property Name="cst_closed_date_end" Type="DateTime" />
+          <Property Name="cst_rows" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="cst_sort_by" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="cst_sort_order" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="cst_hide_closed" Type="Int32" />
+          <Property Name="cst_is_global" Type="Int32" />
+          <Property Name="cst_search_type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cst_custom_field" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_customer_account_manager">
+          <Key>
+            <PropertyRef Name="cam_id" />
+          </Key>
+          <Property Name="cam_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cam_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="cam_customer_id" Type="Int64" Nullable="false" />
+          <Property Name="cam_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="cam_type" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_customer_note">
+          <Key>
+            <PropertyRef Name="cno_id" />
+          </Key>
+          <Property Name="cno_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cno_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="cno_customer_id" Type="Int64" Nullable="false" />
+          <Property Name="cno_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="cno_updated_date" Type="DateTime" />
+          <Property Name="cno_note" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_email_account">
+          <Key>
+            <PropertyRef Name="ema_id" />
+          </Key>
+          <Property Name="ema_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ema_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="ema_type" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ema_folder" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ema_hostname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ema_port" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ema_username" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ema_password" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ema_get_only_new" Type="Int32" Nullable="false" />
+          <Property Name="ema_leave_copy" Type="Int32" Nullable="false" />
+          <Property Name="ema_issue_auto_creation" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ema_issue_auto_creation_options" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="ema_use_routing" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="eventum_email_draft">
+          <Key>
+            <PropertyRef Name="emd_id" />
+          </Key>
+          <Property Name="emd_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emd_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="emd_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="emd_sup_id" Type="Int64" />
+          <Property Name="emd_status" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emd_updated_date" Type="DateTime" Nullable="false" />
+          <Property Name="emd_subject" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emd_body" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="emd_unknown_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_email_draft_recipient">
+          <Key>
+            <PropertyRef Name="edr_id" />
+          </Key>
+          <Property Name="edr_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edr_emd_id" Type="Int64" Nullable="false" />
+          <Property Name="edr_is_cc" Type="Boolean" Nullable="false" />
+          <Property Name="edr_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_email_response">
+          <Key>
+            <PropertyRef Name="ere_id" />
+          </Key>
+          <Property Name="ere_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ere_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ere_response_body" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_faq">
+          <Key>
+            <PropertyRef Name="faq_id" />
+          </Key>
+          <Property Name="faq_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="faq_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="faq_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="faq_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="faq_updated_date" Type="DateTime" />
+          <Property Name="faq_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="faq_message" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="faq_rank" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_faq_support_level">
+          <Key>
+            <PropertyRef Name="fsl_faq_id" />
+            <PropertyRef Name="fsl_support_level_id" />
+          </Key>
+          <Property Name="fsl_faq_id" Type="Int64" Nullable="false" />
+          <Property Name="fsl_support_level_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_group">
+          <Key>
+            <PropertyRef Name="grp_id" />
+          </Key>
+          <Property Name="grp_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grp_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="grp_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="grp_manager_usr_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_history_type">
+          <Key>
+            <PropertyRef Name="htt_id" />
+          </Key>
+          <Property Name="htt_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="htt_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="htt_role" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="eventum_irc_notice">
+          <Key>
+            <PropertyRef Name="ino_id" />
+          </Key>
+          <Property Name="ino_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ino_prj_id" Type="Int32" Nullable="false" />
+          <Property Name="ino_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="ino_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="ino_message" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ino_status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue">
+          <Key>
+            <PropertyRef Name="iss_id" />
+          </Key>
+          <Property Name="iss_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iss_customer_id" Type="Int64" />
+          <Property Name="iss_customer_contact_id" Type="Int64" />
+          <Property Name="iss_customer_contract_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iss_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="iss_grp_id" Type="Int64" />
+          <Property Name="iss_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="iss_prc_id" Type="Int64" Nullable="false" />
+          <Property Name="iss_pre_id" Type="Int64" Nullable="false" />
+          <Property Name="iss_pri_id" Type="Int16" Nullable="false" />
+          <Property Name="iss_sta_id" Type="Boolean" Nullable="false" />
+          <Property Name="iss_res_id" Type="Int64" />
+          <Property Name="iss_duplicated_iss_id" Type="Int64" />
+          <Property Name="iss_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="iss_updated_date" Type="DateTime" />
+          <Property Name="iss_last_response_date" Type="DateTime" />
+          <Property Name="iss_first_response_date" Type="DateTime" />
+          <Property Name="iss_closed_date" Type="DateTime" />
+          <Property Name="iss_last_customer_action_date" Type="DateTime" />
+          <Property Name="iss_expected_resolution_date" Type="DateTime" />
+          <Property Name="iss_summary" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iss_description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iss_dev_time" Type="Single" />
+          <Property Name="iss_developer_est_time" Type="Single" />
+          <Property Name="iss_impact_analysis" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="iss_contact_person_lname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="iss_contact_person_fname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="iss_contact_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iss_contact_phone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="iss_contact_timezone" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="iss_trigger_reminders" Type="Boolean" />
+          <Property Name="iss_last_public_action_date" Type="DateTime" />
+          <Property Name="iss_last_public_action_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="iss_last_internal_action_date" Type="DateTime" />
+          <Property Name="iss_last_internal_action_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="iss_private" Type="Boolean" Nullable="false" />
+          <Property Name="iss_percent_complete" Type="Byte" />
+          <Property Name="iss_root_message_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_attachment">
+          <Key>
+            <PropertyRef Name="iat_id" />
+          </Key>
+          <Property Name="iat_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iat_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="iat_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="iat_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="iat_description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="iat_unknown_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iat_status" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iat_not_id" Type="Int64" />
+        </EntityType>
+        <EntityType Name="eventum_issue_attachment_file">
+          <Key>
+            <PropertyRef Name="iaf_id" />
+          </Key>
+          <Property Name="iaf_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iaf_iat_id" Type="Int64" Nullable="false" />
+          <Property Name="iaf_file" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="iaf_filename" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="iaf_filetype" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="iaf_filesize" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_checkin">
+          <Key>
+            <PropertyRef Name="isc_id" />
+          </Key>
+          <Property Name="isc_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isc_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="isc_module" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isc_filename" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isc_old_version" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isc_new_version" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isc_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="isc_username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isc_commit_msg" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_custom_field">
+          <Key>
+            <PropertyRef Name="icf_id" />
+          </Key>
+          <Property Name="icf_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="icf_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="icf_fld_id" Type="Int64" Nullable="false" />
+          <Property Name="icf_value" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="icf_value_integer" Type="Int32" />
+          <Property Name="icf_value_date" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="eventum_issue_history">
+          <Key>
+            <PropertyRef Name="his_id" />
+          </Key>
+          <Property Name="his_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="his_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="his_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="his_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="his_summary" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="his_htt_id" Type="SByte" Nullable="false" />
+          <Property Name="his_is_hidden" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_quarantine">
+          <Key>
+            <PropertyRef Name="iqu_iss_id" />
+          </Key>
+          <Property Name="iqu_iss_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iqu_expiration" Type="DateTime" />
+          <Property Name="iqu_status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="eventum_issue_requirement">
+          <Key>
+            <PropertyRef Name="isr_id" />
+          </Key>
+          <Property Name="isr_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isr_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="isr_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="isr_updated_usr_id" Type="Int64" />
+          <Property Name="isr_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="isr_updated_date" Type="DateTime" />
+          <Property Name="isr_requirement" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isr_dev_time" Type="Single" />
+          <Property Name="isr_impact_analysis" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_user">
+          <Key>
+            <PropertyRef Name="isu_iss_id" />
+            <PropertyRef Name="isu_usr_id" />
+          </Key>
+          <Property Name="isu_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="isu_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="isu_assigned_date" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="eventum_issue_user_replier">
+          <Key>
+            <PropertyRef Name="iur_id" />
+          </Key>
+          <Property Name="iur_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iur_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="iur_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="iur_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_link_filter">
+          <Key>
+            <PropertyRef Name="lfi_id" />
+          </Key>
+          <Property Name="lfi_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lfi_pattern" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lfi_replacement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lfi_usr_role" Type="SByte" Nullable="false" />
+          <Property Name="lfi_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_mail_queue">
+          <Key>
+            <PropertyRef Name="maq_id" />
+          </Key>
+          <Property Name="maq_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maq_iss_id" Type="Int64" />
+          <Property Name="maq_queued_date" Type="DateTime" Nullable="false" />
+          <Property Name="maq_status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maq_save_copy" Type="Boolean" Nullable="false" />
+          <Property Name="maq_sender_ip_address" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maq_recipient" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maq_subject" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maq_headers" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maq_body" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="maq_type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="maq_usr_id" Type="Int64" />
+          <Property Name="maq_type_id" Type="Int64" />
+        </EntityType>
+        <EntityType Name="eventum_mail_queue_log">
+          <Key>
+            <PropertyRef Name="mql_id" />
+          </Key>
+          <Property Name="mql_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mql_maq_id" Type="Int64" Nullable="false" />
+          <Property Name="mql_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="mql_status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mql_server_message" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_news">
+          <Key>
+            <PropertyRef Name="nws_id" />
+          </Key>
+          <Property Name="nws_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nws_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="nws_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="nws_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nws_message" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nws_status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_note">
+          <Key>
+            <PropertyRef Name="not_id" />
+          </Key>
+          <Property Name="not_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="not_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="not_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="not_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="not_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="not_note" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="not_full_message" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="not_parent_id" Type="Int64" />
+          <Property Name="not_unknown_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="not_has_attachment" Type="Boolean" Nullable="false" />
+          <Property Name="not_message_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="not_removed" Type="Boolean" Nullable="false" />
+          <Property Name="not_is_blocked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_phone_support">
+          <Key>
+            <PropertyRef Name="phs_id" />
+          </Key>
+          <Property Name="phs_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phs_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="phs_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="phs_ttr_id" Type="Int64" />
+          <Property Name="phs_call_from_lname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="phs_call_from_fname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="phs_call_to_lname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="phs_call_to_fname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="phs_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="phs_type" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phs_phone_number" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phs_phone_type" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phs_phc_id" Type="Int64" Nullable="false" />
+          <Property Name="phs_description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project">
+          <Key>
+            <PropertyRef Name="prj_id" />
+          </Key>
+          <Property Name="prj_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prj_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="prj_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prj_status" Type="String" MaxLength="65531" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prj_lead_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="prj_initial_sta_id" Type="Int64" Nullable="false" />
+          <Property Name="prj_remote_invocation" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prj_anonymous_post" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prj_anonymous_post_options" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="prj_outgoing_sender_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prj_outgoing_sender_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prj_mail_aliases" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prj_customer_backend" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="prj_workflow_backend" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="prj_segregate_reporter" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="eventum_project_category">
+          <Key>
+            <PropertyRef Name="prc_id" />
+          </Key>
+          <Property Name="prc_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prc_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="prc_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_custom_field">
+          <Key>
+            <PropertyRef Name="pcf_id" />
+          </Key>
+          <Property Name="pcf_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pcf_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="pcf_fld_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_email_response">
+          <Key>
+            <PropertyRef Name="per_prj_id" />
+            <PropertyRef Name="per_ere_id" />
+          </Key>
+          <Property Name="per_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="per_ere_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_field_display">
+          <Key>
+            <PropertyRef Name="pfd_prj_id" />
+            <PropertyRef Name="pfd_field" />
+          </Key>
+          <Property Name="pfd_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="pfd_field" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pfd_min_role" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_group">
+          <Key>
+            <PropertyRef Name="pgr_prj_id" />
+            <PropertyRef Name="pgr_grp_id" />
+          </Key>
+          <Property Name="pgr_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="pgr_grp_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_link_filter">
+          <Key>
+            <PropertyRef Name="plf_prj_id" />
+            <PropertyRef Name="plf_lfi_id" />
+          </Key>
+          <Property Name="plf_prj_id" Type="Int32" Nullable="false" />
+          <Property Name="plf_lfi_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_news">
+          <Key>
+            <PropertyRef Name="prn_nws_id" />
+            <PropertyRef Name="prn_prj_id" />
+          </Key>
+          <Property Name="prn_nws_id" Type="Int64" Nullable="false" />
+          <Property Name="prn_prj_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_phone_category">
+          <Key>
+            <PropertyRef Name="phc_id" />
+          </Key>
+          <Property Name="phc_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phc_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="phc_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_priority">
+          <Key>
+            <PropertyRef Name="pri_id" />
+          </Key>
+          <Property Name="pri_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pri_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="pri_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pri_rank" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_release">
+          <Key>
+            <PropertyRef Name="pre_id" />
+          </Key>
+          <Property Name="pre_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pre_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="pre_title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pre_scheduled_date" Type="DateTime" Nullable="false" />
+          <Property Name="pre_status" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_round_robin">
+          <Key>
+            <PropertyRef Name="prr_id" />
+          </Key>
+          <Property Name="prr_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prr_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="prr_blackout_start" Type="Time" Nullable="false" />
+          <Property Name="prr_blackout_end" Type="Time" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_status">
+          <Key>
+            <PropertyRef Name="prs_id" />
+          </Key>
+          <Property Name="prs_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prs_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="prs_sta_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_status_date">
+          <Key>
+            <PropertyRef Name="psd_id" />
+          </Key>
+          <Property Name="psd_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="psd_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="psd_sta_id" Type="Int64" Nullable="false" />
+          <Property Name="psd_date_field" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="psd_label" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_project_user">
+          <Key>
+            <PropertyRef Name="pru_id" />
+          </Key>
+          <Property Name="pru_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pru_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="pru_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="pru_role" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_action">
+          <Key>
+            <PropertyRef Name="rma_id" />
+          </Key>
+          <Property Name="rma_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rma_rem_id" Type="Int64" Nullable="false" />
+          <Property Name="rma_rmt_id" Type="Byte" Nullable="false" />
+          <Property Name="rma_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="rma_last_updated_date" Type="DateTime" />
+          <Property Name="rma_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rma_rank" Type="Byte" Nullable="false" />
+          <Property Name="rma_alert_irc" Type="Boolean" Nullable="false" />
+          <Property Name="rma_alert_group_leader" Type="Boolean" Nullable="false" />
+          <Property Name="rma_boilerplate" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_action_type">
+          <Key>
+            <PropertyRef Name="rmt_id" />
+          </Key>
+          <Property Name="rmt_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rmt_type" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rmt_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_field">
+          <Key>
+            <PropertyRef Name="rmf_id" />
+          </Key>
+          <Property Name="rmf_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rmf_title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rmf_sql_field" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rmf_sql_representation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rmf_allow_column_compare" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_history">
+          <Key>
+            <PropertyRef Name="rmh_id" />
+          </Key>
+          <Property Name="rmh_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rmh_iss_id" Type="Int32" Nullable="false" />
+          <Property Name="rmh_rma_id" Type="Int32" Nullable="false" />
+          <Property Name="rmh_created_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_level">
+          <Key>
+            <PropertyRef Name="rem_id" />
+          </Key>
+          <Property Name="rem_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rem_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="rem_rank" Type="Boolean" Nullable="false" />
+          <Property Name="rem_last_updated_date" Type="DateTime" />
+          <Property Name="rem_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rem_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="rem_skip_weekend" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_level_condition">
+          <Key>
+            <PropertyRef Name="rlc_id" />
+          </Key>
+          <Property Name="rlc_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rlc_rma_id" Type="Int64" Nullable="false" />
+          <Property Name="rlc_rmf_id" Type="Byte" Nullable="false" />
+          <Property Name="rlc_rmo_id" Type="Boolean" Nullable="false" />
+          <Property Name="rlc_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="rlc_last_updated_date" Type="DateTime" />
+          <Property Name="rlc_value" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rlc_comparison_rmf_id" Type="Byte" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_operator">
+          <Key>
+            <PropertyRef Name="rmo_id" />
+          </Key>
+          <Property Name="rmo_id" Type="Boolean" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rmo_title" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="rmo_sql_representation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_priority">
+          <Key>
+            <PropertyRef Name="rep_id" />
+          </Key>
+          <Property Name="rep_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rep_rem_id" Type="Int64" Nullable="false" />
+          <Property Name="rep_pri_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_requirement">
+          <Key>
+            <PropertyRef Name="rer_id" />
+          </Key>
+          <Property Name="rer_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rer_rem_id" Type="Int64" Nullable="false" />
+          <Property Name="rer_iss_id" Type="Int64" />
+          <Property Name="rer_support_level_id" Type="Int64" />
+          <Property Name="rer_customer_id" Type="Int64" />
+          <Property Name="rer_trigger_all_issues" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_triggered_action">
+          <Key>
+            <PropertyRef Name="rta_iss_id" />
+          </Key>
+          <Property Name="rta_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="rta_rma_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_resolution">
+          <Key>
+            <PropertyRef Name="res_id" />
+          </Key>
+          <Property Name="res_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="res_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="res_created_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_search_profile">
+          <Key>
+            <PropertyRef Name="sep_id" />
+          </Key>
+          <Property Name="sep_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sep_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="sep_prj_id" Type="Int64" Nullable="false" />
+          <Property Name="sep_type" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sep_user_profile" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_status">
+          <Key>
+            <PropertyRef Name="sta_id" />
+          </Key>
+          <Property Name="sta_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sta_title" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sta_abbreviation" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sta_rank" Type="Int32" Nullable="false" />
+          <Property Name="sta_color" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sta_is_closed" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_subscription">
+          <Key>
+            <PropertyRef Name="sub_id" />
+          </Key>
+          <Property Name="sub_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sub_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="sub_usr_id" Type="Int64" />
+          <Property Name="sub_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="sub_level" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sub_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_subscription_type">
+          <Key>
+            <PropertyRef Name="sbt_id" />
+          </Key>
+          <Property Name="sbt_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sbt_sub_id" Type="Int64" Nullable="false" />
+          <Property Name="sbt_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_support_email">
+          <Key>
+            <PropertyRef Name="sup_id" />
+          </Key>
+          <Property Name="sup_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sup_ema_id" Type="Int64" Nullable="false" />
+          <Property Name="sup_parent_id" Type="Int64" Nullable="false" />
+          <Property Name="sup_iss_id" Type="Int64" />
+          <Property Name="sup_usr_id" Type="Int64" />
+          <Property Name="sup_customer_id" Type="Int64" />
+          <Property Name="sup_message_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sup_date" Type="DateTime" Nullable="false" />
+          <Property Name="sup_from" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sup_to" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sup_cc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="sup_subject" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sup_has_attachment" Type="Boolean" Nullable="false" />
+          <Property Name="sup_removed" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_support_email_body">
+          <Key>
+            <PropertyRef Name="seb_sup_id" />
+          </Key>
+          <Property Name="seb_sup_id" Type="Int64" Nullable="false" />
+          <Property Name="seb_body" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="seb_full_email" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_time_tracking">
+          <Key>
+            <PropertyRef Name="ttr_id" />
+          </Key>
+          <Property Name="ttr_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ttr_ttc_id" Type="Int64" Nullable="false" />
+          <Property Name="ttr_iss_id" Type="Int64" Nullable="false" />
+          <Property Name="ttr_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="ttr_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="ttr_time_spent" Type="Int64" Nullable="false" />
+          <Property Name="ttr_summary" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_time_tracking_category">
+          <Key>
+            <PropertyRef Name="ttc_id" />
+          </Key>
+          <Property Name="ttc_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ttc_title" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ttc_created_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_user">
+          <Key>
+            <PropertyRef Name="usr_id" />
+          </Key>
+          <Property Name="usr_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usr_grp_id" Type="Int64" />
+          <Property Name="usr_customer_id" Type="Int64" />
+          <Property Name="usr_customer_contact_id" Type="Int64" />
+          <Property Name="usr_created_date" Type="DateTime" Nullable="false" />
+          <Property Name="usr_status" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usr_password" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usr_full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usr_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usr_preferences" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="usr_sms_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="usr_clocked_in" Type="Boolean" />
+          <Property Name="usr_lang" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_issue_association">
+          <Key>
+            <PropertyRef Name="isa_issue_id" />
+            <PropertyRef Name="isa_associated_id" />
+          </Key>
+          <Property Name="isa_issue_id" Type="Int64" Nullable="false" />
+          <Property Name="isa_associated_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_reminder_action_list">
+          <Key>
+            <PropertyRef Name="ral_rma_id" />
+            <PropertyRef Name="ral_email" />
+            <PropertyRef Name="ral_usr_id" />
+          </Key>
+          <Property Name="ral_rma_id" Type="Int64" Nullable="false" />
+          <Property Name="ral_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ral_usr_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="eventum_round_robin_user">
+          <Key>
+            <PropertyRef Name="rru_prr_id" />
+            <PropertyRef Name="rru_usr_id" />
+          </Key>
+          <Property Name="rru_prr_id" Type="Int64" Nullable="false" />
+          <Property Name="rru_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="rru_next" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="eventum_user_alias">
+          <Key>
+            <PropertyRef Name="ual_usr_id" />
+          </Key>
+          <Property Name="ual_usr_id" Type="Int64" Nullable="false" />
+          <Property Name="ual_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="eventum_version">
+          <Key>
+            <PropertyRef Name="ver_version" />
+          </Key>
+          <Property Name="ver_version" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="u49299178_Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="eventum_columns_to_display" EntityType="Self.eventum_columns_to_display" />
+          <EntitySet Name="eventum_custom_field" EntityType="Self.eventum_custom_field" />
+          <EntitySet Name="eventum_custom_field_option" EntityType="Self.eventum_custom_field_option" />
+          <EntitySet Name="eventum_custom_filter" EntityType="Self.eventum_custom_filter" />
+          <EntitySet Name="eventum_customer_account_manager" EntityType="Self.eventum_customer_account_manager" />
+          <EntitySet Name="eventum_customer_note" EntityType="Self.eventum_customer_note" />
+          <EntitySet Name="eventum_email_account" EntityType="Self.eventum_email_account" />
+          <EntitySet Name="eventum_email_draft" EntityType="Self.eventum_email_draft" />
+          <EntitySet Name="eventum_email_draft_recipient" EntityType="Self.eventum_email_draft_recipient" />
+          <EntitySet Name="eventum_email_response" EntityType="Self.eventum_email_response" />
+          <EntitySet Name="eventum_faq" EntityType="Self.eventum_faq" />
+          <EntitySet Name="eventum_faq_support_level" EntityType="Self.eventum_faq_support_level" />
+          <EntitySet Name="eventum_group" EntityType="Self.eventum_group" />
+          <EntitySet Name="eventum_history_type" EntityType="Self.eventum_history_type" />
+          <EntitySet Name="eventum_irc_notice" EntityType="Self.eventum_irc_notice" />
+          <EntitySet Name="eventum_issue" EntityType="Self.eventum_issue" />
+          <EntitySet Name="eventum_issue_attachment" EntityType="Self.eventum_issue_attachment" />
+          <EntitySet Name="eventum_issue_attachment_file" EntityType="Self.eventum_issue_attachment_file" />
+          <EntitySet Name="eventum_issue_checkin" EntityType="Self.eventum_issue_checkin" />
+          <EntitySet Name="eventum_issue_custom_field" EntityType="Self.eventum_issue_custom_field" />
+          <EntitySet Name="eventum_issue_history" EntityType="Self.eventum_issue_history" />
+          <EntitySet Name="eventum_issue_quarantine" EntityType="Self.eventum_issue_quarantine" />
+          <EntitySet Name="eventum_issue_requirement" EntityType="Self.eventum_issue_requirement" />
+          <EntitySet Name="eventum_issue_user" EntityType="Self.eventum_issue_user" />
+          <EntitySet Name="eventum_issue_user_replier" EntityType="Self.eventum_issue_user_replier" />
+          <EntitySet Name="eventum_link_filter" EntityType="Self.eventum_link_filter" />
+          <EntitySet Name="eventum_mail_queue" EntityType="Self.eventum_mail_queue" />
+          <EntitySet Name="eventum_mail_queue_log" EntityType="Self.eventum_mail_queue_log" />
+          <EntitySet Name="eventum_news" EntityType="Self.eventum_news" />
+          <EntitySet Name="eventum_note" EntityType="Self.eventum_note" />
+          <EntitySet Name="eventum_phone_support" EntityType="Self.eventum_phone_support" />
+          <EntitySet Name="eventum_project" EntityType="Self.eventum_project" />
+          <EntitySet Name="eventum_project_category" EntityType="Self.eventum_project_category" />
+          <EntitySet Name="eventum_project_custom_field" EntityType="Self.eventum_project_custom_field" />
+          <EntitySet Name="eventum_project_email_response" EntityType="Self.eventum_project_email_response" />
+          <EntitySet Name="eventum_project_field_display" EntityType="Self.eventum_project_field_display" />
+          <EntitySet Name="eventum_project_group" EntityType="Self.eventum_project_group" />
+          <EntitySet Name="eventum_project_link_filter" EntityType="Self.eventum_project_link_filter" />
+          <EntitySet Name="eventum_project_news" EntityType="Self.eventum_project_news" />
+          <EntitySet Name="eventum_project_phone_category" EntityType="Self.eventum_project_phone_category" />
+          <EntitySet Name="eventum_project_priority" EntityType="Self.eventum_project_priority" />
+          <EntitySet Name="eventum_project_release" EntityType="Self.eventum_project_release" />
+          <EntitySet Name="eventum_project_round_robin" EntityType="Self.eventum_project_round_robin" />
+          <EntitySet Name="eventum_project_status" EntityType="Self.eventum_project_status" />
+          <EntitySet Name="eventum_project_status_date" EntityType="Self.eventum_project_status_date" />
+          <EntitySet Name="eventum_project_user" EntityType="Self.eventum_project_user" />
+          <EntitySet Name="eventum_reminder_action" EntityType="Self.eventum_reminder_action" />
+          <EntitySet Name="eventum_reminder_action_type" EntityType="Self.eventum_reminder_action_type" />
+          <EntitySet Name="eventum_reminder_field" EntityType="Self.eventum_reminder_field" />
+          <EntitySet Name="eventum_reminder_history" EntityType="Self.eventum_reminder_history" />
+          <EntitySet Name="eventum_reminder_level" EntityType="Self.eventum_reminder_level" />
+          <EntitySet Name="eventum_reminder_level_condition" EntityType="Self.eventum_reminder_level_condition" />
+          <EntitySet Name="eventum_reminder_operator" EntityType="Self.eventum_reminder_operator" />
+          <EntitySet Name="eventum_reminder_priority" EntityType="Self.eventum_reminder_priority" />
+          <EntitySet Name="eventum_reminder_requirement" EntityType="Self.eventum_reminder_requirement" />
+          <EntitySet Name="eventum_reminder_triggered_action" EntityType="Self.eventum_reminder_triggered_action" />
+          <EntitySet Name="eventum_resolution" EntityType="Self.eventum_resolution" />
+          <EntitySet Name="eventum_search_profile" EntityType="Self.eventum_search_profile" />
+          <EntitySet Name="eventum_status" EntityType="Self.eventum_status" />
+          <EntitySet Name="eventum_subscription" EntityType="Self.eventum_subscription" />
+          <EntitySet Name="eventum_subscription_type" EntityType="Self.eventum_subscription_type" />
+          <EntitySet Name="eventum_support_email" EntityType="Self.eventum_support_email" />
+          <EntitySet Name="eventum_support_email_body" EntityType="Self.eventum_support_email_body" />
+          <EntitySet Name="eventum_time_tracking" EntityType="Self.eventum_time_tracking" />
+          <EntitySet Name="eventum_time_tracking_category" EntityType="Self.eventum_time_tracking_category" />
+          <EntitySet Name="eventum_user" EntityType="Self.eventum_user" />
+          <EntitySet Name="eventum_issue_association" EntityType="Self.eventum_issue_association" />
+          <EntitySet Name="eventum_reminder_action_list" EntityType="Self.eventum_reminder_action_list" />
+          <EntitySet Name="eventum_round_robin_user" EntityType="Self.eventum_round_robin_user" />
+          <EntitySet Name="eventum_user_alias" EntityType="Self.eventum_user_alias" />
+          <EntitySet Name="eventum_version" EntityType="Self.eventum_version" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="u49299178_ModelStoreContainer" CdmEntityContainer="u49299178_Entities1">
+          <EntitySetMapping Name="eventum_columns_to_display">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_columns_to_display">
+              <MappingFragment StoreEntitySet="eventum_columns_to_display">
+                <ScalarProperty Name="ctd_prj_id" ColumnName="ctd_prj_id" />
+                <ScalarProperty Name="ctd_page" ColumnName="ctd_page" />
+                <ScalarProperty Name="ctd_field" ColumnName="ctd_field" />
+                <ScalarProperty Name="ctd_min_role" ColumnName="ctd_min_role" />
+                <ScalarProperty Name="ctd_rank" ColumnName="ctd_rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_custom_field">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_custom_field">
+              <MappingFragment StoreEntitySet="eventum_custom_field">
+                <ScalarProperty Name="fld_id" ColumnName="fld_id" />
+                <ScalarProperty Name="fld_title" ColumnName="fld_title" />
+                <ScalarProperty Name="fld_description" ColumnName="fld_description" />
+                <ScalarProperty Name="fld_type" ColumnName="fld_type" />
+                <ScalarProperty Name="fld_report_form" ColumnName="fld_report_form" />
+                <ScalarProperty Name="fld_report_form_required" ColumnName="fld_report_form_required" />
+                <ScalarProperty Name="fld_anonymous_form" ColumnName="fld_anonymous_form" />
+                <ScalarProperty Name="fld_anonymous_form_required" ColumnName="fld_anonymous_form_required" />
+                <ScalarProperty Name="fld_close_form" ColumnName="fld_close_form" />
+                <ScalarProperty Name="fld_close_form_required" ColumnName="fld_close_form_required" />
+                <ScalarProperty Name="fld_list_display" ColumnName="fld_list_display" />
+                <ScalarProperty Name="fld_min_role" ColumnName="fld_min_role" />
+                <ScalarProperty Name="fld_rank" ColumnName="fld_rank" />
+                <ScalarProperty Name="fld_backend" ColumnName="fld_backend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_custom_field_option">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_custom_field_option">
+              <MappingFragment StoreEntitySet="eventum_custom_field_option">
+                <ScalarProperty Name="cfo_id" ColumnName="cfo_id" />
+                <ScalarProperty Name="cfo_fld_id" ColumnName="cfo_fld_id" />
+                <ScalarProperty Name="cfo_value" ColumnName="cfo_value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_custom_filter">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_custom_filter">
+              <MappingFragment StoreEntitySet="eventum_custom_filter">
+                <ScalarProperty Name="cst_id" ColumnName="cst_id" />
+                <ScalarProperty Name="cst_usr_id" ColumnName="cst_usr_id" />
+                <ScalarProperty Name="cst_prj_id" ColumnName="cst_prj_id" />
+                <ScalarProperty Name="cst_title" ColumnName="cst_title" />
+                <ScalarProperty Name="cst_iss_pri_id" ColumnName="cst_iss_pri_id" />
+                <ScalarProperty Name="cst_keywords" ColumnName="cst_keywords" />
+                <ScalarProperty Name="cst_users" ColumnName="cst_users" />
+                <ScalarProperty Name="cst_reporter" ColumnName="cst_reporter" />
+                <ScalarProperty Name="cst_iss_prc_id" ColumnName="cst_iss_prc_id" />
+                <ScalarProperty Name="cst_iss_sta_id" ColumnName="cst_iss_sta_id" />
+                <ScalarProperty Name="cst_iss_pre_id" ColumnName="cst_iss_pre_id" />
+                <ScalarProperty Name="cst_show_authorized" ColumnName="cst_show_authorized" />
+                <ScalarProperty Name="cst_show_notification_list" ColumnName="cst_show_notification_list" />
+                <ScalarProperty Name="cst_created_date" ColumnName="cst_created_date" />
+                <ScalarProperty Name="cst_created_date_filter_type" ColumnName="cst_created_date_filter_type" />
+                <ScalarProperty Name="cst_created_date_time_period" ColumnName="cst_created_date_time_period" />
+                <ScalarProperty Name="cst_created_date_end" ColumnName="cst_created_date_end" />
+                <ScalarProperty Name="cst_updated_date" ColumnName="cst_updated_date" />
+                <ScalarProperty Name="cst_updated_date_filter_type" ColumnName="cst_updated_date_filter_type" />
+                <ScalarProperty Name="cst_updated_date_time_period" ColumnName="cst_updated_date_time_period" />
+                <ScalarProperty Name="cst_updated_date_end" ColumnName="cst_updated_date_end" />
+                <ScalarProperty Name="cst_last_response_date" ColumnName="cst_last_response_date" />
+                <ScalarProperty Name="cst_last_response_date_filter_type" ColumnName="cst_last_response_date_filter_type" />
+                <ScalarProperty Name="cst_last_response_date_time_period" ColumnName="cst_last_response_date_time_period" />
+                <ScalarProperty Name="cst_last_response_date_end" ColumnName="cst_last_response_date_end" />
+                <ScalarProperty Name="cst_first_response_date" ColumnName="cst_first_response_date" />
+                <ScalarProperty Name="cst_first_response_date_filter_type" ColumnName="cst_first_response_date_filter_type" />
+                <ScalarProperty Name="cst_first_response_date_time_period" ColumnName="cst_first_response_date_time_period" />
+                <ScalarProperty Name="cst_first_response_date_end" ColumnName="cst_first_response_date_end" />
+                <ScalarProperty Name="cst_closed_date" ColumnName="cst_closed_date" />
+                <ScalarProperty Name="cst_closed_date_filter_type" ColumnName="cst_closed_date_filter_type" />
+                <ScalarProperty Name="cst_closed_date_time_period" ColumnName="cst_closed_date_time_period" />
+                <ScalarProperty Name="cst_closed_date_end" ColumnName="cst_closed_date_end" />
+                <ScalarProperty Name="cst_rows" ColumnName="cst_rows" />
+                <ScalarProperty Name="cst_sort_by" ColumnName="cst_sort_by" />
+                <ScalarProperty Name="cst_sort_order" ColumnName="cst_sort_order" />
+                <ScalarProperty Name="cst_hide_closed" ColumnName="cst_hide_closed" />
+                <ScalarProperty Name="cst_is_global" ColumnName="cst_is_global" />
+                <ScalarProperty Name="cst_search_type" ColumnName="cst_search_type" />
+                <ScalarProperty Name="cst_custom_field" ColumnName="cst_custom_field" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_customer_account_manager">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_customer_account_manager">
+              <MappingFragment StoreEntitySet="eventum_customer_account_manager">
+                <ScalarProperty Name="cam_id" ColumnName="cam_id" />
+                <ScalarProperty Name="cam_prj_id" ColumnName="cam_prj_id" />
+                <ScalarProperty Name="cam_customer_id" ColumnName="cam_customer_id" />
+                <ScalarProperty Name="cam_usr_id" ColumnName="cam_usr_id" />
+                <ScalarProperty Name="cam_type" ColumnName="cam_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_customer_note">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_customer_note">
+              <MappingFragment StoreEntitySet="eventum_customer_note">
+                <ScalarProperty Name="cno_id" ColumnName="cno_id" />
+                <ScalarProperty Name="cno_prj_id" ColumnName="cno_prj_id" />
+                <ScalarProperty Name="cno_customer_id" ColumnName="cno_customer_id" />
+                <ScalarProperty Name="cno_created_date" ColumnName="cno_created_date" />
+                <ScalarProperty Name="cno_updated_date" ColumnName="cno_updated_date" />
+                <ScalarProperty Name="cno_note" ColumnName="cno_note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_email_account">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_account">
+              <MappingFragment StoreEntitySet="eventum_email_account">
+                <ScalarProperty Name="ema_id" ColumnName="ema_id" />
+                <ScalarProperty Name="ema_prj_id" ColumnName="ema_prj_id" />
+                <ScalarProperty Name="ema_type" ColumnName="ema_type" />
+                <ScalarProperty Name="ema_folder" ColumnName="ema_folder" />
+                <ScalarProperty Name="ema_hostname" ColumnName="ema_hostname" />
+                <ScalarProperty Name="ema_port" ColumnName="ema_port" />
+                <ScalarProperty Name="ema_username" ColumnName="ema_username" />
+                <ScalarProperty Name="ema_password" ColumnName="ema_password" />
+                <ScalarProperty Name="ema_get_only_new" ColumnName="ema_get_only_new" />
+                <ScalarProperty Name="ema_leave_copy" ColumnName="ema_leave_copy" />
+                <ScalarProperty Name="ema_issue_auto_creation" ColumnName="ema_issue_auto_creation" />
+                <ScalarProperty Name="ema_issue_auto_creation_options" ColumnName="ema_issue_auto_creation_options" />
+                <ScalarProperty Name="ema_use_routing" ColumnName="ema_use_routing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_email_draft">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_draft">
+              <MappingFragment StoreEntitySet="eventum_email_draft">
+                <ScalarProperty Name="emd_id" ColumnName="emd_id" />
+                <ScalarProperty Name="emd_usr_id" ColumnName="emd_usr_id" />
+                <ScalarProperty Name="emd_iss_id" ColumnName="emd_iss_id" />
+                <ScalarProperty Name="emd_sup_id" ColumnName="emd_sup_id" />
+                <ScalarProperty Name="emd_status" ColumnName="emd_status" />
+                <ScalarProperty Name="emd_updated_date" ColumnName="emd_updated_date" />
+                <ScalarProperty Name="emd_subject" ColumnName="emd_subject" />
+                <ScalarProperty Name="emd_body" ColumnName="emd_body" />
+                <ScalarProperty Name="emd_unknown_user" ColumnName="emd_unknown_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_email_draft_recipient">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_draft_recipient">
+              <MappingFragment StoreEntitySet="eventum_email_draft_recipient">
+                <ScalarProperty Name="edr_id" ColumnName="edr_id" />
+                <ScalarProperty Name="edr_emd_id" ColumnName="edr_emd_id" />
+                <ScalarProperty Name="edr_is_cc" ColumnName="edr_is_cc" />
+                <ScalarProperty Name="edr_email" ColumnName="edr_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_email_response">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_response">
+              <MappingFragment StoreEntitySet="eventum_email_response">
+                <ScalarProperty Name="ere_id" ColumnName="ere_id" />
+                <ScalarProperty Name="ere_title" ColumnName="ere_title" />
+                <ScalarProperty Name="ere_response_body" ColumnName="ere_response_body" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_faq">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_faq">
+              <MappingFragment StoreEntitySet="eventum_faq">
+                <ScalarProperty Name="faq_id" ColumnName="faq_id" />
+                <ScalarProperty Name="faq_prj_id" ColumnName="faq_prj_id" />
+                <ScalarProperty Name="faq_usr_id" ColumnName="faq_usr_id" />
+                <ScalarProperty Name="faq_created_date" ColumnName="faq_created_date" />
+                <ScalarProperty Name="faq_updated_date" ColumnName="faq_updated_date" />
+                <ScalarProperty Name="faq_title" ColumnName="faq_title" />
+                <ScalarProperty Name="faq_message" ColumnName="faq_message" />
+                <ScalarProperty Name="faq_rank" ColumnName="faq_rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_faq_support_level">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_faq_support_level">
+              <MappingFragment StoreEntitySet="eventum_faq_support_level">
+                <ScalarProperty Name="fsl_faq_id" ColumnName="fsl_faq_id" />
+                <ScalarProperty Name="fsl_support_level_id" ColumnName="fsl_support_level_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_group">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_group">
+              <MappingFragment StoreEntitySet="eventum_group">
+                <ScalarProperty Name="grp_id" ColumnName="grp_id" />
+                <ScalarProperty Name="grp_name" ColumnName="grp_name" />
+                <ScalarProperty Name="grp_description" ColumnName="grp_description" />
+                <ScalarProperty Name="grp_manager_usr_id" ColumnName="grp_manager_usr_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_history_type">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_history_type">
+              <MappingFragment StoreEntitySet="eventum_history_type">
+                <ScalarProperty Name="htt_id" ColumnName="htt_id" />
+                <ScalarProperty Name="htt_name" ColumnName="htt_name" />
+                <ScalarProperty Name="htt_role" ColumnName="htt_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_irc_notice">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_irc_notice">
+              <MappingFragment StoreEntitySet="eventum_irc_notice">
+                <ScalarProperty Name="ino_id" ColumnName="ino_id" />
+                <ScalarProperty Name="ino_prj_id" ColumnName="ino_prj_id" />
+                <ScalarProperty Name="ino_iss_id" ColumnName="ino_iss_id" />
+                <ScalarProperty Name="ino_created_date" ColumnName="ino_created_date" />
+                <ScalarProperty Name="ino_message" ColumnName="ino_message" />
+                <ScalarProperty Name="ino_status" ColumnName="ino_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue">
+              <MappingFragment StoreEntitySet="eventum_issue">
+                <ScalarProperty Name="iss_id" ColumnName="iss_id" />
+                <ScalarProperty Name="iss_customer_id" ColumnName="iss_customer_id" />
+                <ScalarProperty Name="iss_customer_contact_id" ColumnName="iss_customer_contact_id" />
+                <ScalarProperty Name="iss_customer_contract_id" ColumnName="iss_customer_contract_id" />
+                <ScalarProperty Name="iss_usr_id" ColumnName="iss_usr_id" />
+                <ScalarProperty Name="iss_grp_id" ColumnName="iss_grp_id" />
+                <ScalarProperty Name="iss_prj_id" ColumnName="iss_prj_id" />
+                <ScalarProperty Name="iss_prc_id" ColumnName="iss_prc_id" />
+                <ScalarProperty Name="iss_pre_id" ColumnName="iss_pre_id" />
+                <ScalarProperty Name="iss_pri_id" ColumnName="iss_pri_id" />
+                <ScalarProperty Name="iss_sta_id" ColumnName="iss_sta_id" />
+                <ScalarProperty Name="iss_res_id" ColumnName="iss_res_id" />
+                <ScalarProperty Name="iss_duplicated_iss_id" ColumnName="iss_duplicated_iss_id" />
+                <ScalarProperty Name="iss_created_date" ColumnName="iss_created_date" />
+                <ScalarProperty Name="iss_updated_date" ColumnName="iss_updated_date" />
+                <ScalarProperty Name="iss_last_response_date" ColumnName="iss_last_response_date" />
+                <ScalarProperty Name="iss_first_response_date" ColumnName="iss_first_response_date" />
+                <ScalarProperty Name="iss_closed_date" ColumnName="iss_closed_date" />
+                <ScalarProperty Name="iss_last_customer_action_date" ColumnName="iss_last_customer_action_date" />
+                <ScalarProperty Name="iss_expected_resolution_date" ColumnName="iss_expected_resolution_date" />
+                <ScalarProperty Name="iss_summary" ColumnName="iss_summary" />
+                <ScalarProperty Name="iss_description" ColumnName="iss_description" />
+                <ScalarProperty Name="iss_dev_time" ColumnName="iss_dev_time" />
+                <ScalarProperty Name="iss_developer_est_time" ColumnName="iss_developer_est_time" />
+                <ScalarProperty Name="iss_impact_analysis" ColumnName="iss_impact_analysis" />
+                <ScalarProperty Name="iss_contact_person_lname" ColumnName="iss_contact_person_lname" />
+                <ScalarProperty Name="iss_contact_person_fname" ColumnName="iss_contact_person_fname" />
+                <ScalarProperty Name="iss_contact_email" ColumnName="iss_contact_email" />
+                <ScalarProperty Name="iss_contact_phone" ColumnName="iss_contact_phone" />
+                <ScalarProperty Name="iss_contact_timezone" ColumnName="iss_contact_timezone" />
+                <ScalarProperty Name="iss_trigger_reminders" ColumnName="iss_trigger_reminders" />
+                <ScalarProperty Name="iss_last_public_action_date" ColumnName="iss_last_public_action_date" />
+                <ScalarProperty Name="iss_last_public_action_type" ColumnName="iss_last_public_action_type" />
+                <ScalarProperty Name="iss_last_internal_action_date" ColumnName="iss_last_internal_action_date" />
+                <ScalarProperty Name="iss_last_internal_action_type" ColumnName="iss_last_internal_action_type" />
+                <ScalarProperty Name="iss_private" ColumnName="iss_private" />
+                <ScalarProperty Name="iss_percent_complete" ColumnName="iss_percent_complete" />
+                <ScalarProperty Name="iss_root_message_id" ColumnName="iss_root_message_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_attachment">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_attachment">
+              <MappingFragment StoreEntitySet="eventum_issue_attachment">
+                <ScalarProperty Name="iat_id" ColumnName="iat_id" />
+                <ScalarProperty Name="iat_iss_id" ColumnName="iat_iss_id" />
+                <ScalarProperty Name="iat_usr_id" ColumnName="iat_usr_id" />
+                <ScalarProperty Name="iat_created_date" ColumnName="iat_created_date" />
+                <ScalarProperty Name="iat_description" ColumnName="iat_description" />
+                <ScalarProperty Name="iat_unknown_user" ColumnName="iat_unknown_user" />
+                <ScalarProperty Name="iat_status" ColumnName="iat_status" />
+                <ScalarProperty Name="iat_not_id" ColumnName="iat_not_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_attachment_file">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_attachment_file">
+              <MappingFragment StoreEntitySet="eventum_issue_attachment_file">
+                <ScalarProperty Name="iaf_id" ColumnName="iaf_id" />
+                <ScalarProperty Name="iaf_iat_id" ColumnName="iaf_iat_id" />
+                <ScalarProperty Name="iaf_file" ColumnName="iaf_file" />
+                <ScalarProperty Name="iaf_filename" ColumnName="iaf_filename" />
+                <ScalarProperty Name="iaf_filetype" ColumnName="iaf_filetype" />
+                <ScalarProperty Name="iaf_filesize" ColumnName="iaf_filesize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_checkin">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_checkin">
+              <MappingFragment StoreEntitySet="eventum_issue_checkin">
+                <ScalarProperty Name="isc_id" ColumnName="isc_id" />
+                <ScalarProperty Name="isc_iss_id" ColumnName="isc_iss_id" />
+                <ScalarProperty Name="isc_module" ColumnName="isc_module" />
+                <ScalarProperty Name="isc_filename" ColumnName="isc_filename" />
+                <ScalarProperty Name="isc_old_version" ColumnName="isc_old_version" />
+                <ScalarProperty Name="isc_new_version" ColumnName="isc_new_version" />
+                <ScalarProperty Name="isc_created_date" ColumnName="isc_created_date" />
+                <ScalarProperty Name="isc_username" ColumnName="isc_username" />
+                <ScalarProperty Name="isc_commit_msg" ColumnName="isc_commit_msg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_custom_field">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_custom_field">
+              <MappingFragment StoreEntitySet="eventum_issue_custom_field">
+                <ScalarProperty Name="icf_id" ColumnName="icf_id" />
+                <ScalarProperty Name="icf_iss_id" ColumnName="icf_iss_id" />
+                <ScalarProperty Name="icf_fld_id" ColumnName="icf_fld_id" />
+                <ScalarProperty Name="icf_value" ColumnName="icf_value" />
+                <ScalarProperty Name="icf_value_integer" ColumnName="icf_value_integer" />
+                <ScalarProperty Name="icf_value_date" ColumnName="icf_value_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_history">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_history">
+              <MappingFragment StoreEntitySet="eventum_issue_history">
+                <ScalarProperty Name="his_id" ColumnName="his_id" />
+                <ScalarProperty Name="his_iss_id" ColumnName="his_iss_id" />
+                <ScalarProperty Name="his_usr_id" ColumnName="his_usr_id" />
+                <ScalarProperty Name="his_created_date" ColumnName="his_created_date" />
+                <ScalarProperty Name="his_summary" ColumnName="his_summary" />
+                <ScalarProperty Name="his_htt_id" ColumnName="his_htt_id" />
+                <ScalarProperty Name="his_is_hidden" ColumnName="his_is_hidden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_quarantine">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_quarantine">
+              <MappingFragment StoreEntitySet="eventum_issue_quarantine">
+                <ScalarProperty Name="iqu_iss_id" ColumnName="iqu_iss_id" />
+                <ScalarProperty Name="iqu_expiration" ColumnName="iqu_expiration" />
+                <ScalarProperty Name="iqu_status" ColumnName="iqu_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_requirement">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_requirement">
+              <MappingFragment StoreEntitySet="eventum_issue_requirement">
+                <ScalarProperty Name="isr_id" ColumnName="isr_id" />
+                <ScalarProperty Name="isr_iss_id" ColumnName="isr_iss_id" />
+                <ScalarProperty Name="isr_usr_id" ColumnName="isr_usr_id" />
+                <ScalarProperty Name="isr_updated_usr_id" ColumnName="isr_updated_usr_id" />
+                <ScalarProperty Name="isr_created_date" ColumnName="isr_created_date" />
+                <ScalarProperty Name="isr_updated_date" ColumnName="isr_updated_date" />
+                <ScalarProperty Name="isr_requirement" ColumnName="isr_requirement" />
+                <ScalarProperty Name="isr_dev_time" ColumnName="isr_dev_time" />
+                <ScalarProperty Name="isr_impact_analysis" ColumnName="isr_impact_analysis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_user">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_user">
+              <MappingFragment StoreEntitySet="eventum_issue_user">
+                <ScalarProperty Name="isu_iss_id" ColumnName="isu_iss_id" />
+                <ScalarProperty Name="isu_usr_id" ColumnName="isu_usr_id" />
+                <ScalarProperty Name="isu_assigned_date" ColumnName="isu_assigned_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_user_replier">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_user_replier">
+              <MappingFragment StoreEntitySet="eventum_issue_user_replier">
+                <ScalarProperty Name="iur_id" ColumnName="iur_id" />
+                <ScalarProperty Name="iur_iss_id" ColumnName="iur_iss_id" />
+                <ScalarProperty Name="iur_usr_id" ColumnName="iur_usr_id" />
+                <ScalarProperty Name="iur_email" ColumnName="iur_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_link_filter">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_link_filter">
+              <MappingFragment StoreEntitySet="eventum_link_filter">
+                <ScalarProperty Name="lfi_id" ColumnName="lfi_id" />
+                <ScalarProperty Name="lfi_pattern" ColumnName="lfi_pattern" />
+                <ScalarProperty Name="lfi_replacement" ColumnName="lfi_replacement" />
+                <ScalarProperty Name="lfi_usr_role" ColumnName="lfi_usr_role" />
+                <ScalarProperty Name="lfi_description" ColumnName="lfi_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_mail_queue">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_mail_queue">
+              <MappingFragment StoreEntitySet="eventum_mail_queue">
+                <ScalarProperty Name="maq_id" ColumnName="maq_id" />
+                <ScalarProperty Name="maq_iss_id" ColumnName="maq_iss_id" />
+                <ScalarProperty Name="maq_queued_date" ColumnName="maq_queued_date" />
+                <ScalarProperty Name="maq_status" ColumnName="maq_status" />
+                <ScalarProperty Name="maq_save_copy" ColumnName="maq_save_copy" />
+                <ScalarProperty Name="maq_sender_ip_address" ColumnName="maq_sender_ip_address" />
+                <ScalarProperty Name="maq_recipient" ColumnName="maq_recipient" />
+                <ScalarProperty Name="maq_subject" ColumnName="maq_subject" />
+                <ScalarProperty Name="maq_headers" ColumnName="maq_headers" />
+                <ScalarProperty Name="maq_body" ColumnName="maq_body" />
+                <ScalarProperty Name="maq_type" ColumnName="maq_type" />
+                <ScalarProperty Name="maq_usr_id" ColumnName="maq_usr_id" />
+                <ScalarProperty Name="maq_type_id" ColumnName="maq_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_mail_queue_log">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_mail_queue_log">
+              <MappingFragment StoreEntitySet="eventum_mail_queue_log">
+                <ScalarProperty Name="mql_id" ColumnName="mql_id" />
+                <ScalarProperty Name="mql_maq_id" ColumnName="mql_maq_id" />
+                <ScalarProperty Name="mql_created_date" ColumnName="mql_created_date" />
+                <ScalarProperty Name="mql_status" ColumnName="mql_status" />
+                <ScalarProperty Name="mql_server_message" ColumnName="mql_server_message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_news">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_news">
+              <MappingFragment StoreEntitySet="eventum_news">
+                <ScalarProperty Name="nws_id" ColumnName="nws_id" />
+                <ScalarProperty Name="nws_usr_id" ColumnName="nws_usr_id" />
+                <ScalarProperty Name="nws_created_date" ColumnName="nws_created_date" />
+                <ScalarProperty Name="nws_title" ColumnName="nws_title" />
+                <ScalarProperty Name="nws_message" ColumnName="nws_message" />
+                <ScalarProperty Name="nws_status" ColumnName="nws_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_note">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_note">
+              <MappingFragment StoreEntitySet="eventum_note">
+                <ScalarProperty Name="not_id" ColumnName="not_id" />
+                <ScalarProperty Name="not_iss_id" ColumnName="not_iss_id" />
+                <ScalarProperty Name="not_created_date" ColumnName="not_created_date" />
+                <ScalarProperty Name="not_usr_id" ColumnName="not_usr_id" />
+                <ScalarProperty Name="not_title" ColumnName="not_title" />
+                <ScalarProperty Name="not_note" ColumnName="not_note" />
+                <ScalarProperty Name="not_full_message" ColumnName="not_full_message" />
+                <ScalarProperty Name="not_parent_id" ColumnName="not_parent_id" />
+                <ScalarProperty Name="not_unknown_user" ColumnName="not_unknown_user" />
+                <ScalarProperty Name="not_has_attachment" ColumnName="not_has_attachment" />
+                <ScalarProperty Name="not_message_id" ColumnName="not_message_id" />
+                <ScalarProperty Name="not_removed" ColumnName="not_removed" />
+                <ScalarProperty Name="not_is_blocked" ColumnName="not_is_blocked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_phone_support">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_phone_support">
+              <MappingFragment StoreEntitySet="eventum_phone_support">
+                <ScalarProperty Name="phs_id" ColumnName="phs_id" />
+                <ScalarProperty Name="phs_usr_id" ColumnName="phs_usr_id" />
+                <ScalarProperty Name="phs_iss_id" ColumnName="phs_iss_id" />
+                <ScalarProperty Name="phs_ttr_id" ColumnName="phs_ttr_id" />
+                <ScalarProperty Name="phs_call_from_lname" ColumnName="phs_call_from_lname" />
+                <ScalarProperty Name="phs_call_from_fname" ColumnName="phs_call_from_fname" />
+                <ScalarProperty Name="phs_call_to_lname" ColumnName="phs_call_to_lname" />
+                <ScalarProperty Name="phs_call_to_fname" ColumnName="phs_call_to_fname" />
+                <ScalarProperty Name="phs_created_date" ColumnName="phs_created_date" />
+                <ScalarProperty Name="phs_type" ColumnName="phs_type" />
+                <ScalarProperty Name="phs_phone_number" ColumnName="phs_phone_number" />
+                <ScalarProperty Name="phs_phone_type" ColumnName="phs_phone_type" />
+                <ScalarProperty Name="phs_phc_id" ColumnName="phs_phc_id" />
+                <ScalarProperty Name="phs_description" ColumnName="phs_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project">
+              <MappingFragment StoreEntitySet="eventum_project">
+                <ScalarProperty Name="prj_id" ColumnName="prj_id" />
+                <ScalarProperty Name="prj_created_date" ColumnName="prj_created_date" />
+                <ScalarProperty Name="prj_title" ColumnName="prj_title" />
+                <ScalarProperty Name="prj_status" ColumnName="prj_status" />
+                <ScalarProperty Name="prj_lead_usr_id" ColumnName="prj_lead_usr_id" />
+                <ScalarProperty Name="prj_initial_sta_id" ColumnName="prj_initial_sta_id" />
+                <ScalarProperty Name="prj_remote_invocation" ColumnName="prj_remote_invocation" />
+                <ScalarProperty Name="prj_anonymous_post" ColumnName="prj_anonymous_post" />
+                <ScalarProperty Name="prj_anonymous_post_options" ColumnName="prj_anonymous_post_options" />
+                <ScalarProperty Name="prj_outgoing_sender_name" ColumnName="prj_outgoing_sender_name" />
+                <ScalarProperty Name="prj_outgoing_sender_email" ColumnName="prj_outgoing_sender_email" />
+                <ScalarProperty Name="prj_mail_aliases" ColumnName="prj_mail_aliases" />
+                <ScalarProperty Name="prj_customer_backend" ColumnName="prj_customer_backend" />
+                <ScalarProperty Name="prj_workflow_backend" ColumnName="prj_workflow_backend" />
+                <ScalarProperty Name="prj_segregate_reporter" ColumnName="prj_segregate_reporter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_category">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_category">
+              <MappingFragment StoreEntitySet="eventum_project_category">
+                <ScalarProperty Name="prc_id" ColumnName="prc_id" />
+                <ScalarProperty Name="prc_prj_id" ColumnName="prc_prj_id" />
+                <ScalarProperty Name="prc_title" ColumnName="prc_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_custom_field">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_custom_field">
+              <MappingFragment StoreEntitySet="eventum_project_custom_field">
+                <ScalarProperty Name="pcf_id" ColumnName="pcf_id" />
+                <ScalarProperty Name="pcf_prj_id" ColumnName="pcf_prj_id" />
+                <ScalarProperty Name="pcf_fld_id" ColumnName="pcf_fld_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_email_response">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_email_response">
+              <MappingFragment StoreEntitySet="eventum_project_email_response">
+                <ScalarProperty Name="per_prj_id" ColumnName="per_prj_id" />
+                <ScalarProperty Name="per_ere_id" ColumnName="per_ere_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_field_display">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_field_display">
+              <MappingFragment StoreEntitySet="eventum_project_field_display">
+                <ScalarProperty Name="pfd_prj_id" ColumnName="pfd_prj_id" />
+                <ScalarProperty Name="pfd_field" ColumnName="pfd_field" />
+                <ScalarProperty Name="pfd_min_role" ColumnName="pfd_min_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_group">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_group">
+              <MappingFragment StoreEntitySet="eventum_project_group">
+                <ScalarProperty Name="pgr_prj_id" ColumnName="pgr_prj_id" />
+                <ScalarProperty Name="pgr_grp_id" ColumnName="pgr_grp_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_link_filter">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_link_filter">
+              <MappingFragment StoreEntitySet="eventum_project_link_filter">
+                <ScalarProperty Name="plf_prj_id" ColumnName="plf_prj_id" />
+                <ScalarProperty Name="plf_lfi_id" ColumnName="plf_lfi_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_news">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_news">
+              <MappingFragment StoreEntitySet="eventum_project_news">
+                <ScalarProperty Name="prn_nws_id" ColumnName="prn_nws_id" />
+                <ScalarProperty Name="prn_prj_id" ColumnName="prn_prj_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_phone_category">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_phone_category">
+              <MappingFragment StoreEntitySet="eventum_project_phone_category">
+                <ScalarProperty Name="phc_id" ColumnName="phc_id" />
+                <ScalarProperty Name="phc_prj_id" ColumnName="phc_prj_id" />
+                <ScalarProperty Name="phc_title" ColumnName="phc_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_priority">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_priority">
+              <MappingFragment StoreEntitySet="eventum_project_priority">
+                <ScalarProperty Name="pri_id" ColumnName="pri_id" />
+                <ScalarProperty Name="pri_prj_id" ColumnName="pri_prj_id" />
+                <ScalarProperty Name="pri_title" ColumnName="pri_title" />
+                <ScalarProperty Name="pri_rank" ColumnName="pri_rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_release">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_release">
+              <MappingFragment StoreEntitySet="eventum_project_release">
+                <ScalarProperty Name="pre_id" ColumnName="pre_id" />
+                <ScalarProperty Name="pre_prj_id" ColumnName="pre_prj_id" />
+                <ScalarProperty Name="pre_title" ColumnName="pre_title" />
+                <ScalarProperty Name="pre_scheduled_date" ColumnName="pre_scheduled_date" />
+                <ScalarProperty Name="pre_status" ColumnName="pre_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_round_robin">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_round_robin">
+              <MappingFragment StoreEntitySet="eventum_project_round_robin">
+                <ScalarProperty Name="prr_id" ColumnName="prr_id" />
+                <ScalarProperty Name="prr_prj_id" ColumnName="prr_prj_id" />
+                <ScalarProperty Name="prr_blackout_start" ColumnName="prr_blackout_start" />
+                <ScalarProperty Name="prr_blackout_end" ColumnName="prr_blackout_end" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_status">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_status">
+              <MappingFragment StoreEntitySet="eventum_project_status">
+                <ScalarProperty Name="prs_id" ColumnName="prs_id" />
+                <ScalarProperty Name="prs_prj_id" ColumnName="prs_prj_id" />
+                <ScalarProperty Name="prs_sta_id" ColumnName="prs_sta_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_status_date">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_status_date">
+              <MappingFragment StoreEntitySet="eventum_project_status_date">
+                <ScalarProperty Name="psd_id" ColumnName="psd_id" />
+                <ScalarProperty Name="psd_prj_id" ColumnName="psd_prj_id" />
+                <ScalarProperty Name="psd_sta_id" ColumnName="psd_sta_id" />
+                <ScalarProperty Name="psd_date_field" ColumnName="psd_date_field" />
+                <ScalarProperty Name="psd_label" ColumnName="psd_label" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_project_user">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_user">
+              <MappingFragment StoreEntitySet="eventum_project_user">
+                <ScalarProperty Name="pru_id" ColumnName="pru_id" />
+                <ScalarProperty Name="pru_prj_id" ColumnName="pru_prj_id" />
+                <ScalarProperty Name="pru_usr_id" ColumnName="pru_usr_id" />
+                <ScalarProperty Name="pru_role" ColumnName="pru_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_action">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_action">
+              <MappingFragment StoreEntitySet="eventum_reminder_action">
+                <ScalarProperty Name="rma_id" ColumnName="rma_id" />
+                <ScalarProperty Name="rma_rem_id" ColumnName="rma_rem_id" />
+                <ScalarProperty Name="rma_rmt_id" ColumnName="rma_rmt_id" />
+                <ScalarProperty Name="rma_created_date" ColumnName="rma_created_date" />
+                <ScalarProperty Name="rma_last_updated_date" ColumnName="rma_last_updated_date" />
+                <ScalarProperty Name="rma_title" ColumnName="rma_title" />
+                <ScalarProperty Name="rma_rank" ColumnName="rma_rank" />
+                <ScalarProperty Name="rma_alert_irc" ColumnName="rma_alert_irc" />
+                <ScalarProperty Name="rma_alert_group_leader" ColumnName="rma_alert_group_leader" />
+                <ScalarProperty Name="rma_boilerplate" ColumnName="rma_boilerplate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_action_type">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_action_type">
+              <MappingFragment StoreEntitySet="eventum_reminder_action_type">
+                <ScalarProperty Name="rmt_id" ColumnName="rmt_id" />
+                <ScalarProperty Name="rmt_type" ColumnName="rmt_type" />
+                <ScalarProperty Name="rmt_title" ColumnName="rmt_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_field">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_field">
+              <MappingFragment StoreEntitySet="eventum_reminder_field">
+                <ScalarProperty Name="rmf_id" ColumnName="rmf_id" />
+                <ScalarProperty Name="rmf_title" ColumnName="rmf_title" />
+                <ScalarProperty Name="rmf_sql_field" ColumnName="rmf_sql_field" />
+                <ScalarProperty Name="rmf_sql_representation" ColumnName="rmf_sql_representation" />
+                <ScalarProperty Name="rmf_allow_column_compare" ColumnName="rmf_allow_column_compare" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_history">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_history">
+              <MappingFragment StoreEntitySet="eventum_reminder_history">
+                <ScalarProperty Name="rmh_id" ColumnName="rmh_id" />
+                <ScalarProperty Name="rmh_iss_id" ColumnName="rmh_iss_id" />
+                <ScalarProperty Name="rmh_rma_id" ColumnName="rmh_rma_id" />
+                <ScalarProperty Name="rmh_created_date" ColumnName="rmh_created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_level">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_level">
+              <MappingFragment StoreEntitySet="eventum_reminder_level">
+                <ScalarProperty Name="rem_id" ColumnName="rem_id" />
+                <ScalarProperty Name="rem_created_date" ColumnName="rem_created_date" />
+                <ScalarProperty Name="rem_rank" ColumnName="rem_rank" />
+                <ScalarProperty Name="rem_last_updated_date" ColumnName="rem_last_updated_date" />
+                <ScalarProperty Name="rem_title" ColumnName="rem_title" />
+                <ScalarProperty Name="rem_prj_id" ColumnName="rem_prj_id" />
+                <ScalarProperty Name="rem_skip_weekend" ColumnName="rem_skip_weekend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_level_condition">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_level_condition">
+              <MappingFragment StoreEntitySet="eventum_reminder_level_condition">
+                <ScalarProperty Name="rlc_id" ColumnName="rlc_id" />
+                <ScalarProperty Name="rlc_rma_id" ColumnName="rlc_rma_id" />
+                <ScalarProperty Name="rlc_rmf_id" ColumnName="rlc_rmf_id" />
+                <ScalarProperty Name="rlc_rmo_id" ColumnName="rlc_rmo_id" />
+                <ScalarProperty Name="rlc_created_date" ColumnName="rlc_created_date" />
+                <ScalarProperty Name="rlc_last_updated_date" ColumnName="rlc_last_updated_date" />
+                <ScalarProperty Name="rlc_value" ColumnName="rlc_value" />
+                <ScalarProperty Name="rlc_comparison_rmf_id" ColumnName="rlc_comparison_rmf_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_operator">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_operator">
+              <MappingFragment StoreEntitySet="eventum_reminder_operator">
+                <ScalarProperty Name="rmo_id" ColumnName="rmo_id" />
+                <ScalarProperty Name="rmo_title" ColumnName="rmo_title" />
+                <ScalarProperty Name="rmo_sql_representation" ColumnName="rmo_sql_representation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_priority">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_priority">
+              <MappingFragment StoreEntitySet="eventum_reminder_priority">
+                <ScalarProperty Name="rep_id" ColumnName="rep_id" />
+                <ScalarProperty Name="rep_rem_id" ColumnName="rep_rem_id" />
+                <ScalarProperty Name="rep_pri_id" ColumnName="rep_pri_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_requirement">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_requirement">
+              <MappingFragment StoreEntitySet="eventum_reminder_requirement">
+                <ScalarProperty Name="rer_id" ColumnName="rer_id" />
+                <ScalarProperty Name="rer_rem_id" ColumnName="rer_rem_id" />
+                <ScalarProperty Name="rer_iss_id" ColumnName="rer_iss_id" />
+                <ScalarProperty Name="rer_support_level_id" ColumnName="rer_support_level_id" />
+                <ScalarProperty Name="rer_customer_id" ColumnName="rer_customer_id" />
+                <ScalarProperty Name="rer_trigger_all_issues" ColumnName="rer_trigger_all_issues" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_triggered_action">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_triggered_action">
+              <MappingFragment StoreEntitySet="eventum_reminder_triggered_action">
+                <ScalarProperty Name="rta_iss_id" ColumnName="rta_iss_id" />
+                <ScalarProperty Name="rta_rma_id" ColumnName="rta_rma_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_resolution">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_resolution">
+              <MappingFragment StoreEntitySet="eventum_resolution">
+                <ScalarProperty Name="res_id" ColumnName="res_id" />
+                <ScalarProperty Name="res_title" ColumnName="res_title" />
+                <ScalarProperty Name="res_created_date" ColumnName="res_created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_search_profile">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_search_profile">
+              <MappingFragment StoreEntitySet="eventum_search_profile">
+                <ScalarProperty Name="sep_id" ColumnName="sep_id" />
+                <ScalarProperty Name="sep_usr_id" ColumnName="sep_usr_id" />
+                <ScalarProperty Name="sep_prj_id" ColumnName="sep_prj_id" />
+                <ScalarProperty Name="sep_type" ColumnName="sep_type" />
+                <ScalarProperty Name="sep_user_profile" ColumnName="sep_user_profile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_status">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_status">
+              <MappingFragment StoreEntitySet="eventum_status">
+                <ScalarProperty Name="sta_id" ColumnName="sta_id" />
+                <ScalarProperty Name="sta_title" ColumnName="sta_title" />
+                <ScalarProperty Name="sta_abbreviation" ColumnName="sta_abbreviation" />
+                <ScalarProperty Name="sta_rank" ColumnName="sta_rank" />
+                <ScalarProperty Name="sta_color" ColumnName="sta_color" />
+                <ScalarProperty Name="sta_is_closed" ColumnName="sta_is_closed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_subscription">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_subscription">
+              <MappingFragment StoreEntitySet="eventum_subscription">
+                <ScalarProperty Name="sub_id" ColumnName="sub_id" />
+                <ScalarProperty Name="sub_iss_id" ColumnName="sub_iss_id" />
+                <ScalarProperty Name="sub_usr_id" ColumnName="sub_usr_id" />
+                <ScalarProperty Name="sub_created_date" ColumnName="sub_created_date" />
+                <ScalarProperty Name="sub_level" ColumnName="sub_level" />
+                <ScalarProperty Name="sub_email" ColumnName="sub_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_subscription_type">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_subscription_type">
+              <MappingFragment StoreEntitySet="eventum_subscription_type">
+                <ScalarProperty Name="sbt_id" ColumnName="sbt_id" />
+                <ScalarProperty Name="sbt_sub_id" ColumnName="sbt_sub_id" />
+                <ScalarProperty Name="sbt_type" ColumnName="sbt_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_support_email">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_support_email">
+              <MappingFragment StoreEntitySet="eventum_support_email">
+                <ScalarProperty Name="sup_id" ColumnName="sup_id" />
+                <ScalarProperty Name="sup_ema_id" ColumnName="sup_ema_id" />
+                <ScalarProperty Name="sup_parent_id" ColumnName="sup_parent_id" />
+                <ScalarProperty Name="sup_iss_id" ColumnName="sup_iss_id" />
+                <ScalarProperty Name="sup_usr_id" ColumnName="sup_usr_id" />
+                <ScalarProperty Name="sup_customer_id" ColumnName="sup_customer_id" />
+                <ScalarProperty Name="sup_message_id" ColumnName="sup_message_id" />
+                <ScalarProperty Name="sup_date" ColumnName="sup_date" />
+                <ScalarProperty Name="sup_from" ColumnName="sup_from" />
+                <ScalarProperty Name="sup_to" ColumnName="sup_to" />
+                <ScalarProperty Name="sup_cc" ColumnName="sup_cc" />
+                <ScalarProperty Name="sup_subject" ColumnName="sup_subject" />
+                <ScalarProperty Name="sup_has_attachment" ColumnName="sup_has_attachment" />
+                <ScalarProperty Name="sup_removed" ColumnName="sup_removed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_support_email_body">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_support_email_body">
+              <MappingFragment StoreEntitySet="eventum_support_email_body">
+                <ScalarProperty Name="seb_sup_id" ColumnName="seb_sup_id" />
+                <ScalarProperty Name="seb_body" ColumnName="seb_body" />
+                <ScalarProperty Name="seb_full_email" ColumnName="seb_full_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_time_tracking">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_time_tracking">
+              <MappingFragment StoreEntitySet="eventum_time_tracking">
+                <ScalarProperty Name="ttr_id" ColumnName="ttr_id" />
+                <ScalarProperty Name="ttr_ttc_id" ColumnName="ttr_ttc_id" />
+                <ScalarProperty Name="ttr_iss_id" ColumnName="ttr_iss_id" />
+                <ScalarProperty Name="ttr_usr_id" ColumnName="ttr_usr_id" />
+                <ScalarProperty Name="ttr_created_date" ColumnName="ttr_created_date" />
+                <ScalarProperty Name="ttr_time_spent" ColumnName="ttr_time_spent" />
+                <ScalarProperty Name="ttr_summary" ColumnName="ttr_summary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_time_tracking_category">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_time_tracking_category">
+              <MappingFragment StoreEntitySet="eventum_time_tracking_category">
+                <ScalarProperty Name="ttc_id" ColumnName="ttc_id" />
+                <ScalarProperty Name="ttc_title" ColumnName="ttc_title" />
+                <ScalarProperty Name="ttc_created_date" ColumnName="ttc_created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_user">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_user">
+              <MappingFragment StoreEntitySet="eventum_user">
+                <ScalarProperty Name="usr_id" ColumnName="usr_id" />
+                <ScalarProperty Name="usr_grp_id" ColumnName="usr_grp_id" />
+                <ScalarProperty Name="usr_customer_id" ColumnName="usr_customer_id" />
+                <ScalarProperty Name="usr_customer_contact_id" ColumnName="usr_customer_contact_id" />
+                <ScalarProperty Name="usr_created_date" ColumnName="usr_created_date" />
+                <ScalarProperty Name="usr_status" ColumnName="usr_status" />
+                <ScalarProperty Name="usr_password" ColumnName="usr_password" />
+                <ScalarProperty Name="usr_full_name" ColumnName="usr_full_name" />
+                <ScalarProperty Name="usr_email" ColumnName="usr_email" />
+                <ScalarProperty Name="usr_preferences" ColumnName="usr_preferences" />
+                <ScalarProperty Name="usr_sms_email" ColumnName="usr_sms_email" />
+                <ScalarProperty Name="usr_clocked_in" ColumnName="usr_clocked_in" />
+                <ScalarProperty Name="usr_lang" ColumnName="usr_lang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_issue_association">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_association">
+              <MappingFragment StoreEntitySet="eventum_issue_association">
+                <ScalarProperty Name="isa_issue_id" ColumnName="isa_issue_id" />
+                <ScalarProperty Name="isa_associated_id" ColumnName="isa_associated_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_reminder_action_list">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_action_list">
+              <MappingFragment StoreEntitySet="eventum_reminder_action_list">
+                <ScalarProperty Name="ral_rma_id" ColumnName="ral_rma_id" />
+                <ScalarProperty Name="ral_email" ColumnName="ral_email" />
+                <ScalarProperty Name="ral_usr_id" ColumnName="ral_usr_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_round_robin_user">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_round_robin_user">
+              <MappingFragment StoreEntitySet="eventum_round_robin_user">
+                <ScalarProperty Name="rru_prr_id" ColumnName="rru_prr_id" />
+                <ScalarProperty Name="rru_usr_id" ColumnName="rru_usr_id" />
+                <ScalarProperty Name="rru_next" ColumnName="rru_next" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_user_alias">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_user_alias">
+              <MappingFragment StoreEntitySet="eventum_user_alias">
+                <ScalarProperty Name="ual_usr_id" ColumnName="ual_usr_id" />
+                <ScalarProperty Name="ual_email" ColumnName="ual_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventum_version">
+            <EntityTypeMapping TypeName="u49299178_Model.eventum_version">
+              <MappingFragment StoreEntitySet="eventum_version">
+                <ScalarProperty Name="ver_version" ColumnName="ver_version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
