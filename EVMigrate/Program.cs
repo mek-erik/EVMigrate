@@ -24,9 +24,11 @@ namespace EVMigrate
                     webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM attr_values");
                     webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM issues");
                     webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM stamps");
+                    webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM issue_states");
                     webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE attr_values AUTO_INCREMENT = 1");
                     webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE issues AUTO_INCREMENT = 1");
                     webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE stamps AUTO_INCREMENT = 1");
+                    webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE issue_states AUTO_INCREMENT = 1");
                     webIssuesContext.SaveChanges();
 
 
@@ -43,7 +45,7 @@ namespace EVMigrate
                     List<eventum_issue_custom_field> eventum_Issue_Custom_Fields = eventumContext.eventum_issue_custom_field.ToList();
                     int key = 0;
                     foreach (eventum_issue issue in issues)
-                    {
+                    { 
                         key++;
                         Console.WriteLine(new String('-', 100));
                         WebIssueRepo repo = new WebIssueRepo(webIssuesContext);
@@ -69,6 +71,10 @@ namespace EVMigrate
                             }
                             repo.AddAttribute(custFields.Find(field => field.fld_id == item.icf_fld_id).fld_title, value);
 
+                        }
+                        foreach (var item in eventumContext.eventum_note.Where(note => note.not_iss_id == issue.iss_id))
+                        {
+                            repo.AddComment(item.not_full_message, "Erik van Reusel" , item.not_created_date);
                         }
                         // Add Priority
                         string priority = "Medium";
@@ -121,6 +127,16 @@ namespace EVMigrate
         {
         this.webIssuesContext = webIssuesContext;
 
+        }
+        public void AddComment(string comment, string username, DateTime time)
+        {
+            int unixStamp = Convert.ToInt32(new DateTimeOffset(time).ToUnixTimeSeconds());
+            int userId = webIssuesContext.users.First(user => user.user_name == username).user_id;
+           
+            int id = AddStamp(unixStamp, username);
+            comments comm = new comments() { comment_text = comment, comment_id = id, comment_format = 1 };
+            issue.issue_states.Add(new issue_states() { read_id = id, user_id = userId });
+            webIssuesContext.SaveChanges();
         }
         private int AddStamp(int timeStamp, string username)
         {
