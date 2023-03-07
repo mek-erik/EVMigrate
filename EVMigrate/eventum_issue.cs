@@ -24,7 +24,7 @@ namespace EVMigrate
         public long iss_prc_id { get; set; }
         public long iss_pre_id { get; set; }
         public short iss_pri_id { get; set; }
-        public bool iss_sta_id { get; set; }
+        public long iss_sta_id { get; set; }
         public Nullable<long> iss_res_id { get; set; }
         public Nullable<long> iss_duplicated_iss_id { get; set; }
         public System.DateTime iss_created_date { get; set; }

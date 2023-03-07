@@ -1773,7 +1773,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
           </Key>
           <Property Name="ver_version" Type="Int64" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="u49299178_Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="u49299178_Entities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="eventum_columns_to_display" EntityType="Self.eventum_columns_to_display" />
           <EntitySet Name="eventum_custom_field" EntityType="Self.eventum_custom_field" />
           <EntitySet Name="eventum_custom_field_option" EntityType="Self.eventum_custom_field_option" />
@@ -1851,7 +1851,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="u49299178_ModelStoreContainer" CdmEntityContainer="u49299178_Entities1">
+        <EntityContainerMapping StorageEntityContainer="u49299178_ModelStoreContainer" CdmEntityContainer="u49299178_Entities4">
           <EntitySetMapping Name="eventum_columns_to_display">
             <EntityTypeMapping TypeName="u49299178_Model.eventum_columns_to_display">
               <MappingFragment StoreEntitySet="eventum_columns_to_display">
@@ -2751,7 +2751,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

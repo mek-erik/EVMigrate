@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e4063633483432bbd3cad9fa8cceb77" Name="Diagram1">
+      <Diagram DiagramId="eac303123a5c400c98718b04cdd03ce2" Name="Diagram1">
         <EntityTypeShape EntityType="u49299178_Model.eventum_columns_to_display" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="u49299178_Model.eventum_custom_field" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="u49299178_Model.eventum_custom_field_option" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -63,7 +63,7 @@
         <EntityTypeShape EntityType="u49299178_Model.eventum_reminder_triggered_action" Width="1.5" PointX="20.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="u49299178_Model.eventum_resolution" Width="1.5" PointX="14.75" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="u49299178_Model.eventum_search_profile" Width="1.5" PointX="20.75" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="u49299178_Model.eventum_status" Width="1.5" PointX="8.875" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="u49299178_Model.eventum_status" Width="1.5" PointX="20.75" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="u49299178_Model.eventum_subscription" Width="1.5" PointX="16.75" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="u49299178_Model.eventum_subscription_type" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="u49299178_Model.eventum_support_email" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />

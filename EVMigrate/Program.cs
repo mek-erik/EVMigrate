@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using System.IO;
 
 namespace EVMigrate
 {
@@ -15,85 +17,221 @@ namespace EVMigrate
         static void Main(string[] args)
         {
             int stamp;
+            MantisRepo mantisRepo = new MantisRepo();
+            EventumRepo repo = new EventumRepo();
+            Console.WriteLine(string.Join(",", repo.GetCustomFieldValues(180, "Objective") ));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WindowWidth = 100;
-            using (var eventumContext = new u49299178_Entities1())
+            using (var eventumContext = new u49299178_Entities2())
             {
-                using (var webIssuesContext = new webissuesEntities())
+                using (var mantisContext = new bugtrackerEntities())
                 {
-                    webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM attr_values");
-                    webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM issues");
-                    webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM stamps");
-                    webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM issue_states");
-                    webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE attr_values AUTO_INCREMENT = 1");
-                    webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE issues AUTO_INCREMENT = 1");
-                    webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE stamps AUTO_INCREMENT = 1");
-                    webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE issue_states AUTO_INCREMENT = 1");
-                    webIssuesContext.SaveChanges();
 
 
+                    using (var webIssuesContext = new webissuesEntities())
+                    {
+                        //webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM attr_values");
+                        //webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM issues");
+                        //webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM stamps");
+                        //webIssuesContext.Database.ExecuteSqlCommand("DELETE  FROM issue_states");
+                        //webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE attr_values AUTO_INCREMENT = 1");
+                        //webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE issues AUTO_INCREMENT = 1");
+                        //webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE stamps AUTO_INCREMENT = 1");
+                        //webIssuesContext.Database.ExecuteSqlCommand("ALTER TABLE issue_states AUTO_INCREMENT = 1");
+                        //webIssuesContext.SaveChanges();
 
-                    //WebIssueRepo repo = new WebIssueRepo(webIssuesContext);
-                    //repo.AddIssue(1, "Generated Test Issue");
-                    //repo.AddDescription("Description");
-                    List<eventum_issue> issues = eventumContext.eventum_issue.Where(issue => issue.iss_prj_id == 2).ToList();
-                    List<eventum_custom_field> custFields = eventumContext.eventum_custom_field.ToList();
-                    List<eventum_custom_field_option> custOptions = eventumContext.eventum_custom_field_option.ToList();
-
-                    List<eventum_custom_field_option> issueTypes = eventumContext.eventum_custom_field_option.Where(field => field.cfo_fld_id == 1).ToList();
-                    List<eventum_custom_field_option> salesEffects = eventumContext.eventum_custom_field_option.Where(field => field.cfo_fld_id == 2).ToList();
-                    List<eventum_issue_custom_field> eventum_Issue_Custom_Fields = eventumContext.eventum_issue_custom_field.ToList();
-                    int key = 0;
-                    foreach (eventum_issue issue in issues)
-                    { 
-                        key++;
-                        Console.WriteLine(new String('-', 100));
-                        WebIssueRepo repo = new WebIssueRepo(webIssuesContext);
-
-                        repo.AddIssue(EventumConverter.Category(Convert.ToInt32(issue.iss_prc_id)), issue.iss_summary, eventumContext.eventum_user.First(users => users.usr_id == issue.iss_usr_id).usr_full_name, issue.iss_created_date);
-                        repo.AddDescription(issue.iss_description);
                         
-                        Console.WriteLine(issue.iss_id);
-                        Console.WriteLine(issue.iss_summary);
 
-                        foreach (var item in eventum_Issue_Custom_Fields.Where(item => item.icf_iss_id == issue.iss_id && item.icf_value != null && item.icf_value != ""))
+
+                        //WebIssueRepo repo = new WebIssueRepo(webIssuesContext);
+                        //repo.AddIssue(1, "Generated Test Issue");
+                        //repo.AddDescription("Description");
+                        List<eventum_issue> issues = eventumContext.eventum_issue.Where(issue => issue.iss_prj_id == 2).ToList();
+                        List<eventum_custom_field> custFields = eventumContext.eventum_custom_field.ToList();
+                        List<eventum_custom_field_option> custOptions = eventumContext.eventum_custom_field_option.ToList();
+                        List<eventum_note> comments = eventumContext.eventum_note.ToList();
+                        List<eventum_custom_field_option> issueTypes = eventumContext.eventum_custom_field_option.Where(field => field.cfo_fld_id == 1).ToList();
+                        List<eventum_custom_field_option> salesEffects = eventumContext.eventum_custom_field_option.Where(field => field.cfo_fld_id == 2).ToList();
+                        List<eventum_issue_custom_field> eventum_Issue_Custom_Fields = eventumContext.eventum_issue_custom_field.ToList();
+                        List<eventum_issue_attachment_file> eventum_files = eventumContext.eventum_issue_attachment_file.ToList();
+                        List<eventum_issue_attachment> eventum_issue_attachments = eventumContext.eventum_issue_attachment.ToList();
+                        List<eventum_issue_user> eventum_issue_user = eventumContext.eventum_issue_user.ToList();
+                        List<eventum_status> eventum_Issue_Statuses = eventumContext.eventum_status.ToList();
+                        List<eventum_user> eventum_Users = eventumContext.eventum_user.ToList();
+                        List<long> eventum_allstats = issues.Select(iss => iss.iss_sta_id).Distinct().ToList();
+
+                        var evusers = eventumContext.eventum_user.ToList();
+                        int key = 0;
+                        for (int i = 1; i < issues.Last().iss_id; i++)
                         {
-                            //    eventum_custom_field_option test = custOptions.Find(option => option.cfo_id.ToString() == item.icf_value);
-                            Console.WriteLine(custFields.Find(field => field.fld_id == item.icf_fld_id).fld_title); //+ " - " + custOptions.Find(option => option.cfo_id.ToString() == item.icf_value).cfo_value);
-                            string value;
-                            if (custFields.Find(field => field.fld_id == item.icf_fld_id).fld_type != "text"  )
+                            eventum_issue issue = issues.Find(iss => iss.iss_id == i);
+                            if (issue != null)
                             {
-                                value = custOptions.Find(option => option.cfo_id.ToString() == item.icf_value).cfo_value;
+
+                                mantisRepo.AddBug(issue);
+
+
+
+
+
+
+                                //
+                                List<eventum_issue_attachment> issue_Attachments = eventum_issue_attachments.Where(atch => atch.iat_iss_id == issue.iss_id).ToList();
+                                foreach (var issue_attachment in issue_Attachments)
+                                {
+                                    string fileUuid = Guid.NewGuid().ToString("N");
+                                    string usernameAttachment = eventum_Users.First(users => users.usr_id == issue_attachment.iat_usr_id).usr_full_name;
+                                    long filerId = mantisContext.mt_user.Where(mtu => mtu.realname == usernameAttachment).First().id;
+                                    List<eventum_issue_attachment_file> attachment_Files;
+
+                                    
+
+                                    mt_bugnote_text commentText = new mt_bugnote_text()
+                                    {
+                                        note = issue_attachment.iat_description
+
+                                    };
+                                    mantisContext.mt_bugnote_text.Add(commentText);
+                                    mantisContext.SaveChanges();
+                                    mt_bugnote fileNote = new mt_bugnote()
+                                    {
+                                        bug_id = issue_attachment.iat_iss_id,
+                                        reporter_id = filerId,
+                                        note_type = 0,
+                                        view_state = 10,
+                                        last_modified = ((DateTimeOffset)issue_attachment.iat_created_date).ToUnixTimeSeconds(),
+                                        date_submitted = ((DateTimeOffset)issue_attachment.iat_created_date).ToUnixTimeSeconds(),
+                                        bugnote_text_id = commentText.id
+                                    };
+                                    mantisContext.mt_bugnote.Add(fileNote);
+
+                                    // Add custom fields
+                                    var attributeGroup = eventum_Issue_Custom_Fields.Where(item => item.icf_iss_id == issue.iss_id && item.icf_value != null && item.icf_value != "").GroupBy(item => item.icf_fld_id);
+
+
+                                    mantisContext.SaveChanges();
+                                    attachment_Files = eventum_files.Where(f => f.iaf_iat_id == issue_attachment.iat_id).ToList();
+                                    foreach (eventum_issue_attachment_file attachment_File in attachment_Files)
+                                    {
+                                        mt_bug_file file = new mt_bug_file()
+                                        {
+                                            diskfile = fileUuid,
+                                            bug_id = issue_attachment.iat_iss_id,
+                                            folder = @"\data",
+                                            filename = attachment_File.iaf_filename,
+                                            date_added = ((DateTimeOffset)issue_attachment.iat_created_date).ToUnixTimeSeconds(),
+                                            filesize = Convert.ToInt32(attachment_File.iaf_filesize),
+                                            file_type = attachment_File.iaf_filetype,
+                                            title = "",
+                                            description = "",
+                                            bugnote_id = fileNote.id
+                                            
+                                        };
+                                        
+                                        mantisContext.mt_bug_file.Add(file);
+                                        // Save File Locally
+                                        File.WriteAllBytes(@".\data\" + fileUuid,attachment_File.iaf_file);
+                                    }
+
+                                    mantisContext.SaveChanges();
+                                }
+
+
+                                //mantisContext.mt_bug_history.Add(bug_History_Status);
+                                //mantisContext.mt_bug_history.Add(bug_History_Handler);
+                                mantisContext.SaveChanges();
+                                Console.WriteLine("--------------------------------------------------------");
+                                Console.WriteLine(issue.iss_id + " " + issue.iss_summary);
                             }
-                            else 
+
+                            //mt_bugn
+                            
+
+                        
+                            else
                             {
-                                value = item.icf_value;
+                                mantisRepo.MakeEmptyBug();
+                                
                             }
-                            repo.AddAttribute(custFields.Find(field => field.fld_id == item.icf_fld_id).fld_title, value);
+                            Console.Title = ((int)((double)i / issues.Count() * 100)).ToString();
+
 
                         }
-                        foreach (var item in eventumContext.eventum_note.Where(note => note.not_iss_id == issue.iss_id))
-                        {
-                            repo.AddComment(item.not_full_message, "Erik van Reusel" , item.not_created_date);
-                        }
-                        // Add Priority
-                        string priority = "Medium";
-                        if (issue.iss_pri_id > 0) priority = eventumContext.eventum_project_priority.FirstOrDefault(pri => pri.pri_id == issue.iss_pri_id && issue.iss_prj_id == pri.pri_prj_id).pri_title;
 
-                        repo.AddAttribute("Priority", priority);
-                        Console.WriteLine(new string('_', 50) + " " + (int)((double)key / issues.Count() * 100));
-                        Console.Title =  ((int)((double)key / issues.Count() * 100)).ToString();
-                        Console.Clear();
+                        //foreach (eventum_issue issue in issues.Where(iss => iss.iss_id))
+                        //{
+                        //    key++;
+                        // Mantis Stuff
+
+
+
+
+
+
+
+
+                        //    // WebIssues stuff
+                        //    WebIssueRepo repo = new WebIssueRepo(webIssuesContext);
+
+                        //    repo.AddIssue(EventumConverter.Category(Convert.ToInt32(issue.iss_prc_id)), issue.iss_summary, eventumContext.eventum_user.First(users => users.usr_id == issue.iss_usr_id).usr_full_name, issue.iss_created_date);
+                        //    repo.AddDescription(issue.iss_description);
+                        //    repo.AddAttribute("Status", eventum_Issue_Statuses.Find(stat => stat.sta_id == issue.iss_sta_id).sta_title);
+                        //    Console.Clear();
+                        //    Console.Write("\r" + issue.iss_id);
+                        //    Console.Write("\r" + issue.iss_summary);
+                        //    //Get status
+                        //    string status = eventum_Issue_Statuses.Find(st => st.sta_id == issue.iss_sta_id).sta_title;
+
+                        //    var attributeGroup = eventum_Issue_Custom_Fields.Where(item => item.icf_iss_id == issue.iss_id && item.icf_value != null && item.icf_value != "").GroupBy(item => item.icf_fld_id);
+                        //    foreach (var group in attributeGroup)
+                        //    {
+                        //        var item = group.FirstOrDefault();
+                        //        //    eventum_custom_field_option test = custOptions.Find(option => option.cfo_id.ToString() == item.icf_value);
+                        //        Console.Write("\r" + custFields.Find(field => field.fld_id == item.icf_fld_id).fld_title); //+ " - " + custOptions.Find(option => option.cfo_id.ToString() == item.icf_value).cfo_value);
+                        //        string value;
+                        //        if (custFields.Find(field => field.fld_id == item.icf_fld_id).fld_type != "text")
+                        //        {
+                        //            value = custOptions.Find(option => option.cfo_id.ToString() == group.First().icf_value).cfo_value;
+                        //        }
+                        //        else
+                        //        {
+
+                        //            value = group.Select(i => i.icf_value).First();
+                        //            //value = string.Join(", ", group.SelectMany(i => i.icf_value).ToList());
+                        //        }
+                        //        repo.AddAttribute(custFields.Find(field => field.fld_id == item.icf_fld_id).fld_title, value);
+
+                        //    }
+                        //    foreach (var item in eventumContext.eventum_note.Where(note => note.not_iss_id == issue.iss_id))
+                        //    {
+                        //        if (item.not_usr_id > 3)
+                        //        {
+                        //            string username = evusers.First(user => item.not_usr_id == user.usr_id).usr_full_name;
+                        //            repo.AddComment(item.not_note, username, item.not_created_date);
+                        //        }
+
+                        //    }
+                        //    List<eventum_issue_user> assignedUsers = eventum_issue_user.Where(user => user.isu_iss_id == issue.iss_id).ToList();
+
+                        //    // Add Priority
+                        //    string priority = "Medium";
+                        //    if (issue.iss_pri_id > 0) priority = eventumContext.eventum_project_priority.FirstOrDefault(pri => pri.pri_id == issue.iss_pri_id && issue.iss_prj_id == pri.pri_prj_id).pri_title;
+
+                        //    repo.AddAttribute("Priority", priority);
+                        //    Console.Write("\r" + new string('_', 50) + " " + (int)((double)key / issues.Count() * 100));
+
+                        //    Console.Clear();
+                        //}
+                        Console.Write("\r" + issues.Count);
+
                     }
-                    Console.WriteLine(issues.Count);
-                    
                 }
-                
             }
             Console.ReadLine();
 
         }
-
+        
+        
 
     }
     class EventumConverter
@@ -130,13 +268,27 @@ namespace EVMigrate
         }
         public void AddComment(string comment, string username, DateTime time)
         {
-            int unixStamp = Convert.ToInt32(new DateTimeOffset(time).ToUnixTimeSeconds());
-            int userId = webIssuesContext.users.First(user => user.user_name == username).user_id;
-           
-            int id = AddStamp(unixStamp, username);
-            comments comm = new comments() { comment_text = comment, comment_id = id, comment_format = 1 };
-            issue.issue_states.Add(new issue_states() { read_id = id, user_id = userId });
-            webIssuesContext.SaveChanges();
+            if (webIssuesContext.users.Count(user => user.user_name == username) > 0  )
+            {
+                int unixStamp = Convert.ToInt32(new DateTimeOffset(time).ToUnixTimeSeconds());
+                int userId = 4;
+
+
+                userId = webIssuesContext.users.First(user => user.user_name == username).user_id;
+                
+                int id = AddStamp(unixStamp, username);
+
+                webIssuesContext.changes.Add(new changes() { issue_id = issue.issue_id, change_type = 3, stamp_id = id, change_id = id });
+                webIssuesContext.SaveChanges();
+
+                comments comm = new comments() { comment_text = comment, comment_id = id, comment_format = 1 };
+                webIssuesContext.comments.Add(comm);
+                webIssuesContext.SaveChanges();
+
+
+            }
+            //issue.issue_states.Add(new issue_states() { read_id = id, user_id = userId });
+            
         }
         private int AddStamp(int timeStamp, string username)
         {
@@ -179,7 +331,6 @@ namespace EVMigrate
         {
 
             int id = AddStamp(unixStamp, createdBy);
-
 
             issue_descriptions description = new issue_descriptions();
             //description.issue_id = issue.issue_id;

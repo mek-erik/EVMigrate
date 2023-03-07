@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="u49299178_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="u49299178_Model1.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="eventum_columns_to_display">
           <Key>
             <PropertyRef Name="ctd_prj_id" />
@@ -842,7 +842,7 @@ warning 6002: The table/view 'def.u49299178_.eventum_version' does not have a pr
           </Key>
           <Property Name="ver_version" Type="uint" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="u49299178_ModelStoreContainer">
+        <EntityContainer Name="u49299178_Model1StoreContainer">
           <EntitySet Name="eventum_columns_to_display" EntityType="Self.eventum_columns_to_display" Schema="u49299178_" store:Type="Tables" />
           <EntitySet Name="eventum_custom_field" EntityType="Self.eventum_custom_field" Schema="u49299178_" store:Type="Tables" />
           <EntitySet Name="eventum_custom_field_option" EntityType="Self.eventum_custom_field_option" Schema="u49299178_" store:Type="Tables" />
@@ -945,7 +945,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="u49299178_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="u49299178_Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="eventum_columns_to_display">
           <Key>
             <PropertyRef Name="ctd_prj_id" />
@@ -1773,7 +1773,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
           </Key>
           <Property Name="ver_version" Type="Int64" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="u49299178_Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="u49299178_Entities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="eventum_columns_to_display" EntityType="Self.eventum_columns_to_display" />
           <EntitySet Name="eventum_custom_field" EntityType="Self.eventum_custom_field" />
           <EntitySet Name="eventum_custom_field_option" EntityType="Self.eventum_custom_field_option" />
@@ -1851,9 +1851,9 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="u49299178_ModelStoreContainer" CdmEntityContainer="u49299178_Entities1">
+        <EntityContainerMapping StorageEntityContainer="u49299178_Model1StoreContainer" CdmEntityContainer="u49299178_Entities2">
           <EntitySetMapping Name="eventum_columns_to_display">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_columns_to_display">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_columns_to_display">
               <MappingFragment StoreEntitySet="eventum_columns_to_display">
                 <ScalarProperty Name="ctd_prj_id" ColumnName="ctd_prj_id" />
                 <ScalarProperty Name="ctd_page" ColumnName="ctd_page" />
@@ -1864,7 +1864,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_custom_field">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_custom_field">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_custom_field">
               <MappingFragment StoreEntitySet="eventum_custom_field">
                 <ScalarProperty Name="fld_id" ColumnName="fld_id" />
                 <ScalarProperty Name="fld_title" ColumnName="fld_title" />
@@ -1884,7 +1884,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_custom_field_option">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_custom_field_option">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_custom_field_option">
               <MappingFragment StoreEntitySet="eventum_custom_field_option">
                 <ScalarProperty Name="cfo_id" ColumnName="cfo_id" />
                 <ScalarProperty Name="cfo_fld_id" ColumnName="cfo_fld_id" />
@@ -1893,7 +1893,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_custom_filter">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_custom_filter">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_custom_filter">
               <MappingFragment StoreEntitySet="eventum_custom_filter">
                 <ScalarProperty Name="cst_id" ColumnName="cst_id" />
                 <ScalarProperty Name="cst_usr_id" ColumnName="cst_usr_id" />
@@ -1939,7 +1939,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_customer_account_manager">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_customer_account_manager">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_customer_account_manager">
               <MappingFragment StoreEntitySet="eventum_customer_account_manager">
                 <ScalarProperty Name="cam_id" ColumnName="cam_id" />
                 <ScalarProperty Name="cam_prj_id" ColumnName="cam_prj_id" />
@@ -1950,7 +1950,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_customer_note">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_customer_note">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_customer_note">
               <MappingFragment StoreEntitySet="eventum_customer_note">
                 <ScalarProperty Name="cno_id" ColumnName="cno_id" />
                 <ScalarProperty Name="cno_prj_id" ColumnName="cno_prj_id" />
@@ -1962,7 +1962,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_email_account">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_account">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_email_account">
               <MappingFragment StoreEntitySet="eventum_email_account">
                 <ScalarProperty Name="ema_id" ColumnName="ema_id" />
                 <ScalarProperty Name="ema_prj_id" ColumnName="ema_prj_id" />
@@ -1981,7 +1981,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_email_draft">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_draft">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_email_draft">
               <MappingFragment StoreEntitySet="eventum_email_draft">
                 <ScalarProperty Name="emd_id" ColumnName="emd_id" />
                 <ScalarProperty Name="emd_usr_id" ColumnName="emd_usr_id" />
@@ -1996,7 +1996,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_email_draft_recipient">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_draft_recipient">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_email_draft_recipient">
               <MappingFragment StoreEntitySet="eventum_email_draft_recipient">
                 <ScalarProperty Name="edr_id" ColumnName="edr_id" />
                 <ScalarProperty Name="edr_emd_id" ColumnName="edr_emd_id" />
@@ -2006,7 +2006,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_email_response">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_email_response">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_email_response">
               <MappingFragment StoreEntitySet="eventum_email_response">
                 <ScalarProperty Name="ere_id" ColumnName="ere_id" />
                 <ScalarProperty Name="ere_title" ColumnName="ere_title" />
@@ -2015,7 +2015,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_faq">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_faq">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_faq">
               <MappingFragment StoreEntitySet="eventum_faq">
                 <ScalarProperty Name="faq_id" ColumnName="faq_id" />
                 <ScalarProperty Name="faq_prj_id" ColumnName="faq_prj_id" />
@@ -2029,7 +2029,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_faq_support_level">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_faq_support_level">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_faq_support_level">
               <MappingFragment StoreEntitySet="eventum_faq_support_level">
                 <ScalarProperty Name="fsl_faq_id" ColumnName="fsl_faq_id" />
                 <ScalarProperty Name="fsl_support_level_id" ColumnName="fsl_support_level_id" />
@@ -2037,7 +2037,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_group">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_group">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_group">
               <MappingFragment StoreEntitySet="eventum_group">
                 <ScalarProperty Name="grp_id" ColumnName="grp_id" />
                 <ScalarProperty Name="grp_name" ColumnName="grp_name" />
@@ -2047,7 +2047,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_history_type">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_history_type">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_history_type">
               <MappingFragment StoreEntitySet="eventum_history_type">
                 <ScalarProperty Name="htt_id" ColumnName="htt_id" />
                 <ScalarProperty Name="htt_name" ColumnName="htt_name" />
@@ -2056,7 +2056,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_irc_notice">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_irc_notice">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_irc_notice">
               <MappingFragment StoreEntitySet="eventum_irc_notice">
                 <ScalarProperty Name="ino_id" ColumnName="ino_id" />
                 <ScalarProperty Name="ino_prj_id" ColumnName="ino_prj_id" />
@@ -2068,7 +2068,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue">
               <MappingFragment StoreEntitySet="eventum_issue">
                 <ScalarProperty Name="iss_id" ColumnName="iss_id" />
                 <ScalarProperty Name="iss_customer_id" ColumnName="iss_customer_id" />
@@ -2112,7 +2112,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_attachment">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_attachment">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_attachment">
               <MappingFragment StoreEntitySet="eventum_issue_attachment">
                 <ScalarProperty Name="iat_id" ColumnName="iat_id" />
                 <ScalarProperty Name="iat_iss_id" ColumnName="iat_iss_id" />
@@ -2126,7 +2126,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_attachment_file">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_attachment_file">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_attachment_file">
               <MappingFragment StoreEntitySet="eventum_issue_attachment_file">
                 <ScalarProperty Name="iaf_id" ColumnName="iaf_id" />
                 <ScalarProperty Name="iaf_iat_id" ColumnName="iaf_iat_id" />
@@ -2138,7 +2138,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_checkin">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_checkin">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_checkin">
               <MappingFragment StoreEntitySet="eventum_issue_checkin">
                 <ScalarProperty Name="isc_id" ColumnName="isc_id" />
                 <ScalarProperty Name="isc_iss_id" ColumnName="isc_iss_id" />
@@ -2153,7 +2153,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_custom_field">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_custom_field">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_custom_field">
               <MappingFragment StoreEntitySet="eventum_issue_custom_field">
                 <ScalarProperty Name="icf_id" ColumnName="icf_id" />
                 <ScalarProperty Name="icf_iss_id" ColumnName="icf_iss_id" />
@@ -2165,7 +2165,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_history">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_history">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_history">
               <MappingFragment StoreEntitySet="eventum_issue_history">
                 <ScalarProperty Name="his_id" ColumnName="his_id" />
                 <ScalarProperty Name="his_iss_id" ColumnName="his_iss_id" />
@@ -2178,7 +2178,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_quarantine">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_quarantine">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_quarantine">
               <MappingFragment StoreEntitySet="eventum_issue_quarantine">
                 <ScalarProperty Name="iqu_iss_id" ColumnName="iqu_iss_id" />
                 <ScalarProperty Name="iqu_expiration" ColumnName="iqu_expiration" />
@@ -2187,7 +2187,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_requirement">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_requirement">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_requirement">
               <MappingFragment StoreEntitySet="eventum_issue_requirement">
                 <ScalarProperty Name="isr_id" ColumnName="isr_id" />
                 <ScalarProperty Name="isr_iss_id" ColumnName="isr_iss_id" />
@@ -2202,7 +2202,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_user">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_user">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_user">
               <MappingFragment StoreEntitySet="eventum_issue_user">
                 <ScalarProperty Name="isu_iss_id" ColumnName="isu_iss_id" />
                 <ScalarProperty Name="isu_usr_id" ColumnName="isu_usr_id" />
@@ -2211,7 +2211,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_user_replier">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_user_replier">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_user_replier">
               <MappingFragment StoreEntitySet="eventum_issue_user_replier">
                 <ScalarProperty Name="iur_id" ColumnName="iur_id" />
                 <ScalarProperty Name="iur_iss_id" ColumnName="iur_iss_id" />
@@ -2221,7 +2221,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_link_filter">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_link_filter">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_link_filter">
               <MappingFragment StoreEntitySet="eventum_link_filter">
                 <ScalarProperty Name="lfi_id" ColumnName="lfi_id" />
                 <ScalarProperty Name="lfi_pattern" ColumnName="lfi_pattern" />
@@ -2232,7 +2232,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_mail_queue">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_mail_queue">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_mail_queue">
               <MappingFragment StoreEntitySet="eventum_mail_queue">
                 <ScalarProperty Name="maq_id" ColumnName="maq_id" />
                 <ScalarProperty Name="maq_iss_id" ColumnName="maq_iss_id" />
@@ -2251,7 +2251,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_mail_queue_log">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_mail_queue_log">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_mail_queue_log">
               <MappingFragment StoreEntitySet="eventum_mail_queue_log">
                 <ScalarProperty Name="mql_id" ColumnName="mql_id" />
                 <ScalarProperty Name="mql_maq_id" ColumnName="mql_maq_id" />
@@ -2262,7 +2262,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_news">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_news">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_news">
               <MappingFragment StoreEntitySet="eventum_news">
                 <ScalarProperty Name="nws_id" ColumnName="nws_id" />
                 <ScalarProperty Name="nws_usr_id" ColumnName="nws_usr_id" />
@@ -2274,7 +2274,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_note">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_note">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_note">
               <MappingFragment StoreEntitySet="eventum_note">
                 <ScalarProperty Name="not_id" ColumnName="not_id" />
                 <ScalarProperty Name="not_iss_id" ColumnName="not_iss_id" />
@@ -2293,7 +2293,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_phone_support">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_phone_support">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_phone_support">
               <MappingFragment StoreEntitySet="eventum_phone_support">
                 <ScalarProperty Name="phs_id" ColumnName="phs_id" />
                 <ScalarProperty Name="phs_usr_id" ColumnName="phs_usr_id" />
@@ -2313,7 +2313,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project">
               <MappingFragment StoreEntitySet="eventum_project">
                 <ScalarProperty Name="prj_id" ColumnName="prj_id" />
                 <ScalarProperty Name="prj_created_date" ColumnName="prj_created_date" />
@@ -2334,7 +2334,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_category">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_category">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_category">
               <MappingFragment StoreEntitySet="eventum_project_category">
                 <ScalarProperty Name="prc_id" ColumnName="prc_id" />
                 <ScalarProperty Name="prc_prj_id" ColumnName="prc_prj_id" />
@@ -2343,7 +2343,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_custom_field">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_custom_field">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_custom_field">
               <MappingFragment StoreEntitySet="eventum_project_custom_field">
                 <ScalarProperty Name="pcf_id" ColumnName="pcf_id" />
                 <ScalarProperty Name="pcf_prj_id" ColumnName="pcf_prj_id" />
@@ -2352,7 +2352,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_email_response">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_email_response">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_email_response">
               <MappingFragment StoreEntitySet="eventum_project_email_response">
                 <ScalarProperty Name="per_prj_id" ColumnName="per_prj_id" />
                 <ScalarProperty Name="per_ere_id" ColumnName="per_ere_id" />
@@ -2360,7 +2360,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_field_display">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_field_display">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_field_display">
               <MappingFragment StoreEntitySet="eventum_project_field_display">
                 <ScalarProperty Name="pfd_prj_id" ColumnName="pfd_prj_id" />
                 <ScalarProperty Name="pfd_field" ColumnName="pfd_field" />
@@ -2369,7 +2369,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_group">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_group">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_group">
               <MappingFragment StoreEntitySet="eventum_project_group">
                 <ScalarProperty Name="pgr_prj_id" ColumnName="pgr_prj_id" />
                 <ScalarProperty Name="pgr_grp_id" ColumnName="pgr_grp_id" />
@@ -2377,7 +2377,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_link_filter">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_link_filter">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_link_filter">
               <MappingFragment StoreEntitySet="eventum_project_link_filter">
                 <ScalarProperty Name="plf_prj_id" ColumnName="plf_prj_id" />
                 <ScalarProperty Name="plf_lfi_id" ColumnName="plf_lfi_id" />
@@ -2385,7 +2385,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_news">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_news">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_news">
               <MappingFragment StoreEntitySet="eventum_project_news">
                 <ScalarProperty Name="prn_nws_id" ColumnName="prn_nws_id" />
                 <ScalarProperty Name="prn_prj_id" ColumnName="prn_prj_id" />
@@ -2393,7 +2393,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_phone_category">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_phone_category">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_phone_category">
               <MappingFragment StoreEntitySet="eventum_project_phone_category">
                 <ScalarProperty Name="phc_id" ColumnName="phc_id" />
                 <ScalarProperty Name="phc_prj_id" ColumnName="phc_prj_id" />
@@ -2402,7 +2402,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_priority">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_priority">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_priority">
               <MappingFragment StoreEntitySet="eventum_project_priority">
                 <ScalarProperty Name="pri_id" ColumnName="pri_id" />
                 <ScalarProperty Name="pri_prj_id" ColumnName="pri_prj_id" />
@@ -2412,7 +2412,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_release">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_release">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_release">
               <MappingFragment StoreEntitySet="eventum_project_release">
                 <ScalarProperty Name="pre_id" ColumnName="pre_id" />
                 <ScalarProperty Name="pre_prj_id" ColumnName="pre_prj_id" />
@@ -2423,7 +2423,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_round_robin">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_round_robin">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_round_robin">
               <MappingFragment StoreEntitySet="eventum_project_round_robin">
                 <ScalarProperty Name="prr_id" ColumnName="prr_id" />
                 <ScalarProperty Name="prr_prj_id" ColumnName="prr_prj_id" />
@@ -2433,7 +2433,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_status">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_status">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_status">
               <MappingFragment StoreEntitySet="eventum_project_status">
                 <ScalarProperty Name="prs_id" ColumnName="prs_id" />
                 <ScalarProperty Name="prs_prj_id" ColumnName="prs_prj_id" />
@@ -2442,7 +2442,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_status_date">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_status_date">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_status_date">
               <MappingFragment StoreEntitySet="eventum_project_status_date">
                 <ScalarProperty Name="psd_id" ColumnName="psd_id" />
                 <ScalarProperty Name="psd_prj_id" ColumnName="psd_prj_id" />
@@ -2453,7 +2453,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_project_user">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_project_user">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_project_user">
               <MappingFragment StoreEntitySet="eventum_project_user">
                 <ScalarProperty Name="pru_id" ColumnName="pru_id" />
                 <ScalarProperty Name="pru_prj_id" ColumnName="pru_prj_id" />
@@ -2463,7 +2463,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_action">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_action">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_action">
               <MappingFragment StoreEntitySet="eventum_reminder_action">
                 <ScalarProperty Name="rma_id" ColumnName="rma_id" />
                 <ScalarProperty Name="rma_rem_id" ColumnName="rma_rem_id" />
@@ -2479,7 +2479,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_action_type">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_action_type">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_action_type">
               <MappingFragment StoreEntitySet="eventum_reminder_action_type">
                 <ScalarProperty Name="rmt_id" ColumnName="rmt_id" />
                 <ScalarProperty Name="rmt_type" ColumnName="rmt_type" />
@@ -2488,7 +2488,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_field">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_field">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_field">
               <MappingFragment StoreEntitySet="eventum_reminder_field">
                 <ScalarProperty Name="rmf_id" ColumnName="rmf_id" />
                 <ScalarProperty Name="rmf_title" ColumnName="rmf_title" />
@@ -2499,7 +2499,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_history">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_history">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_history">
               <MappingFragment StoreEntitySet="eventum_reminder_history">
                 <ScalarProperty Name="rmh_id" ColumnName="rmh_id" />
                 <ScalarProperty Name="rmh_iss_id" ColumnName="rmh_iss_id" />
@@ -2509,7 +2509,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_level">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_level">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_level">
               <MappingFragment StoreEntitySet="eventum_reminder_level">
                 <ScalarProperty Name="rem_id" ColumnName="rem_id" />
                 <ScalarProperty Name="rem_created_date" ColumnName="rem_created_date" />
@@ -2522,7 +2522,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_level_condition">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_level_condition">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_level_condition">
               <MappingFragment StoreEntitySet="eventum_reminder_level_condition">
                 <ScalarProperty Name="rlc_id" ColumnName="rlc_id" />
                 <ScalarProperty Name="rlc_rma_id" ColumnName="rlc_rma_id" />
@@ -2536,7 +2536,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_operator">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_operator">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_operator">
               <MappingFragment StoreEntitySet="eventum_reminder_operator">
                 <ScalarProperty Name="rmo_id" ColumnName="rmo_id" />
                 <ScalarProperty Name="rmo_title" ColumnName="rmo_title" />
@@ -2545,7 +2545,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_priority">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_priority">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_priority">
               <MappingFragment StoreEntitySet="eventum_reminder_priority">
                 <ScalarProperty Name="rep_id" ColumnName="rep_id" />
                 <ScalarProperty Name="rep_rem_id" ColumnName="rep_rem_id" />
@@ -2554,7 +2554,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_requirement">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_requirement">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_requirement">
               <MappingFragment StoreEntitySet="eventum_reminder_requirement">
                 <ScalarProperty Name="rer_id" ColumnName="rer_id" />
                 <ScalarProperty Name="rer_rem_id" ColumnName="rer_rem_id" />
@@ -2566,7 +2566,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_triggered_action">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_triggered_action">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_triggered_action">
               <MappingFragment StoreEntitySet="eventum_reminder_triggered_action">
                 <ScalarProperty Name="rta_iss_id" ColumnName="rta_iss_id" />
                 <ScalarProperty Name="rta_rma_id" ColumnName="rta_rma_id" />
@@ -2574,7 +2574,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_resolution">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_resolution">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_resolution">
               <MappingFragment StoreEntitySet="eventum_resolution">
                 <ScalarProperty Name="res_id" ColumnName="res_id" />
                 <ScalarProperty Name="res_title" ColumnName="res_title" />
@@ -2583,7 +2583,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_search_profile">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_search_profile">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_search_profile">
               <MappingFragment StoreEntitySet="eventum_search_profile">
                 <ScalarProperty Name="sep_id" ColumnName="sep_id" />
                 <ScalarProperty Name="sep_usr_id" ColumnName="sep_usr_id" />
@@ -2594,7 +2594,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_status">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_status">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_status">
               <MappingFragment StoreEntitySet="eventum_status">
                 <ScalarProperty Name="sta_id" ColumnName="sta_id" />
                 <ScalarProperty Name="sta_title" ColumnName="sta_title" />
@@ -2606,7 +2606,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_subscription">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_subscription">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_subscription">
               <MappingFragment StoreEntitySet="eventum_subscription">
                 <ScalarProperty Name="sub_id" ColumnName="sub_id" />
                 <ScalarProperty Name="sub_iss_id" ColumnName="sub_iss_id" />
@@ -2618,7 +2618,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_subscription_type">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_subscription_type">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_subscription_type">
               <MappingFragment StoreEntitySet="eventum_subscription_type">
                 <ScalarProperty Name="sbt_id" ColumnName="sbt_id" />
                 <ScalarProperty Name="sbt_sub_id" ColumnName="sbt_sub_id" />
@@ -2627,7 +2627,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_support_email">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_support_email">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_support_email">
               <MappingFragment StoreEntitySet="eventum_support_email">
                 <ScalarProperty Name="sup_id" ColumnName="sup_id" />
                 <ScalarProperty Name="sup_ema_id" ColumnName="sup_ema_id" />
@@ -2647,7 +2647,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_support_email_body">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_support_email_body">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_support_email_body">
               <MappingFragment StoreEntitySet="eventum_support_email_body">
                 <ScalarProperty Name="seb_sup_id" ColumnName="seb_sup_id" />
                 <ScalarProperty Name="seb_body" ColumnName="seb_body" />
@@ -2656,7 +2656,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_time_tracking">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_time_tracking">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_time_tracking">
               <MappingFragment StoreEntitySet="eventum_time_tracking">
                 <ScalarProperty Name="ttr_id" ColumnName="ttr_id" />
                 <ScalarProperty Name="ttr_ttc_id" ColumnName="ttr_ttc_id" />
@@ -2669,7 +2669,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_time_tracking_category">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_time_tracking_category">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_time_tracking_category">
               <MappingFragment StoreEntitySet="eventum_time_tracking_category">
                 <ScalarProperty Name="ttc_id" ColumnName="ttc_id" />
                 <ScalarProperty Name="ttc_title" ColumnName="ttc_title" />
@@ -2678,7 +2678,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_user">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_user">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_user">
               <MappingFragment StoreEntitySet="eventum_user">
                 <ScalarProperty Name="usr_id" ColumnName="usr_id" />
                 <ScalarProperty Name="usr_grp_id" ColumnName="usr_grp_id" />
@@ -2697,7 +2697,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_issue_association">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_issue_association">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_issue_association">
               <MappingFragment StoreEntitySet="eventum_issue_association">
                 <ScalarProperty Name="isa_issue_id" ColumnName="isa_issue_id" />
                 <ScalarProperty Name="isa_associated_id" ColumnName="isa_associated_id" />
@@ -2705,7 +2705,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_reminder_action_list">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_reminder_action_list">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_reminder_action_list">
               <MappingFragment StoreEntitySet="eventum_reminder_action_list">
                 <ScalarProperty Name="ral_rma_id" ColumnName="ral_rma_id" />
                 <ScalarProperty Name="ral_email" ColumnName="ral_email" />
@@ -2714,7 +2714,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_round_robin_user">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_round_robin_user">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_round_robin_user">
               <MappingFragment StoreEntitySet="eventum_round_robin_user">
                 <ScalarProperty Name="rru_prr_id" ColumnName="rru_prr_id" />
                 <ScalarProperty Name="rru_usr_id" ColumnName="rru_usr_id" />
@@ -2723,7 +2723,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_user_alias">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_user_alias">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_user_alias">
               <MappingFragment StoreEntitySet="eventum_user_alias">
                 <ScalarProperty Name="ual_usr_id" ColumnName="ual_usr_id" />
                 <ScalarProperty Name="ual_email" ColumnName="ual_email" />
@@ -2731,7 +2731,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="eventum_version">
-            <EntityTypeMapping TypeName="u49299178_Model.eventum_version">
+            <EntityTypeMapping TypeName="u49299178_Model1.eventum_version">
               <MappingFragment StoreEntitySet="eventum_version">
                 <ScalarProperty Name="ver_version" ColumnName="ver_version" />
               </MappingFragment>
@@ -2751,7 +2751,7 @@ FROM `eventum_version` AS `eventum_version`</DefiningQuery>
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
