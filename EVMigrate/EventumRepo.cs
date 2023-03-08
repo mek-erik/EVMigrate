@@ -42,6 +42,9 @@ namespace EVMigrate
             long prjId = GetProject(issueId);
             long prioId = GetPrioId(issueId);
             string rank = "Medium";
+            if (prioId > -1)
+            {
+                
             try
             {
 
@@ -51,6 +54,7 @@ namespace EVMigrate
             {
 
                 rank = "Medium";
+            }
             }
             return rank;
         }

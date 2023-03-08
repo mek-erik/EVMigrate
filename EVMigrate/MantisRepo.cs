@@ -119,15 +119,19 @@ namespace EVMigrate
                 
             }
             long projectId = 1;
-            try
+            if (projectName != "")
             {
-                projectId = mantisContext.mt_project.Where(prj => prj.name == projectName).FirstOrDefault().id;
+                try
+                {
+                    projectId = mantisContext.mt_project.Where(prj => prj.name == projectName).FirstOrDefault().id;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("JE OMA");
+
+                }
             }
-            catch (Exception)
-            {
-                Console.WriteLine("JE OMA");
-      
-            }
+            
             
             return projectId;
         }
