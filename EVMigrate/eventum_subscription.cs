@@ -16,7 +16,7 @@ namespace EVMigrate
     {
         public long sub_id { get; set; }
         public long sub_iss_id { get; set; }
-        public Nullable<long> sub_usr_id { get; set; }
+        public long sub_usr_id { get; set; }
         public System.DateTime sub_created_date { get; set; }
         public string sub_level { get; set; }
         public string sub_email { get; set; }

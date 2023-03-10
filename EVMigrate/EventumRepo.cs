@@ -100,6 +100,14 @@ namespace EVMigrate
         {
             return eventumContext.eventum_issue.Find(issue_id).iss_sta_id;
         }
+        public List<eventum_issue_history> GetHistory(long issue_id)
+        {
+            return eventumContext.eventum_issue_history.Where(hist => hist.his_iss_id== issue_id).ToList();
+        }
+        public List<long> GetRelatedIssues(long issue_id)
+        {
+            return eventumContext.eventum_issue_association.Where(ass => ass.isa_issue_id == issue_id).Select(ass => ass.isa_associated_id).ToList();
+        }
         public long GetResolutionId(long issue_id)
         {
             long id = 5;
@@ -119,6 +127,11 @@ namespace EVMigrate
         {
             return eventumContext.eventum_issue.Find(issue_id).iss_prc_id;
         }
+        public List<long> GetSubbedUsers(long issue_id)
+        {
+            return eventumContext.eventum_subscription.Where(sub => sub.sub_iss_id == issue_id).Select(sub => sub.sub_usr_id).Where(us => us > 0).ToList();
+        }
+
         public List<eventum_note> GetComments(long issue_id)
         {
             return eventumContext.eventum_note.Where(note => note.not_iss_id == issue_id && note.not_usr_id != 3).ToList();

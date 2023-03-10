@@ -25,12 +25,16 @@ namespace EVMigrate
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_history");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_monitor");
+            mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_file");
+            mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_monitor");
 
 
-            //mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_monitor");
+            
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bugnote_text");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bugnote");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_file");
+            mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_custom_field_string");
+            mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_monitor AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_text AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_history AUTO_INCREMENT = 1");
@@ -38,6 +42,7 @@ namespace EVMigrate
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bugnote_text AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bugnote AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_file AUTO_INCREMENT = 1");
+            mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_custom_field_string AUTO_INCREMENT = 1");
             mantisContext.SaveChanges();
         }
         private long GetUserId(string userName)
@@ -138,6 +143,41 @@ namespace EVMigrate
         private long GetStatusId()
         {
             return 0;
+        }
+        private void AddRelationShips(long issueId)
+        {
+            List<long> assos = eventumRepo.GetRelatedIssues(issueId);
+            foreach (long ass in assos)
+            {
+                mantisContext.mt_bug_relationship.Add(new mt_bug_relationship() { source_bug_id = issueId, destination_bug_id = ass, relationship_type = 1 });
+            }
+            mantisContext.SaveChanges();
+        }
+        private void AddCustomFields(long issueId)
+        {
+
+            List<string> fields = new List<string>() { "Objective", "Request Type", "Sales Goal", "Sales Effect" };
+            foreach (string field in fields)
+            {
+                List<string> values = eventumRepo.GetCustomFieldValues(issueId, field);
+                if (values.Count > 0)
+                {
+                    AddCustomFieldValue((int)issueId, GetCustomFieldID(field), values);
+                }
+            }
+            mantisContext.SaveChanges();
+            return;
+        }
+        private int GetCustomFieldID(string fieldName)
+        {
+            short id = 0;
+            return mantisContext.mt_custom_field.Where(field => field.name == fieldName).FirstOrDefault().id;
+        }
+        private void AddCustomFieldValue(int issueId, int id, List<string> values)
+        {
+            mantisContext.mt_custom_field_string.Add(
+                new mt_custom_field_string() { bug_id = issueId, field_id = id, value = string.Join("|", values) });
+
         }
         private short GetResolutionId(long issueId)
         {
@@ -246,38 +286,79 @@ namespace EVMigrate
                 //id = issue.iss_id,
                 description = MarkDownText(issue.iss_description),
                 steps_to_reproduce = "",
-                additional_information = "Migrated from eventum #" + issue.iss_id
+                additional_information = "Migrated from eventum: https://eventum.mek-europe.com/view.php?id=" + issue.iss_id
             };
             mantisContext.mt_bug_text.Add(bugtext);
             mantisContext.SaveChanges();
             bug.bug_text_id = bugtext.id;
             mantisContext.mt_bug.Add(bug);
             mantisContext.SaveChanges();
-            mt_bug_history bug_History_Status = new mt_bug_history()
-            {
-                user_id = 1,
-                bug_id = bug.id,
-                date_modified = ((DateTimeOffset)issue.iss_created_date).ToUnixTimeSeconds(), // TODO: Change to update date
-                field_name = "status",
-                old_value = "10",
-                new_value = "50",
-                type = 0
-
-            };
-            mt_bug_history bug_History_Handler = new mt_bug_history()
-            {
-                user_id = 1,
-                bug_id = bug.id,
-                date_modified = ((DateTimeOffset)issue.iss_created_date).ToUnixTimeSeconds(), // TODO: Change to update date
-                field_name = "handler_id",
-                old_value = "0",
-                new_value = "1",
-                type = 0
-
-            };
+            
             AddComments(issue.iss_id);
+            AddCustomFields(issue.iss_id);
+            AddRelationShips(issue.iss_id);
+            AddHistory(issue.iss_id);
+            AddMonitor(issue.iss_id);
+                
         }
 
+        private void AddMonitor(long iss_id)
+        {
+            List<long> subscription = eventumRepo.GetSubbedUsers(iss_id);
+            foreach (long user in subscription) 
+            {
+                mt_bug_monitor moni = new mt_bug_monitor() 
+                { 
+                user_id = GetUserId(eventumRepo.GetUserName(user)),
+                bug_id = iss_id
+                };
+                mantisContext.mt_bug_monitor.Add(moni);
+            }
+            mantisContext.SaveChanges();
+
+        }
+
+        private void AddHistory(long issue_id)
+        {
+            var items = eventumRepo.GetHistory(issue_id);
+            foreach (var historyItem in  items)
+            {
+                mt_bug_history hist = new mt_bug_history()
+                {
+                    bug_id = issue_id,
+                    date_modified = ((DateTimeOffset)historyItem.his_created_date ).ToUnixTimeSeconds(),
+                    type = GetHistType(historyItem.his_htt_id),
+                    old_value = historyItem.his_summary,
+                    user_id = GetUserId(eventumRepo.GetUserName(historyItem.his_usr_id)),
+                    field_name = "",
+                    new_value = ""
+                };
+                if (hist.old_value.Length > 255) hist.old_value = hist.old_value.Substring(0, 255);
+                
+                mantisContext.mt_bug_history.Add(hist);
+            }
+            mantisContext.SaveChanges();
+        }
+        private short GetHistType(long httId)
+        {
+            switch (httId)
+            {
+                case 15:
+                    return 1;
+                case 29:
+                    return 2;
+                case 34:
+                    return 12;
+                case 3:
+                case 12:
+                    return 3;
+                case 9:
+                    return 11;
+                
+                default:
+                    return 3;
+            }
+        }
         private void AddComments(long issueId)
         {
             var evcomments = eventumRepo.GetComments(issueId);
