@@ -132,9 +132,13 @@ namespace EVMigrate
             return eventumContext.eventum_subscription.Where(sub => sub.sub_iss_id == issue_id).Select(sub => sub.sub_usr_id).Where(us => us > 0).ToList();
         }
 
-        public List<eventum_note> GetComments(long issue_id)
+        public List<eventum_note> GetComments(long issue_id, bool excludeRemoved = true)
         {
-            return eventumContext.eventum_note.Where(note => note.not_iss_id == issue_id && note.not_usr_id != 3).ToList();
+            return eventumContext.eventum_note.Where(note => note.not_iss_id == issue_id && note.not_usr_id != 3 && note.not_removed != excludeRemoved ).ToList();
+        }
+        public List<eventum_user> GetUsers()
+        {
+            return eventumContext.eventum_user.ToList();
         }
     }
 }
