@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace EVMigrate
 {
@@ -17,9 +18,44 @@ namespace EVMigrate
         static void Main(string[] args)
         {
             int stamp;
+            var folders = Directory.GetDirectories(@"K:\aoi\Software\22X Software", "v???");
+            List<FileInfo> files = folders.SelectMany(folder => Directory.GetFiles(folder, "*v???*.zip", SearchOption.AllDirectories).Where(file => !file.Contains("OLT")).Select(file => new FileInfo(file))).ToList();
+            //List<string> versions = files.Select(file => file.Name).Select(name => name.Substring(name.IndexOf('v'), 3)).ToList();
+            //files.AddRange(folders.SelectMany(folder => Directory.GetFiles(folder, "*_???*.zip", SearchOption.AllDirectories).Where(file => !file.Contains("OLT")).Select(file => new FileInfo(file))));
+            string pattern = @"v[0-9]{3}";
+            string pattern1 = @"22XX[0-9]{3}";
+            Dictionary<string, List<DateTime>> versionDates = new Dictionary<string, List<DateTime>>();
+            List<string> versionNumbers = new List<string>();
+            foreach (FileInfo file in files)
+            {
+                string versionNumber = "";
+                Match match = Regex.Match(file.Name, pattern);
+                if (match.Success)
+                {
+                    versionNumber = match.Value.Substring(1, 3);
+                }
+                else
+                {
+                    Match match1 = Regex.Match(file.Name, pattern1);
+                    if (match1.Success) versionNumber = match1.Value.Substring(4, 3);
+                    else continue;
+                }
+                if (versionDates.ContainsKey(versionNumber)) versionDates[versionNumber].Add(file.CreationTime);
+                else
+                {
+                    versionDates.Add(versionNumber, new List<DateTime>() { file.CreationTime });
+                }
+                
+                versionNumbers.Add(versionNumber);
+            }
+            
+            
+
+
+            //var files = Directory.GetFiles(@"K:\aoi\Software\22X Software", "*v???*.zip", SearchOption.AllDirectories).Select(file => new FileInfo(file));
             MantisRepo mantisRepo = new MantisRepo();
+            mantisRepo.AddVersions(versionDates);
             EventumRepo repo = new EventumRepo();
-            Console.WriteLine(string.Join(",", repo.GetCustomFieldValues(180, "Objective") ));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WindowWidth = 100;
             using (var eventumContext = new u49299178_Entities2())
@@ -65,6 +101,7 @@ namespace EVMigrate
                         for (int i = 1; i < issues.Last().iss_id; i++)
                         {
                             eventum_issue issue = issues.Find(iss => iss.iss_id == i);
+                            
                             if (issue != null)
                             {
 
