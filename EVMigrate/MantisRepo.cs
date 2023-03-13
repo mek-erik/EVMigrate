@@ -17,6 +17,7 @@ namespace EVMigrate
         
         {
             mantisContext = new bugtrackerEntities();
+            UpdateUsers();
             ClearData();
         }
         private void ClearData()
@@ -27,14 +28,16 @@ namespace EVMigrate
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_monitor");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_file");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_monitor");
-
-
-            
+            mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_relationship");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bugnote_text");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bugnote");
-            mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_bug_file");
+            mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_project_version");
             mantisContext.Database.ExecuteSqlCommand("DELETE  FROM mt_custom_field_string");
+
+
+
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_monitor AUTO_INCREMENT = 1");
+            mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_project_version AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_text AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_history AUTO_INCREMENT = 1");
@@ -43,11 +46,28 @@ namespace EVMigrate
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bugnote AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_file AUTO_INCREMENT = 1");
             mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_custom_field_string AUTO_INCREMENT = 1");
+            mantisContext.Database.ExecuteSqlCommand("ALTER TABLE mt_bug_relationship AUTO_INCREMENT = 1");
             mantisContext.SaveChanges();
         }
         private long GetUserId(string userName)
         {
            return mantisContext.mt_user.Where(mtu => mtu.realname == userName).First().id;
+        }
+        public void AddVersions(Dictionary<string, List<DateTime>> versionNumbers )
+        {
+            foreach (var item in versionNumbers)
+            {
+                mt_project_version version = new mt_project_version()
+                {
+                    released = 1,
+                    version = string.Join(".", item.Key.ToCharArray()),
+                    date_order =  ((DateTimeOffset)item.Value.OrderBy(date => date.Ticks).First()).ToUnixTimeSeconds(),
+                    description = "",
+                    project_id = 1
+                };
+                mantisContext.mt_project_version.Add(version);
+            }
+            mantisContext.SaveChanges();
         }
         private short GetPriority(string title)
         {
@@ -156,7 +176,7 @@ namespace EVMigrate
         private void AddCustomFields(long issueId)
         {
 
-            List<string> fields = new List<string>() { "Objective", "Request Type", "Sales Goal", "Sales Effect" };
+            List<string> fields = new List<string>() { "Objective", "Request Type", "Sales Goal", "Sales Effect" , "Customer" };
             foreach (string field in fields)
             {
                 List<string> values = eventumRepo.GetCustomFieldValues(issueId, field);
@@ -185,15 +205,15 @@ namespace EVMigrate
 
             switch (eventumResId)
             {
-                case 1: return 60;
-                case 2: return 20;
-                case 3: return 70;
-                case 4: return 50;
-                case 5: return 10;
-                case 6: return 30;
-                case 7: return 80;
-                case 8: return 40;
-                case 9: return 90;
+                case 1: return 10; // Open
+                case 2: return 20; // Fixed
+                case 3: return 30; // Reopened
+                case 4: return 40; // Unable to reproduce
+                case 5: return 50; // Not fixable
+                case 6: return 60; // Duplicate
+                case 7: return 70; // Not A Bug
+                case 8: return 80; // Suspended
+                case 9: return 90; // Won't Fix
                 default:
                     return 10;
                     break;
@@ -222,20 +242,20 @@ namespace EVMigrate
             long statusId = eventumRepo.GetStatusId(issueId);
             switch (statusId)
             {
-                case 1:
-                return 10;
-                case 2:
+                case 1: // Discovery
+                return 10; // New
+                case 2: // Requirements
                 return 30;
-                case 3:
+                case 3: // Implentation
                 return 50;
-                case 4:
-                return 20;
-                case 5:
-                return 90;
-                case 6:
-                    return 90;
+                case 4: // Evaluation
+                return 20; // Feedback
+                case 5: // Released
+                return 80; // Resolved
+                case 6: // Killed
+                    return 90; // Closed
                 default:
-                    return 10;
+                    return 10; // New
             }
         }
         public void AddBug(eventum_issue issue)
@@ -338,6 +358,39 @@ namespace EVMigrate
                 mantisContext.mt_bug_history.Add(hist);
             }
             mantisContext.SaveChanges();
+        }
+        private void UpdateUsers()
+        {
+            List<eventum_user> evUsers = eventumRepo.GetUsers();
+            List<mt_user> users = mantisContext.mt_user.ToList();
+            foreach (var mtuser in users) 
+            {
+                eventum_user evUser = evUsers.Find(u => u.usr_full_name == mtuser.realname);
+               
+                if (evUser == null) continue;
+                if (evUser.usr_id == 3) continue;
+
+                mtuser.username = GenerateUsernameFromEmail(evUser.usr_email);
+                mtuser.password = evUser.usr_password;
+
+            }
+            mantisContext.SaveChanges();
+        }
+        private string GenerateUsernameFromEmail(string email)
+        {
+            int index = email.IndexOf("@");
+            string user = "";
+            if (index > -1)
+            {
+             user = email.Substring(0, index);
+
+            }
+            int dotIndex = user.IndexOf('.');
+            if (dotIndex > -1)
+            {
+                user = user.Substring(0, dotIndex);
+            }
+            return user;
         }
         private short GetHistType(long httId)
         {
@@ -455,6 +508,10 @@ namespace EVMigrate
             mantisContext.SaveChanges();
             bug.bug_text_id = bugtext.id;
             mantisContext.mt_bug.Add(bug);
+            mantisContext.SaveChanges();
+            // Remove right after creating
+            mantisContext.mt_bug_text.Remove(bugtext);
+            mantisContext.mt_bug.Remove(bug);
             mantisContext.SaveChanges();
         }
         
